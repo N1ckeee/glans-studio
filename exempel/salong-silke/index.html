@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Salong Silke – exempelsajt av Glans Studio</title>
+<meta name="description" content="Exempelsajt för en frisörsalong, gjord av Glans Studio. Salong Silke är ett påhittat företag.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%231B1512'/%3E%3Ctext x='16' y='22.5' text-anchor='middle' font-family='Georgia,serif' font-size='19' font-style='italic' fill='%23D9BE8C'%3ES%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Manrope:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --elfenben: #F6F1EA;
+    --sand: #EAE0D3;
+    --espresso: #1B1512;
+    --mocka: #5B4B42;
+    --guld: #B8935A;
+    --guld-ljus: #D9BE8C;
+    --rosa: #E9D7CC;
+    --linje: rgba(27, 21, 18, .14);
+    --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    --text: "Manrope", "Segoe UI", system-ui, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--elfenben); color: var(--espresso); font: 400 1rem/1.7 var(--text); -webkit-font-smoothing: antialiased; }
+  img, video { display: block; max-width: 100%; }
+  a { color: inherit; }
+  .ram { width: min(1180px, 100% - 40px); margin-inline: auto; }
+  h1, h2, h3 { margin: 0; font-family: var(--serif); font-weight: 500; line-height: 1.05; letter-spacing: -0.01em; }
+  em { font-style: italic; color: var(--guld); }
+  .etikett { margin: 0 0 18px; font: 600 .72rem/1 var(--text); letter-spacing: .28em; text-transform: uppercase; color: var(--guld); }
+  .knapp { display: inline-flex; align-items: center; gap: 10px; padding: 16px 30px; border: 1px solid var(--espresso); border-radius: 999px; background: var(--espresso); color: var(--elfenben); font: 600 .9rem/1 var(--text); letter-spacing: .04em; text-decoration: none; transition: background-color .3s, color .3s, border-color .3s; }
+  .knapp:hover { background: var(--guld); border-color: var(--guld); }
+  .knapp.ljus { background: transparent; color: var(--elfenben); border-color: rgba(246, 241, 234, .55); }
+  .knapp.ljus:hover { background: var(--elfenben); color: var(--espresso); }
+
+  /* Exempelremsa */
+  .exempel { position: relative; z-index: 60; padding: 9px 20px; background: var(--espresso); color: var(--guld-ljus); font: 500 .78rem/1.4 var(--text); text-align: center; }
+  .exempel a { color: var(--elfenben); }
+
+  /* Meny */
+  .meny { position: absolute; inset: 38px 0 auto; z-index: 50; }
+  .meny-inre { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 22px; color: var(--elfenben); }
+  .logga { font: 600 1.7rem/1 var(--serif); letter-spacing: .06em; text-decoration: none; }
+  .logga span { font-style: italic; color: var(--guld-ljus); }
+  .meny nav { display: flex; align-items: center; gap: 28px; }
+  .meny nav a { font-size: .9rem; text-decoration: none; opacity: .85; }
+  .meny nav a:hover { opacity: 1; }
+  .sprak { display: inline-flex; border: 1px solid rgba(246, 241, 234, .45); border-radius: 999px; overflow: hidden; }
+  .sprak button { padding: 7px 12px; border: 0; background: transparent; color: inherit; font: 600 .72rem/1 var(--text); letter-spacing: .12em; cursor: pointer; }
+  .sprak button[aria-pressed="true"] { background: var(--elfenben); color: var(--espresso); }
+
+  /* Hjälte */
+  .hjalte { position: relative; min-height: min(92vh, 860px); display: grid; align-items: end; color: var(--elfenben); overflow: hidden; }
+  .hjalte video, .hjalte .affisch { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hjalte::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(27, 21, 18, .55), rgba(27, 21, 18, .15) 40%, rgba(27, 21, 18, .85)); }
+  .hjalte-text { position: relative; z-index: 2; padding-block: 160px 90px; max-width: 760px; }
+  .hjalte h1 { font-size: clamp(3rem, 7vw, 6.2rem); }
+  .hjalte h1 em { color: var(--guld-ljus); }
+  .hjalte p { max-width: 520px; margin: 24px 0 36px; font-size: 1.1rem; color: rgba(246, 241, 234, .85); }
+  .knapprad { display: flex; flex-wrap: wrap; gap: 14px; }
+  .oppet { position: absolute; z-index: 2; right: 20px; bottom: 34px; padding: 14px 18px; border: 1px solid rgba(246, 241, 234, .3); border-radius: 14px; background: rgba(27, 21, 18, .45); backdrop-filter: blur(8px); font-size: .82rem; }
+  .oppet strong { display: block; font: 500 1.2rem/1.2 var(--serif); }
+
+  /* Avsnitt */
+  .sektion { padding-block: clamp(80px, 11vw, 140px); }
+  .huvud { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 56px; }
+  .huvud h2 { font-size: clamp(2.4rem, 4.6vw, 4rem); }
+  .huvud p { margin: 0; color: var(--mocka); max-width: 460px; justify-self: end; }
+  .behandlingar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .behandling { position: relative; aspect-ratio: 3 / 4; overflow: hidden; border-radius: 18px; color: var(--elfenben); }
+  .behandling img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(.2, .7, .2, 1); }
+  .behandling:hover img { transform: scale(1.06); }
+  .behandling::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, rgba(27, 21, 18, .82)); }
+  .behandling div { position: absolute; z-index: 1; left: 22px; right: 22px; bottom: 20px; }
+  .behandling h3 { font-size: 1.8rem; }
+  .behandling p { margin: 6px 0 0; font-size: .86rem; color: rgba(246, 241, 234, .82); }
+
+  /* Priser */
+  .priser { background: var(--sand); }
+  .prislista { display: grid; grid-template-columns: 1fr 1fr; gap: 0 70px; }
+  .pris { display: flex; align-items: baseline; gap: 14px; padding-block: 20px; border-bottom: 1px solid var(--linje); }
+  .pris span:first-child { font: 500 1.35rem/1.2 var(--serif); }
+  .pris i { flex: 1; border-bottom: 1px dotted rgba(27, 21, 18, .3); transform: translateY(-5px); }
+  .pris span:last-child { font-weight: 600; white-space: nowrap; }
+  .not { margin-top: 26px; font-size: .82rem; color: var(--mocka); }
+
+  /* Om oss */
+  .om { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(40px, 7vw, 100px); align-items: center; }
+  .om figure { margin: 0; position: relative; }
+  .om figure img { border-radius: 220px 220px 18px 18px; aspect-ratio: 4 / 5; object-fit: cover; width: 100%; }
+  .om figure::before { content: ""; position: absolute; inset: -18px 18px 18px -18px; border: 1px solid var(--guld); border-radius: 230px 230px 22px 22px; z-index: -1; }
+  .om h2 { font-size: clamp(2.4rem, 4.4vw, 3.8rem); margin-bottom: 26px; }
+  .om p { color: var(--mocka); }
+  .loften { display: grid; gap: 14px; margin: 30px 0 0; padding: 0; list-style: none; }
+  .loften li { display: flex; gap: 14px; align-items: center; }
+  .loften li::before { content: ""; width: 26px; height: 1px; background: var(--guld); }
+
+  /* Galleri */
+  .galleri { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 20px; }
+  .galleri img { width: 100%; height: 100%; object-fit: cover; border-radius: 18px; aspect-ratio: 4 / 5; }
+  .galleri img:first-child { aspect-ratio: auto; grid-row: span 2; }
+
+  /* Hitta hit och boka */
+  .boka { background: var(--espresso); color: var(--elfenben); }
+  .boka-rad { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(40px, 7vw, 100px); }
+  .boka h2 { font-size: clamp(2.6rem, 5vw, 4.4rem); margin-bottom: 24px; }
+  .boka h2 em { color: var(--guld-ljus); }
+  .boka p { color: rgba(246, 241, 234, .75); }
+  .tider { width: 100%; border-collapse: collapse; margin-top: 10px; }
+  .tider td { padding: 13px 0; border-bottom: 1px solid rgba(246, 241, 234, .14); }
+  .tider td:last-child { text-align: right; color: var(--guld-ljus); }
+  .kort { padding: clamp(28px, 4vw, 44px); border: 1px solid rgba(246, 241, 234, .16); border-radius: 22px; background: rgba(246, 241, 234, .04); }
+  .kort h3 { font-size: 2rem; margin-bottom: 12px; }
+  .kort .knapp { margin-top: 18px; background: var(--guld); border-color: var(--guld); color: var(--espresso); }
+  .kort .knapp:hover { background: var(--elfenben); border-color: var(--elfenben); }
+  .kontakt { margin-top: 26px; display: grid; gap: 6px; font-size: .95rem; }
+  .sidfot { padding-block: 34px; background: #120e0c; color: rgba(246, 241, 234, .55); font-size: .78rem; }
+  .sidfot .ram { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+
+  .visas { opacity: 0; transform: translateY(26px); transition: opacity 1s ease, transform 1s cubic-bezier(.2, .7, .2, 1); }
+  .visas.synlig { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .visas { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+
+  @media (max-width: 900px) {
+    .meny nav a { display: none; }
+    .huvud, .prislista, .om, .boka-rad { grid-template-columns: 1fr; }
+    .huvud p { justify-self: start; }
+    .behandlingar { grid-template-columns: 1fr 1fr; }
+    .galleri { grid-template-columns: 1fr 1fr; }
+    .galleri img:first-child { grid-row: auto; grid-column: span 2; aspect-ratio: 16 / 10; }
+    .oppet { display: none; }
+  }
+  @media (max-width: 520px) {
+    .behandlingar { grid-template-columns: 1fr; }
+    .behandling { aspect-ratio: 4 / 3; }
+    .hjalte-text { padding-block: 140px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="exempel" data-da="Eksempel på en hjemmeside fra Glans Studio – Salon Silke er en opdigtet virksomhed. <a href=&quot;../../index.html&quot;>Til Glans Studio</a>">Exempelsajt av Glans Studio – Salong Silke är ett påhittat företag. <a href="../../index.html">Till Glans Studio</a></div>
+
+<header class="meny">
+  <div class="ram meny-inre">
+    <a class="logga" href="#top"><span>Salong</span> Silke</a>
+    <nav>
+      <a href="#behandlingar" data-da="Behandlinger">Behandlingar</a>
+      <a href="#priser" data-da="Priser">Priser</a>
+      <a href="#om" data-da="Om os">Om oss</a>
+      <a href="#boka" data-da="Find os">Hitta hit</a>
+      <div class="sprak" role="group" aria-label="Språk"><button type="button" data-sprak="sv" aria-pressed="true">SV</button><button type="button" data-sprak="da" aria-pressed="false">DA</button></div>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hjalte">
+    <img class="affisch" src="media/hero.jpg" alt="">
+    <video src="media/hero.mp4" poster="media/hero.jpg" autoplay muted loop playsinline aria-hidden="true"></video>
+    <div class="ram">
+      <div class="hjalte-text visas">
+        <p class="etikett" data-da="Frisør &amp; skønhed">Frisör &amp; skönhet</p>
+        <h1 data-da="Hår, der føles <em>lige så godt</em>, som det ser ud">Hår som känns <em>lika bra</em> som det ser ut</h1>
+        <p data-da="Klipning, farve og behandlinger i rolige omgivelser – med tid til dig og et resultat, der holder.">Klippning, färg och behandlingar i lugn miljö – med tid för dig och ett resultat som håller.</p>
+        <div class="knapprad">
+          <a class="knapp" href="#boka" data-da="Book tid">Boka tid</a>
+          <a class="knapp ljus" href="#priser" data-da="Se priser">Se priser</a>
+        </div>
+      </div>
+    </div>
+    <div class="oppet"><span data-da="I dag">I dag</span><strong data-da="Åbent 10–19">Öppet 10–19</strong></div>
+  </section>
+
+  <section class="sektion" id="behandlingar">
+    <div class="ram">
+      <div class="huvud visas">
+        <div><p class="etikett" data-da="Behandlinger">Behandlingar</p><h2 data-da="Til hvert <em>hår</em> og hver dag">För varje <em>hår</em> och varje dag</h2></div>
+        <p data-da="Vi starter altid med en rolig snak om, hvad du ønsker, og giver dig ærlige råd om, hvad der passer til dit hår.">Vi börjar alltid med ett lugnt samtal om vad du önskar och ger ärliga råd om vad som passar ditt hår.</p>
+      </div>
+      <div class="behandlingar">
+        <article class="behandling visas"><img src="media/tvatt.jpg" alt="Hårtvätt i salong" loading="lazy"><div><h3 data-da="Klipning">Klippning</h3><p data-da="Vask, klip og styling">Tvätt, klippning och styling</p></div></article>
+        <article class="behandling visas"><img src="media/foning.jpg" alt="Frisör som fönar kundens hår" loading="lazy"><div><h3 data-da="Farve">Färg</h3><p data-da="Helfarve, striber og toning">Helfärg, slingor och toning</p></div></article>
+        <article class="behandling visas"><img src="media/lock.jpg" alt="Lockar görs med locktång" loading="lazy"><div><h3 data-da="Styling">Styling</h3><p data-da="Fest, bryllup og opsætning">Fest, bröllop och uppsättning</p></div></article>
+        <article class="behandling visas"><img src="media/behandling.jpg" alt="Ansiktsbehandling med mask" loading="lazy"><div><h3 data-da="Ansigt">Ansikte</h3><p data-da="Rens, maske og afslapning">Rengöring, mask och avkoppling</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sektion priser" id="priser">
+    <div class="ram">
+      <div class="huvud visas">
+        <div><p class="etikett" data-da="Priser">Priser</p><h2 data-da="Tydelige priser, <em>ingen overraskelser</em>">Tydliga priser, <em>inga överraskningar</em></h2></div>
+        <p data-da="Alle priser er eksempler på en demoside og inkluderer moms.">Alla priser är exempel på en demosajt och inkluderar moms.</p>
+      </div>
+      <div class="prislista visas">
+        <div>
+          <div class="pris"><span data-da="Dameklip">Damklippning</span><i></i><span data-da="495 kr.">695 kr</span></div>
+          <div class="pris"><span data-da="Herreklip">Herrklippning</span><i></i><span data-da="350 kr.">495 kr</span></div>
+          <div class="pris"><span data-da="Børneklip">Barnklippning</span><i></i><span data-da="250 kr.">350 kr</span></div>
+          <div class="pris"><span data-da="Vask og føn">Tvätt och fön</span><i></i><span data-da="295 kr.">395 kr</span></div>
+        </div>
+        <div>
+          <div class="pris"><span data-da="Helfarve">Helfärg</span><i></i><span data-da="fra 895 kr.">från 1 195 kr</span></div>
+          <div class="pris"><span data-da="Striber">Slingor</span><i></i><span data-da="fra 1.095 kr.">från 1 495 kr</span></div>
+          <div class="pris"><span data-da="Opsætning">Uppsättning</span><i></i><span data-da="fra 695 kr.">från 895 kr</span></div>
+          <div class="pris"><span data-da="Ansigtsbehandling">Ansiktsbehandling</span><i></i><span data-da="795 kr.">995 kr</span></div>
+        </div>
+      </div>
+      <p class="not" data-da="Eksempelpriser – en rigtig salon indsætter sine egne priser her.">Exempelpriser – en riktig salong lägger in sina egna priser här.</p>
+    </div>
+  </section>
+
+  <section class="sektion" id="om">
+    <div class="ram om">
+      <figure class="visas"><img src="media/salong.jpg" alt="Salong med svarta stolar och runda speglar" loading="lazy"></figure>
+      <div class="visas">
+        <p class="etikett" data-da="Om os">Om oss</p>
+        <h2 data-da="En salon, hvor du <em>kan slappe af</em>">En salong där du <em>kan landa</em></h2>
+        <p data-da="Salon Silke er et roligt sted midt i byen. Vi tager os tid til hver kunde, bruger skånsomme produkter og giver dig råd, du kan bruge derhjemme.">Salong Silke är en lugn plats mitt i stan. Vi tar oss tid för varje kund, använder skonsamma produkter och ger dig råd du har nytta av hemma.</p>
+        <ul class="loften">
+          <li data-da="Personlig rådgivning før hver behandling">Personlig rådgivning före varje behandling</li>
+          <li data-da="Skånsomme produkter af høj kvalitet">Skonsamma produkter av hög kvalitet</li>
+          <li data-da="Book online – døgnet rundt">Boka online – dygnet runt</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sektion" style="padding-top: 0">
+    <div class="ram galleri visas">
+      <img src="media/stylist.jpg" alt="Glad frisör som fönar en kund" loading="lazy">
+      <img src="media/foning.jpg" alt="Föning med rundborste" loading="lazy">
+      <img src="media/lock.jpg" alt="Lockar med locktång" loading="lazy">
+      <img src="media/tvatt.jpg" alt="Hårtvätt" loading="lazy">
+      <img src="media/behandling.jpg" alt="Ansiktsbehandling" loading="lazy">
+    </div>
+  </section>
+
+  <section class="sektion boka" id="boka">
+    <div class="ram boka-rad">
+      <div class="visas">
+        <p class="etikett" data-da="Find os">Hitta hit</p>
+        <h2 data-da="Vi glæder os til <em>at se dig</em>">Välkommen <em>in till oss</em></h2>
+        <p data-da="Eksempelvej 12, 1234 Byen · 2 minutter fra stationen">Exempelgatan 12, 123 45 Staden · 2 minuter från stationen</p>
+        <table class="tider">
+          <tr><td data-da="Mandag–fredag">Måndag–fredag</td><td>10–19</td></tr>
+          <tr><td data-da="Lørdag">Lördag</td><td>10–16</td></tr>
+          <tr><td data-da="Søndag">Söndag</td><td data-da="Lukket">Stängt</td></tr>
+        </table>
+      </div>
+      <div class="kort visas">
+        <h3 data-da="Book din tid online">Boka din tid online</h3>
+        <p data-da="Vælg behandling, frisør og tidspunkt på under en minut. Her kobles salonens eget bookingsystem på.">Välj behandling, frisör och tid på under en minut. Här kopplas salongens eget bokningssystem in.</p>
+        <a class="knapp" href="#boka" data-da="Book tid">Boka tid</a>
+        <div class="kontakt">
+          <span data-da="Telefon: 00 00 00 00 (eksempel)">Telefon: 000-000 00 00 (exempel)</span>
+          <span data-da="E-mail: hej@salonsilke.eksempel">E-post: hej@salongsilke.exempel</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="sidfot">
+  <div class="ram">
+    <span data-da="© Salon Silke – opdigtet eksempel. Hjemmeside af Glans Studio.">© Salong Silke – påhittat exempel. Hemsida av Glans Studio.</span>
+    <span data-da="Fotos: Greg Trowman, Lindsay Cash, Adam Winger, Baylee Gramling og Rosa Rafael via Unsplash · Video: Coverr">Foto: Greg Trowman, Lindsay Cash, Adam Winger, Baylee Gramling och Rosa Rafael via Unsplash · Film: Coverr</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  // Språk: svenska finns i sidan, danska i data-da. Valet sparas i webbläsaren.
+  const element = Array.from(document.querySelectorAll('[data-da]'));
+  element.forEach(el => { el.dataset.sv = el.innerHTML; });
+  const knappar = Array.from(document.querySelectorAll('[data-sprak]'));
+  function sattSprak(sprak) {
+    element.forEach(el => { el.innerHTML = sprak === 'da' ? el.dataset.da : el.dataset.sv; });
+    document.documentElement.lang = sprak;
+    knappar.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.sprak === sprak)));
+    try { localStorage.setItem('glans-sprak', sprak); } catch (e) {}
+  }
+  knappar.forEach(b => b.addEventListener('click', () => sattSprak(b.dataset.sprak)));
+  let start = 'sv';
+  try { start = localStorage.getItem('glans-sprak') || (/^da\b/i.test(navigator.language) ? 'da' : 'sv'); } catch (e) {}
+  if (start === 'da') sattSprak('da');
+
+  // Mjuk inglidning när avsnitten syns
+  const visas = document.querySelectorAll('.visas');
+  if ('IntersectionObserver' in window) {
+    const o = new IntersectionObserver(poster => poster.forEach(p => { if (p.isIntersecting) { p.target.classList.add('synlig'); o.unobserve(p.target); } }), { threshold: 0.12 });
+    visas.forEach(el => o.observe(el));
+  } else { visas.forEach(el => el.classList.add('synlig')); }
+
+  // Videon pausas för besökare som valt mindre rörelse
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelectorAll('video').forEach(v => { v.pause(); v.removeAttribute('autoplay'); });
+})();
+</script>
+</body>
+</html>

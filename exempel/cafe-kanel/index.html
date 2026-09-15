@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Café Kanel – exempelsajt av Glans Studio</title>
+<meta name="description" content="Exempelsajt för ett café och en bistro, gjord av Glans Studio. Café Kanel är ett påhittat företag.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%2316110E'/%3E%3Ctext x='16' y='22.5' text-anchor='middle' font-family='Georgia,serif' font-size='19' font-style='italic' fill='%23D98B52'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --espresso: #16110E;
+    --rost: #231A15;
+    --gradde: #F3EBDD;
+    --kanel: #B5652F;
+    --kanel-ljus: #D98B52;
+    --salvia: #7A8B6F;
+    --guld: #C9A66B;
+    --dampad: rgba(243, 235, 221, .72);
+    --linje: rgba(243, 235, 221, .14);
+    --serif: "Fraunces", Georgia, "Times New Roman", serif;
+    --text: "Work Sans", "Segoe UI", system-ui, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--espresso); color: var(--gradde); font: 400 1rem/1.7 var(--text); -webkit-font-smoothing: antialiased; }
+  img, video { display: block; max-width: 100%; }
+  a { color: inherit; }
+  .ram { width: min(1180px, 100% - 40px); margin-inline: auto; }
+  h1, h2, h3 { margin: 0; font-family: var(--serif); font-weight: 500; line-height: 1.02; letter-spacing: -0.015em; }
+  em { font-style: italic; color: var(--kanel-ljus); }
+  .etikett { margin: 0 0 18px; font: 600 .72rem/1 var(--text); letter-spacing: .26em; text-transform: uppercase; color: var(--guld); }
+  .knapp { display: inline-flex; align-items: center; gap: 10px; padding: 16px 30px; border: 1px solid var(--kanel); border-radius: 999px; background: var(--kanel); color: var(--gradde); font: 600 .9rem/1 var(--text); text-decoration: none; transition: background-color .3s, border-color .3s, color .3s; }
+  .knapp:hover { background: var(--kanel-ljus); border-color: var(--kanel-ljus); }
+  .knapp.spok { background: transparent; border-color: rgba(243, 235, 221, .5); }
+  .knapp.spok:hover { background: var(--gradde); color: var(--espresso); border-color: var(--gradde); }
+
+  .exempel { position: relative; z-index: 60; padding: 9px 20px; background: var(--kanel); color: var(--gradde); font: 500 .78rem/1.4 var(--text); text-align: center; }
+  .exempel a { color: var(--espresso); font-weight: 600; }
+
+  .meny { position: absolute; inset: 38px 0 auto; z-index: 50; }
+  .meny-inre { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 22px; }
+  .logga { font: 600 1.75rem/1 var(--serif); text-decoration: none; }
+  .logga em { color: var(--kanel-ljus); }
+  .meny nav { display: flex; align-items: center; gap: 28px; }
+  .meny nav a { font-size: .92rem; text-decoration: none; opacity: .85; }
+  .meny nav a:hover { opacity: 1; }
+  .sprak { display: inline-flex; border: 1px solid rgba(243, 235, 221, .45); border-radius: 999px; overflow: hidden; }
+  .sprak button { padding: 7px 12px; border: 0; background: transparent; color: inherit; font: 600 .72rem/1 var(--text); letter-spacing: .12em; cursor: pointer; }
+  .sprak button[aria-pressed="true"] { background: var(--gradde); color: var(--espresso); }
+
+  .hjalte { position: relative; min-height: min(94vh, 880px); display: grid; align-items: center; overflow: hidden; }
+  .hjalte video, .hjalte .affisch { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hjalte::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 60%, rgba(22, 17, 14, .2), rgba(22, 17, 14, .85) 70%), linear-gradient(180deg, rgba(22, 17, 14, .5), transparent 30%, rgba(22, 17, 14, .9)); }
+  .hjalte-text { position: relative; z-index: 2; padding-block: 150px 110px; max-width: 720px; }
+  .hjalte h1 { font-size: clamp(3.2rem, 7.4vw, 6.6rem); }
+  .hjalte p { max-width: 500px; margin: 26px 0 36px; font-size: 1.1rem; color: var(--dampad); }
+  .knapprad { display: flex; flex-wrap: wrap; gap: 14px; }
+  .info { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; border-top: 1px solid var(--linje); background: rgba(22, 17, 14, .55); backdrop-filter: blur(8px); }
+  .info .ram { display: flex; flex-wrap: wrap; gap: 10px 44px; padding-block: 18px; font-size: .88rem; color: var(--dampad); }
+  .info strong { color: var(--gradde); font-weight: 600; margin-right: 8px; }
+
+  .sektion { padding-block: clamp(80px, 11vw, 140px); }
+  .intro { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 7vw, 100px); align-items: center; }
+  .intro h2 { font-size: clamp(2.4rem, 4.6vw, 4rem); margin-bottom: 24px; }
+  .intro p { color: var(--dampad); }
+  .intro-bilder { position: relative; }
+  .intro-bilder img:first-child { width: 86%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 20px; }
+  .intro-bilder img:last-child { position: absolute; right: 0; bottom: -40px; width: 46%; aspect-ratio: 1; object-fit: cover; border-radius: 50%; border: 8px solid var(--espresso); }
+
+  .menyavsnitt { background: var(--gradde); color: var(--espresso); }
+  .menyavsnitt em { color: var(--kanel); }
+  .menyavsnitt .etikett { color: var(--kanel); }
+  .menyhuvud { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 50px; }
+  .menyhuvud h2 { font-size: clamp(2.4rem, 4.6vw, 4rem); }
+  .kolumner { display: grid; grid-template-columns: repeat(3, 1fr); gap: 50px; }
+  .kolumner h3 { font-size: 1.7rem; padding-bottom: 14px; margin-bottom: 8px; border-bottom: 2px solid var(--espresso); }
+  .ratt { padding-block: 16px; border-bottom: 1px solid rgba(22, 17, 14, .12); }
+  .ratt div { display: flex; justify-content: space-between; gap: 12px; font-weight: 600; }
+  .ratt p { margin: 4px 0 0; font-size: .88rem; color: #6c5a4c; }
+  .not { margin-top: 30px; font-size: .82rem; color: #6c5a4c; }
+
+  .rattbilder { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .rattbilder figure { margin: 0; }
+  .rattbilder img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 18px; transition: transform 1s cubic-bezier(.2, .7, .2, 1); }
+  .rattbilder figure:hover img { transform: translateY(-6px); }
+  .rattbilder figcaption { margin-top: 12px; font: 500 1.15rem/1.3 var(--serif); }
+
+  .filmband { position: relative; min-height: 70vh; display: grid; place-items: center; overflow: hidden; text-align: center; }
+  .filmband video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .filmband::after { content: ""; position: absolute; inset: 0; background: rgba(22, 17, 14, .55); }
+  .filmband blockquote { position: relative; z-index: 1; margin: 0; max-width: 16ch; font: 500 clamp(2.4rem, 5.6vw, 4.8rem)/1.05 var(--serif); }
+
+  .boka-rad { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 7vw, 100px); }
+  .boka h2 { font-size: clamp(2.6rem, 5vw, 4.4rem); margin-bottom: 22px; }
+  .boka p { color: var(--dampad); }
+  .tider { width: 100%; border-collapse: collapse; margin-top: 12px; }
+  .tider td { padding: 13px 0; border-bottom: 1px solid var(--linje); }
+  .tider td:last-child { text-align: right; color: var(--guld); }
+  .kort { padding: clamp(28px, 4vw, 44px); border-radius: 24px; background: var(--rost); border: 1px solid var(--linje); }
+  .kort h3 { font-size: 2.1rem; margin-bottom: 12px; }
+  .kort .knapp { margin-top: 20px; }
+  .kontakt { margin-top: 26px; display: grid; gap: 6px; font-size: .95rem; color: var(--dampad); }
+  .sidfot { padding-block: 34px; border-top: 1px solid var(--linje); color: rgba(243, 235, 221, .5); font-size: .78rem; }
+  .sidfot .ram { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+
+  .visas { opacity: 0; transform: translateY(26px); transition: opacity 1s ease, transform 1s cubic-bezier(.2, .7, .2, 1); }
+  .visas.synlig { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .visas { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+
+  @media (max-width: 900px) {
+    .meny nav a { display: none; }
+    .intro, .boka-rad { grid-template-columns: 1fr; }
+    .kolumner { grid-template-columns: 1fr; gap: 36px; }
+    .rattbilder { grid-template-columns: 1fr 1fr; }
+    .intro-bilder { margin-bottom: 40px; }
+  }
+  @media (max-width: 520px) {
+    .hjalte-text { padding-block: 130px 150px; }
+    .info .ram { gap: 6px 20px; font-size: .8rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="exempel" data-da="Eksempel på en hjemmeside fra Glans Studio – Café Kanel er en opdigtet virksomhed. <a href=&quot;../../index.html&quot;>Til Glans Studio</a>">Exempelsajt av Glans Studio – Café Kanel är ett påhittat företag. <a href="../../index.html">Till Glans Studio</a></div>
+
+<header class="meny">
+  <div class="ram meny-inre">
+    <a class="logga" href="#top">Café <em>Kanel</em></a>
+    <nav>
+      <a href="#menyn" data-da="Menu">Meny</a>
+      <a href="#om" data-da="Om os">Om oss</a>
+      <a href="#boka" data-da="Find os">Hitta hit</a>
+      <div class="sprak" role="group" aria-label="Språk"><button type="button" data-sprak="sv" aria-pressed="true">SV</button><button type="button" data-sprak="da" aria-pressed="false">DA</button></div>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hjalte">
+    <img class="affisch" src="media/hero.jpg" alt="">
+    <video src="media/hero.mp4" poster="media/hero.jpg" autoplay muted loop playsinline aria-hidden="true"></video>
+    <div class="ram">
+      <div class="hjalte-text visas">
+        <p class="etikett" data-da="Café &amp; bistro">Café &amp; bistro</p>
+        <h1 data-da="Kaffe, kanel og <em>lange frokoster</em>">Kaffe, kanel och <em>långa luncher</em></h1>
+        <p data-da="Nybrygget kaffe om morgenen, sæsonens mad til frokost og et glas vin, når dagen er slut.">Nybryggt kaffe på morgonen, säsongens mat till lunch och ett glas vin när dagen är slut.</p>
+        <div class="knapprad">
+          <a class="knapp" href="#boka" data-da="Book bord">Boka bord</a>
+          <a class="knapp spok" href="#menyn" data-da="Se menuen">Se menyn</a>
+        </div>
+      </div>
+    </div>
+    <div class="info">
+      <div class="ram">
+        <span><strong data-da="I dag">I dag</strong><span data-da="07–22">07–22</span></span>
+        <span><strong data-da="Frokost">Lunch</strong><span data-da="11.30–14.30">11.30–14.30</span></span>
+        <span><strong data-da="Adresse">Adress</strong><span data-da="Eksempelvej 5, Byen">Exempelgatan 5, Staden</span></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="sektion" id="om">
+    <div class="ram intro">
+      <div class="intro-bilder visas">
+        <img src="media/lokal.jpg" alt="Varm restauranglokal med trägolv och lampor" loading="lazy">
+        <img src="media/latteart.jpg" alt="Kopp med latte art" loading="lazy">
+      </div>
+      <div class="visas">
+        <p class="etikett" data-da="Om os">Om oss</p>
+        <h2 data-da="Et sted at <em>blive hængende</em>">Ett ställe att <em>stanna kvar</em> på</h2>
+        <p data-da="Café Kanel er kvarterets stue. Vi bager selv, køber råvarer fra lokale leverandører og laver mad, der smager af sæsonen.">Café Kanel är kvarterets vardagsrum. Vi bakar själva, köper råvaror från lokala leverantörer och lagar mat som smakar säsong.</p>
+        <p data-da="Kom forbi til en hurtig kop kaffe, eller sæt dig til rette med venner hele eftermiddagen.">Titta in för en snabb kopp kaffe eller slå dig ner med vänner hela eftermiddagen.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sektion menyavsnitt" id="menyn">
+    <div class="ram">
+      <div class="menyhuvud visas">
+        <div><p class="etikett" data-da="Menu">Meny</p><h2 data-da="Enkelt, godt <em>og hjemmelavet</em>">Enkelt, gott <em>och hemlagat</em></h2></div>
+        <a class="knapp" href="#boka" data-da="Book bord">Boka bord</a>
+      </div>
+      <div class="kolumner visas">
+        <div>
+          <h3 data-da="Morgenmad &amp; kage">Frukost &amp; fika</h3>
+          <div class="ratt"><div><span data-da="Kanelsnegl">Kanelbulle</span><span data-da="38 kr.">45 kr</span></div><p data-da="Bagt her i huset hver morgen">Bakad här varje morgon</p></div>
+          <div class="ratt"><div><span data-da="Surdejsbrød med avocado">Surdegsmacka med avokado</span><span data-da="95 kr.">115 kr</span></div><p data-da="Blødkogt æg, citron og chili">Löskokt ägg, citron och chili</p></div>
+          <div class="ratt"><div><span data-da="Yoghurt med granola">Yoghurt med granola</span><span data-da="75 kr.">95 kr</span></div><p data-da="Hjemmelavet granola og friske bær">Hemgjord granola och färska bär</p></div>
+        </div>
+        <div>
+          <h3 data-da="Frokost &amp; aften">Lunch &amp; middag</h3>
+          <div class="ratt"><div><span data-da="Dagens ret">Dagens lunch</span><span data-da="125 kr.">145 kr</span></div><p data-da="Salat, brød og kaffe inkluderet">Sallad, bröd och kaffe ingår</p></div>
+          <div class="ratt"><div><span data-da="Grillet entrecote">Grillad entrecôte</span><span data-da="265 kr.">325 kr</span></div><p data-da="Grønne asparges og rødvinssauce">Grön sparris och rödvinssås</p></div>
+          <div class="ratt"><div><span data-da="Sæsonens grønne ret">Säsongens gröna rätt</span><span data-da="165 kr.">195 kr</span></div><p data-da="Spørg os om dagens valg">Fråga oss om dagens val</p></div>
+        </div>
+        <div>
+          <h3 data-da="Drikke">Dryck</h3>
+          <div class="ratt"><div><span>Cappuccino</span><span data-da="42 kr.">45 kr</span></div><p data-da="Espresso fra lokalt risteri">Espresso från lokalt rosteri</p></div>
+          <div class="ratt"><div><span data-da="Latte med havremælk">Latte med havremjölk</span><span data-da="45 kr.">52 kr</span></div><p data-da="Også med kanel og honning">Även med kanel och honung</p></div>
+          <div class="ratt"><div><span data-da="Glas vin">Glas vin</span><span data-da="fra 75 kr.">från 95 kr</span></div><p data-da="Rødt, hvidt og mousserende">Rött, vitt och mousserande</p></div>
+        </div>
+      </div>
+      <p class="not" data-da="Eksempelmenu – en rigtig restaurant indsætter sin egen menu og sine egne priser her.">Exempelmeny – en riktig restaurang lägger in sin egen meny och sina egna priser här.</p>
+    </div>
+  </section>
+
+  <section class="sektion">
+    <div class="ram">
+      <p class="etikett visas" data-da="Fra køkkenet">Från köket</p>
+      <div class="rattbilder visas">
+        <figure><img src="media/biff.jpg" alt="Grillad biff med sparris och vin" loading="lazy"><figcaption data-da="Grillet entrecote">Grillad entrecôte</figcaption></figure>
+        <figure><img src="media/ratt.jpg" alt="Upplagd rätt på träbord" loading="lazy"><figcaption data-da="Sæsonens ret">Säsongens rätt</figcaption></figure>
+        <figure><img src="media/barista.jpg" alt="Barista med en kopp latte" loading="lazy"><figcaption data-da="Kaffe fra baristaen">Kaffe från baristan</figcaption></figure>
+        <figure><img src="media/kanna.jpg" alt="Mjölk hälls i en kaffekopp" loading="lazy"><figcaption data-da="Latte med havremælk">Latte med havremjölk</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="filmband" aria-label="Stämning">
+    <video src="media/latte.mp4" poster="media/latte.jpg" autoplay muted loop playsinline aria-hidden="true"></video>
+    <blockquote class="visas" data-da="De bedste samtaler starter over <em>en kop kaffe</em>">De bästa samtalen börjar över <em>en kopp kaffe</em></blockquote>
+  </section>
+
+  <section class="sektion boka" id="boka">
+    <div class="ram boka-rad">
+      <div class="visas">
+        <p class="etikett" data-da="Find os">Hitta hit</p>
+        <h2 data-da="Velkommen <em>indenfor</em>">Välkommen <em>in</em></h2>
+        <p data-da="Eksempelvej 5, 1234 Byen · Tæt på torvet">Exempelgatan 5, 123 45 Staden · Nära torget</p>
+        <table class="tider">
+          <tr><td data-da="Mandag–fredag">Måndag–fredag</td><td>07–22</td></tr>
+          <tr><td data-da="Lørdag">Lördag</td><td>09–23</td></tr>
+          <tr><td data-da="Søndag">Söndag</td><td>09–18</td></tr>
+        </table>
+      </div>
+      <div class="kort visas">
+        <h3 data-da="Book et bord">Boka ett bord</h3>
+        <p data-da="Vælg dag, tid og antal personer. Her kobles restaurantens eget bookingsystem på.">Välj dag, tid och antal personer. Här kopplas restaurangens eget bokningssystem in.</p>
+        <a class="knapp" href="#boka" data-da="Book bord">Boka bord</a>
+        <div class="kontakt">
+          <span data-da="Telefon: 00 00 00 00 (eksempel)">Telefon: 000-000 00 00 (exempel)</span>
+          <span data-da="E-mail: hej@cafekanel.eksempel">E-post: hej@cafekanel.exempel</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="sidfot">
+  <div class="ram">
+    <span data-da="© Café Kanel – opdigtet eksempel. Hjemmeside af Glans Studio.">© Café Kanel – påhittat exempel. Hemsida av Glans Studio.</span>
+    <span data-da="Fotos: Glenov Brankovic, Fahmi Fakhrudin, Hybrid Storytellers, Kristóf Koródy, Pete Willis og Andreas Behr via Unsplash · Video: Coverr">Foto: Glenov Brankovic, Fahmi Fakhrudin, Hybrid Storytellers, Kristóf Koródy, Pete Willis och Andreas Behr via Unsplash · Film: Coverr</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  // Språk: svenska finns i sidan, danska i data-da. Valet sparas i webbläsaren.
+  const element = Array.from(document.querySelectorAll('[data-da]'));
+  element.forEach(el => { el.dataset.sv = el.innerHTML; });
+  const knappar = Array.from(document.querySelectorAll('[data-sprak]'));
+  function sattSprak(sprak) {
+    element.forEach(el => { el.innerHTML = sprak === 'da' ? el.dataset.da : el.dataset.sv; });
+    document.documentElement.lang = sprak;
+    knappar.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.sprak === sprak)));
+    try { localStorage.setItem('glans-sprak', sprak); } catch (e) {}
+  }
+  knappar.forEach(b => b.addEventListener('click', () => sattSprak(b.dataset.sprak)));
+  let start = 'sv';
+  try { start = localStorage.getItem('glans-sprak') || (/^da\b/i.test(navigator.language) ? 'da' : 'sv'); } catch (e) {}
+  if (start === 'da') sattSprak('da');
+
+  const visas = document.querySelectorAll('.visas');
+  if ('IntersectionObserver' in window) {
+    const o = new IntersectionObserver(poster => poster.forEach(p => { if (p.isIntersecting) { p.target.classList.add('synlig'); o.unobserve(p.target); } }), { threshold: 0.12 });
+    visas.forEach(el => o.observe(el));
+  } else { visas.forEach(el => el.classList.add('synlig')); }
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.querySelectorAll('video').forEach(v => { v.pause(); v.removeAttribute('autoplay'); });
+})();
+</script>
+</body>
+</html>
