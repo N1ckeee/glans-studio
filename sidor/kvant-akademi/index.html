@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kvant Akademi – lär dig hur börsen fungerar</title>
+<meta name="description" content="Kvant Akademi är en aktieskola på enkel svenska: lär dig hur börsen fungerar, analysera bolag och bygg en egen plan med kurs, verktyg och coachning. Utbildning – inga köptips.">
+<meta name="theme-color" content="#05070A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2305070A'/%3E%3Cellipse cx='16' cy='16' rx='12' ry='4.6' fill='none' stroke='%235BF0C4' stroke-width='1.6' transform='rotate(-32 16 16)'/%3E%3Cellipse cx='16' cy='16' rx='12' ry='4.6' fill='none' stroke='%23E4C27F' stroke-width='1.6' transform='rotate(32 16 16)'/%3E%3Ccircle cx='16' cy='16' r='3.2' fill='%235BF0C4'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --natt: #05070A;
+    --djup: #0A0E13;
+    --yta: #0F151C;
+    --yta-2: #141C25;
+    --linje: rgba(148, 226, 205, .13);
+    --linje-stark: rgba(148, 226, 205, .32);
+    --platina: #EEF3F5;
+    --dampad: #93A2AD;
+    --kvant: #5BF0C4;
+    --kvant-mork: #1FAE86;
+    --guld: #E4C27F;
+    --rod: #FF8A7A;
+    --display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+    --serif: "Instrument Serif", Georgia, serif;
+    --text: "Inter", "Segoe UI", system-ui, sans-serif;
+    --mono: "JetBrains Mono", Consolas, ui-monospace, monospace;
+    --radie: 22px;
+    --max: 1240px;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--natt); color: var(--platina); font: 400 1rem/1.65 var(--text); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+  /* Rutnät och ljusskimmer bakom hela sidan */
+  body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 50% at 85% -10%, rgba(91, 240, 196, .13), transparent 60%),
+      radial-gradient(ellipse 45% 40% at -5% 35%, rgba(228, 194, 127, .06), transparent 60%),
+      linear-gradient(rgba(148, 226, 205, .04) 1px, transparent 1px) 0 0 / 64px 64px,
+      linear-gradient(90deg, rgba(148, 226, 205, .04) 1px, transparent 1px) 0 0 / 64px 64px; }
+  body::after { content: ""; position: fixed; inset: 0; z-index: 90; pointer-events: none; opacity: .035; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  [hidden] { display: none !important; }
+  img, svg, canvas, video { display: block; max-width: 100%; }
+  a { color: inherit; }
+  button, input, select, textarea { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--kvant); outline-offset: 3px; border-radius: 6px; }
+  ::selection { background: var(--kvant); color: var(--natt); }
+  .ram { width: min(var(--max), 100% - 40px); margin-inline: auto; }
+  .hoppa { position: absolute; left: 16px; top: -60px; z-index: 100; padding: 10px 16px; border-radius: 10px; background: var(--kvant); color: var(--natt); text-decoration: none; }
+  .hoppa:focus { top: 16px; }
+
+  /* ===== Meny ===== */
+  .nav { position: fixed; inset: 0 0 auto; z-index: 50; border-bottom: 1px solid transparent; transition: background-color .4s, border-color .4s; }
+  .nav.skrollad { background: rgba(5, 7, 10, .74); border-color: var(--linje); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4); }
+  .nav-inre { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 76px; }
+  .logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font: 600 1.14rem/1 var(--display); letter-spacing: -.01em; }
+  .logo svg { width: 32px; height: 32px; }
+  .logo em { font: italic 400 1.3rem/1 var(--serif); color: var(--kvant); }
+  .nav-lankar { display: flex; gap: 30px; margin: 0; padding: 0; list-style: none; }
+  .nav-lankar a { font-size: .9rem; color: var(--dampad); text-decoration: none; transition: color .3s; }
+  .nav-lankar a:hover { color: var(--platina); }
+
+  /* ===== Knappar och etiketter ===== */
+  .knapp { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 15px 26px; border: 0; border-radius: 999px; background: linear-gradient(135deg, #9AF8DC, var(--kvant) 45%, #2BCB9C); color: #03110C; font: 600 .94rem/1 var(--text); text-decoration: none; white-space: nowrap; cursor: pointer; box-shadow: 0 0 0 1px rgba(91, 240, 196, .4), 0 14px 40px -12px rgba(91, 240, 196, .55); transition: transform .3s, box-shadow .3s; }
+  .knapp:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(91, 240, 196, .6), 0 20px 50px -12px rgba(91, 240, 196, .7); }
+  .knapp.spok { background: rgba(255, 255, 255, .02); color: var(--platina); box-shadow: inset 0 0 0 1px var(--linje-stark); }
+  .knapp.spok:hover { box-shadow: inset 0 0 0 1px var(--kvant); }
+  .knapp.liten { padding: 11px 18px; font-size: .86rem; }
+  .etikett { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 18px; font: 500 .74rem/1.3 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--kvant); }
+  .etikett::before { content: ""; flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--kvant); box-shadow: 0 0 0 4px rgba(91, 240, 196, .15), 0 0 14px var(--kvant); animation: puls 2.4s ease-in-out infinite; }
+  @keyframes puls { 50% { box-shadow: 0 0 0 8px rgba(91, 240, 196, 0), 0 0 20px var(--kvant); } }
+  h1, h2, h3 { margin: 0; font-family: var(--display); font-weight: 500; letter-spacing: -.035em; line-height: 1.04; }
+  h1 em, h2 em, h3 em { padding-right: .06em; font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -.01em; background: linear-gradient(100deg, var(--kvant), #CFFFF1 45%, var(--guld)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  h2 { font-size: clamp(2.2rem, 4.6vw, 3.9rem); }
+  h3 { font-size: 1.35rem; letter-spacing: -.02em; line-height: 1.2; }
+
+  /* ===== Hjältedel med 3D ===== */
+  .hjalte { position: relative; display: flex; align-items: center; min-height: 100svh; padding-block: 120px 60px; }
+  .hjalte-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: center; }
+  .hjalte h1 { font-size: clamp(3rem, 6.2vw, 5.8rem); }
+  .ingress { max-width: 540px; margin: 26px 0 36px; font-size: 1.12rem; color: var(--dampad); }
+  .knapprad { display: flex; flex-wrap: wrap; gap: 12px; }
+  .fakta { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 34px; margin-top: 54px; padding-top: 26px; border-top: 1px solid var(--linje); }
+  .fakta strong { display: block; font: 500 1.02rem/1.2 var(--display); }
+  .fakta span { font-size: .84rem; color: var(--dampad); }
+  .scen { position: relative; aspect-ratio: 1 / 1; margin-right: -5vw; }
+  .scen canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .scen-reserv { position: absolute; inset: 14%; color: var(--kvant); }
+  .scen-reserv svg { width: 100%; height: 100%; }
+  .scen-hud { position: absolute; top: 12%; right: 9%; display: grid; gap: 4px; padding: 12px 14px; border: 1px solid var(--linje); border-radius: 14px; background: rgba(10, 14, 19, .6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); font: 500 .7rem/1.5 var(--mono); color: var(--dampad); pointer-events: none; }
+  .scen-hud b { font-weight: 500; color: var(--kvant); }
+  .scen-etikett { position: absolute; left: 9%; bottom: 7%; font: 500 .66rem/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--dampad); pointer-events: none; }
+
+  /* ===== Löpande ordband ===== */
+  .band { overflow: hidden; border-block: 1px solid var(--linje); background: rgba(10, 14, 19, .6); }
+  .band-spar { display: flex; width: max-content; animation: lopa 60s linear infinite; }
+  .band-spar span { display: inline-flex; align-items: center; gap: 26px; padding: 18px 0 18px 26px; font: 500 .8rem/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--dampad); white-space: nowrap; }
+  .band-spar span::after { content: "◆"; font-size: .5rem; color: var(--kvant); }
+  @keyframes lopa { to { transform: translateX(-50%); } }
+
+  /* ===== Avsnitt och kort ===== */
+  .sektion { position: relative; padding-block: clamp(90px, 12vw, 150px); }
+  .huvud { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 40px; align-items: end; margin-bottom: 56px; }
+  .huvud > p { justify-self: end; max-width: 460px; margin: 0; color: var(--dampad); }
+  .kort { position: relative; overflow: hidden; border: 1px solid var(--linje); border-radius: var(--radie); background: linear-gradient(180deg, rgba(20, 28, 37, .82), rgba(12, 17, 23, .82)); }
+  .kort::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; background: radial-gradient(420px circle at var(--mx, 50%) var(--my, -20%), rgba(91, 240, 196, .12), transparent 50%); transition: opacity .4s; }
+  .kort:hover::before { opacity: 1; }
+
+  .steg-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; }
+  .steg { padding: 30px 26px 32px; }
+  .steg-ikon { display: grid; place-items: center; width: 54px; height: 54px; margin-bottom: 40px; border: 1px solid var(--linje-stark); border-radius: 16px; background: rgba(91, 240, 196, .06); color: var(--kvant); }
+  .steg-ikon svg { width: 26px; height: 26px; }
+  .steg-nr { position: absolute; top: 28px; right: 26px; font: 500 .74rem/1 var(--mono); color: var(--dampad); }
+  .steg h3 { margin-bottom: 10px; }
+  .steg p { margin: 0; font-size: .95rem; color: var(--dampad); }
+  .lofte { display: grid; grid-template-columns: auto 1fr; gap: 20px; align-items: center; margin-top: 16px; padding: 22px 26px; border: 1px solid var(--linje-stark); border-radius: var(--radie); background: linear-gradient(90deg, rgba(91, 240, 196, .08), transparent 70%); }
+  .lofte svg { width: 34px; height: 34px; color: var(--kvant); }
+  .lofte p { margin: 0; color: var(--dampad); }
+  .lofte strong { color: var(--platina); }
+
+  /* ===== Kursen ===== */
+  .kurs-grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 60px; align-items: start; }
+  .kurs-sida { position: sticky; top: 110px; }
+  .kurs-sida > p:not(.etikett) { margin: 22px 0 30px; color: var(--dampad); }
+  .kurs-siffror { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 30px; margin: 0 0 34px; }
+  .kurs-siffror strong { display: block; font: 500 2.2rem/1 var(--display); letter-spacing: -.04em; }
+  .kurs-siffror span { font-size: .82rem; color: var(--dampad); }
+  .modul { margin-bottom: 12px; border: 1px solid var(--linje); border-radius: 18px; background: rgba(15, 21, 28, .7); transition: border-color .3s, background-color .3s; }
+  .modul[open] { border-color: var(--linje-stark); background: rgba(20, 28, 37, .88); }
+  .modul summary { display: grid; grid-template-columns: auto 1fr auto; gap: 18px; align-items: center; padding: 22px 24px; list-style: none; cursor: pointer; }
+  .modul summary::-webkit-details-marker { display: none; }
+  .modul-nr { padding: 8px 10px; border: 1px solid var(--linje-stark); border-radius: 10px; font: 500 .78rem/1 var(--mono); color: var(--kvant); }
+  .modul-titel strong { display: block; font: 500 1.14rem/1.25 var(--display); letter-spacing: -.01em; }
+  .modul-titel span { font-size: .84rem; color: var(--dampad); }
+  .plus { position: relative; flex: none; width: 30px; height: 30px; border: 1px solid var(--linje-stark); border-radius: 50%; }
+  .plus::before, .plus::after { content: ""; position: absolute; left: 50%; top: 50%; width: 11px; height: 1.5px; background: var(--platina); transform: translate(-50%, -50%); transition: transform .3s; }
+  .plus::after { transform: translate(-50%, -50%) rotate(90deg); }
+  [open] > summary .plus::after { transform: translate(-50%, -50%); }
+  .modul-inre { padding: 0 24px 24px; }
+  .modul-inre > p { margin: 0 0 16px; color: var(--dampad); }
+  .lektioner { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+  .lektioner li { display: grid; grid-template-columns: auto 1fr; gap: 14px; padding: 14px 16px; border-radius: 12px; background: rgba(255, 255, 255, .03); }
+  .lektioner b { font: 500 .74rem/1.7 var(--mono); color: var(--kvant); }
+  .lektioner strong { display: block; font-size: .95rem; font-weight: 600; }
+  .lektioner span { font-size: .88rem; color: var(--dampad); }
+
+  /* ===== Verktyg ===== */
+  .verktyg-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, .65fr); gap: 16px; align-items: start; }
+  .verktyg { padding: clamp(24px, 3vw, 36px); }
+  .verktyg h3 { margin-bottom: 6px; }
+  .verktyg-not { margin: 0 0 26px; font-size: .88rem; color: var(--dampad); }
+  .reglage-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 20px 26px; }
+  .reglage label { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 8px; font-size: .84rem; color: var(--dampad); }
+  .reglage output { font: 500 .88rem/1.3 var(--mono); color: var(--platina); white-space: nowrap; }
+  input[type="range"] { width: 100%; height: 22px; margin: 0; background: transparent; cursor: pointer; -webkit-appearance: none; appearance: none; }
+  input[type="range"]::-webkit-slider-runnable-track { height: 4px; border-radius: 4px; background: linear-gradient(90deg, var(--kvant) var(--fyll, 50%), rgba(148, 226, 205, .18) var(--fyll, 50%)); }
+  input[type="range"]::-webkit-slider-thumb { width: 18px; height: 18px; margin-top: -7px; border: 3px solid var(--kvant); border-radius: 50%; background: var(--platina); box-shadow: 0 0 14px rgba(91, 240, 196, .7); -webkit-appearance: none; }
+  input[type="range"]::-moz-range-track { height: 4px; border-radius: 4px; background: rgba(148, 226, 205, .18); }
+  input[type="range"]::-moz-range-progress { height: 4px; border-radius: 4px; background: var(--kvant); }
+  input[type="range"]::-moz-range-thumb { width: 13px; height: 13px; border: 3px solid var(--kvant); border-radius: 50%; background: var(--platina); }
+  .resultat { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 28px 0 18px; }
+  .resultat div { padding: 16px 18px; border: 1px solid var(--linje); border-radius: 14px; background: rgba(5, 7, 10, .4); }
+  .resultat span { display: block; font-size: .76rem; color: var(--dampad); }
+  .resultat strong { display: block; margin-top: 6px; font: 500 clamp(1.1rem, 2vw, 1.45rem)/1.15 var(--mono); letter-spacing: -.02em; }
+  .resultat .viktig strong { color: var(--kvant); }
+  .graf { position: relative; height: 260px; }
+  .graf canvas { width: 100%; height: 100%; }
+  .graf-forklaring { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 12px; font-size: .8rem; color: var(--dampad); }
+  .graf-forklaring i { display: inline-block; width: 18px; height: 3px; margin-right: 8px; border-radius: 2px; vertical-align: middle; }
+  .avgiftsrad { margin: 16px 0 0; padding: 14px 16px; border: 1px solid rgba(228, 194, 127, .24); border-radius: 12px; background: rgba(228, 194, 127, .07); font-size: .9rem; color: var(--dampad); }
+  .avgiftsrad strong { font-family: var(--mono); font-weight: 500; color: var(--guld); }
+  .nyckel-falt { display: grid; gap: 14px; }
+  .nyckel-falt label { display: grid; gap: 7px; font-size: .84rem; color: var(--dampad); }
+  .inmatning { display: flex; align-items: center; border: 1px solid var(--linje-stark); border-radius: 12px; background: rgba(5, 7, 10, .5); transition: border-color .3s; }
+  .inmatning:focus-within { border-color: var(--kvant); }
+  .inmatning input { width: 100%; min-width: 0; padding: 12px 14px; border: 0; outline: none; background: transparent; font-family: var(--mono); }
+  .inmatning span { padding-right: 14px; font-size: .85rem; color: var(--dampad); }
+  .nyckeltal { display: grid; gap: 10px; margin-top: 22px; }
+  .nyckeltal div { padding: 14px 16px; border: 1px solid var(--linje); border-radius: 14px; background: rgba(5, 7, 10, .35); }
+  .nyckeltal span { display: flex; justify-content: space-between; gap: 10px; font-size: .8rem; color: var(--dampad); }
+  .nyckeltal strong { font: 500 1.15rem/1.2 var(--mono); color: var(--kvant); }
+  .nyckeltal p { margin: 6px 0 0; font-size: .84rem; color: var(--dampad); }
+
+  /* ===== Medlemskap ===== */
+  .medlem-huvud { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .75fr); gap: 30px; align-items: center; margin-bottom: 40px; }
+  .medlem-huvud > div > p:not(.etikett) { max-width: 520px; margin: 22px 0 0; color: var(--dampad); }
+  .karna { position: relative; aspect-ratio: 4 / 3; }
+  .karna canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .planer { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .plan { display: flex; flex-direction: column; padding: 32px 28px; }
+  .plan.utvald { border-color: rgba(91, 240, 196, .5); background: linear-gradient(180deg, rgba(91, 240, 196, .1), rgba(12, 17, 23, .92) 45%); box-shadow: 0 30px 80px -40px rgba(91, 240, 196, .45); }
+  .plan-tag { position: absolute; top: 24px; right: 22px; padding: 7px 11px; border-radius: 999px; background: var(--kvant); color: #03110C; font: 600 .66rem/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+  .plan h3 { font-size: 1.5rem; }
+  .plan-beskr { min-height: 3.3em; margin: 8px 0 22px; font-size: .92rem; color: var(--dampad); }
+  .pris { display: flex; align-items: baseline; gap: 8px; margin-bottom: 22px; padding-bottom: 22px; border-bottom: 1px solid var(--linje); }
+  .pris strong { font: 500 3rem/1 var(--display); letter-spacing: -.04em; }
+  .pris span { font-size: .9rem; color: var(--dampad); }
+  .plan ul { display: grid; flex: 1; align-content: start; gap: 12px; margin: 0 0 30px; padding: 0; list-style: none; }
+  .plan li { position: relative; padding-left: 28px; font-size: .94rem; }
+  .plan li::before { content: ""; position: absolute; left: 0; top: .25em; width: 17px; height: 17px; border-radius: 50%; background: rgba(91, 240, 196, .15) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2l2.2 2.2 4.8-4.8' fill='none' stroke='%235BF0C4' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 11px no-repeat; }
+  .plan .knapp { width: 100%; }
+  .villkorsrad { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; margin-top: 26px; font-size: .84rem; color: var(--dampad); }
+  .agar-tips { margin: 18px 0 0; padding: 12px 14px; border: 1px dashed var(--kvant); border-radius: 12px; font-size: .84rem; color: var(--kvant); text-align: center; }
+
+  /* ===== Frågor ===== */
+  .fragor-grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 60px; align-items: start; }
+  .fragor-grid > div:first-child > p:not(.etikett) { margin: 22px 0 0; color: var(--dampad); }
+  .fraga { border-bottom: 1px solid var(--linje); }
+  .fraga summary { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 24px 0; font: 500 1.14rem/1.3 var(--display); letter-spacing: -.01em; list-style: none; cursor: pointer; }
+  .fraga summary::-webkit-details-marker { display: none; }
+  .fraga p { max-width: 700px; margin: 0 0 24px; color: var(--dampad); }
+
+  /* ===== Kontakt ===== */
+  .kontakt-kort { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(30px, 5vw, 70px); padding: clamp(28px, 5vw, 60px); }
+  .kontakt-kort > div > p:not(.etikett) { margin: 22px 0 0; color: var(--dampad); }
+  .direkt { margin-top: 28px; font: 500 1rem/1.4 var(--mono); }
+  .direkt a { text-decoration: none; border-bottom: 1px solid var(--linje-stark); }
+  .form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .falt { display: grid; align-content: start; gap: 8px; }
+  .falt.bred { grid-column: 1 / -1; }
+  .falt label { font-size: .82rem; color: var(--dampad); }
+  .falt input, .falt select, .falt textarea { width: 100%; padding: 14px 16px; border: 1px solid var(--linje-stark); border-radius: 12px; outline: none; background: rgba(5, 7, 10, .5); transition: border-color .3s; }
+  .falt input:focus, .falt select:focus, .falt textarea:focus { border-color: var(--kvant); }
+  .falt select option { background: var(--yta); }
+  .falt textarea { min-height: 120px; resize: vertical; }
+  .falt-fel { min-height: 1em; margin: 0; font-size: .78rem; color: var(--rod); }
+  .falt [aria-invalid="true"] { border-color: var(--rod); }
+  .honung { position: absolute; left: -9999px; }
+  .form-not { grid-column: 1 / -1; margin: 0; font-size: .8rem; color: var(--dampad); }
+  .form .knapp { justify-self: start; }
+  .tack { display: grid; align-content: center; gap: 12px; }
+  .tack p { margin: 0; color: var(--dampad); }
+
+  /* ===== Sidfot ===== */
+  .sidfot { padding-block: 60px 40px; border-top: 1px solid var(--linje); }
+  .sidfot-topp { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: start; gap: 30px; }
+  .riskruta { max-width: 660px; margin: 0; padding: 18px 20px; border: 1px solid rgba(255, 138, 122, .26); border-radius: 14px; background: rgba(255, 138, 122, .05); font-size: .84rem; color: var(--dampad); }
+  .riskruta strong { color: var(--platina); }
+  .sidfot-rad { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px 30px; margin-top: 34px; font-size: .84rem; color: var(--dampad); }
+  .sidfot-lankar { display: inline-flex; flex-wrap: wrap; gap: 8px 20px; }
+  .lanklik { padding: 0; border: 0; background: none; color: inherit; font: inherit; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+  .lanklik:hover { color: var(--platina); }
+
+  /* ===== Dialogrutor ===== */
+  dialog { width: min(720px, calc(100vw - 32px)); max-height: calc(100vh - 48px); padding: 0; border: 1px solid var(--linje-stark); border-radius: 22px; background: var(--yta); color: var(--platina); }
+  dialog::backdrop { background: rgba(2, 4, 6, .8); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+  .dialog-inre { display: grid; gap: 16px; padding: clamp(24px, 4vw, 44px); }
+  .dialog-inre h2 { font-size: clamp(1.9rem, 4vw, 2.5rem); }
+  .dialog-inre .etikett { margin: 0; }
+  .dialog-text { display: grid; gap: 10px; font-size: .93rem; color: var(--dampad); }
+  .dialog-text p { margin: 0; }
+  .dialog-text strong { color: var(--platina); }
+  .dialog-inre .knapp { justify-self: start; }
+  .foretagsinfo { padding-top: 12px; border-top: 1px solid var(--linje); }
+
+  /* ===== Ägarens redigering ===== */
+  .redigera { position: fixed; left: 16px; bottom: 16px; z-index: 80; display: grid; justify-items: start; gap: 10px; }
+  .redigera-panel { display: grid; gap: 8px; width: min(340px, calc(100vw - 32px)); max-height: calc(100vh - 96px); overflow-y: auto; padding: 18px; border: 1px solid var(--linje-stark); border-radius: 18px; background: rgba(10, 14, 19, .95); box-shadow: 0 30px 80px -30px #000; font-size: .84rem; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  .redigera-panel > span { color: var(--dampad); }
+  .redigera-panel label { margin-top: 4px; font: 500 .66rem/1.3 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--dampad); }
+  .redigera-panel input { width: 100%; padding: 11px 12px; border: 1px solid var(--linje-stark); border-radius: 10px; outline: none; background: rgba(5, 7, 10, .6); font-size: .86rem; }
+  .redigera-panel input:focus { border-color: var(--kvant); }
+  .redigera-panel input[aria-invalid="true"] { border-color: var(--rod); }
+  .redigera-panel .knapp { margin-top: 8px; }
+  .panel-rubrik { margin-top: 8px; padding-top: 12px; border-top: 1px solid var(--linje); font: 600 .7rem/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--kvant); }
+  .panel-rubrik:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+  .aterstall { padding: 8px 0; border: 0; background: none; color: var(--dampad); font-size: .8rem; text-align: left; text-decoration: underline; cursor: pointer; }
+  .redigera-knapp.knapp.spok { background: rgba(10, 14, 19, .92); }
+  html.redigerar [data-edit] { outline: 1px dashed rgba(91, 240, 196, .45); outline-offset: 3px; border-radius: 4px; cursor: text; }
+  html.redigerar [data-edit]:hover, html.redigerar [data-edit]:focus { outline: 1px solid var(--kvant); }
+
+  .toast { position: fixed; left: 50%; bottom: 24px; z-index: 95; max-width: calc(100vw - 32px); padding: 14px 20px; border-radius: 999px; background: var(--platina); color: var(--natt); font-size: .9rem; box-shadow: 0 20px 50px -20px #000; opacity: 0; pointer-events: none; transform: translate(-50%, calc(100% + 40px)); transition: transform .5s cubic-bezier(.2, .8, .2, 1), opacity .5s; }
+  .toast.synlig { opacity: 1; transform: translate(-50%, 0); }
+  .visas { opacity: 0; transform: translateY(26px); transition: opacity .9s cubic-bezier(.2, .7, .2, 1), transform .9s cubic-bezier(.2, .7, .2, 1); }
+  .visas.synlig { opacity: 1; transform: none; }
+
+  @media (max-width: 1000px) {
+    .nav-lankar { display: none; }
+    .hjalte { min-height: auto; padding-top: 100px; }
+    .hjalte-grid, .huvud, .kurs-grid, .verktyg-grid, .fragor-grid, .kontakt-kort, .medlem-huvud { grid-template-columns: minmax(0, 1fr); }
+    .scen { order: -1; width: 100%; max-width: 560px; margin: -10px auto -40px; }
+    .huvud > p { justify-self: start; }
+    .steg-grid { grid-template-columns: 1fr 1fr; }
+    .kurs-sida { position: static; }
+    .planer { grid-template-columns: minmax(0, 1fr); max-width: 540px; margin-inline: auto; }
+    .plan-beskr { min-height: 0; }
+    .karna { max-width: 420px; width: 100%; margin: -20px auto 0; }
+  }
+  @media (max-width: 600px) {
+    .ram { width: min(var(--max), 100% - 32px); }
+    .nav-inre .knapp { padding: 11px 16px; font-size: .84rem; }
+    .fakta { grid-template-columns: 1fr; gap: 16px; }
+    .steg-grid { grid-template-columns: minmax(0, 1fr); }
+    .resultat { grid-template-columns: minmax(0, 1fr); }
+    .form { grid-template-columns: minmax(0, 1fr); }
+    .graf { height: 220px; }
+    .scen-hud { top: 8%; right: 4%; }
+    .kurs-siffror strong { font-size: 1.8rem; }
+    .lofte { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .band-spar, .etikett::before { animation: none; }
+    .visas { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* ===== Tillägg: panel, ångerformulär och mjuka kanter på 3D ===== */
+  .lankfalt { display: grid; gap: 8px; }
+  .angra-knappar { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+  dialog .tack h3 { font-size: 1.5rem; }
+  .dialog-inre .tack .knapp { justify-self: start; }
+  .fraga summary .plus { flex: none; }
+  .scen canvas, .karna canvas { -webkit-mask-image: radial-gradient(closest-side, #000 52%, transparent 100%); mask-image: radial-gradient(closest-side, #000 52%, transparent 100%); }
+  .scen-reserv { -webkit-mask-image: none; mask-image: none; }
+
+  /* ===== 4K-film, foton och lyxiga detaljer ===== */
+  .nav.skrollad::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: linear-gradient(90deg, transparent, rgba(228, 194, 127, .45), rgba(91, 240, 196, .45), transparent); }
+  .bakgrundsfilm { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: var(--natt); }
+  .hjalte { isolation: isolate; overflow: hidden; }
+  .hjalte-bakgrund { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+  .hjalte-bakgrund .bakgrundsfilm { opacity: .45; filter: saturate(.85) contrast(1.05); }
+  .hjalte-bakgrund::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, var(--natt) 0%, rgba(5, 7, 10, .9) 30%, rgba(5, 7, 10, .5) 62%, rgba(5, 7, 10, .7) 100%), linear-gradient(0deg, var(--natt) 0%, transparent 32%), linear-gradient(180deg, rgba(5, 7, 10, .75) 0%, transparent 24%); }
+
+  .film-sektion { position: relative; isolation: isolate; display: flex; align-items: flex-end; min-height: min(94vh, 920px); padding-block: 160px 90px; overflow: hidden; border-block: 1px solid var(--linje); }
+  .film-sektion .bakgrundsfilm { z-index: -2; }
+  .film-sektion::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(0deg, rgba(5, 7, 10, .96) 0%, rgba(5, 7, 10, .55) 45%, rgba(5, 7, 10, .3) 70%, rgba(5, 7, 10, .8) 100%), radial-gradient(ellipse 70% 60% at 20% 90%, rgba(91, 240, 196, .12), transparent 60%); }
+  .film-inre { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: 50px; align-items: end; }
+  .film-text h2 { max-width: 13ch; font-size: clamp(2.6rem, 6vw, 5.6rem); }
+  .film-text > p:not(.etikett) { max-width: 540px; margin: 24px 0 0; font-size: 1.08rem; color: #C3CDD3; }
+  .film-text .knapp { margin-top: 32px; }
+  .film-punkter { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+  .film-punkter li { display: grid; gap: 4px; padding: 18px 22px; border: 1px solid var(--linje-stark); border-radius: 16px; background: rgba(5, 7, 10, .5); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+  .film-punkter strong { font: 500 1.08rem/1.3 var(--display); }
+  .film-punkter span { font-size: .9rem; color: var(--dampad); }
+  .film-stockholm { align-items: center; padding-block: 150px; }
+  .film-stockholm::after { background: radial-gradient(ellipse 60% 55% at 50% 50%, rgba(5, 7, 10, .6), rgba(5, 7, 10, .22) 70%), linear-gradient(0deg, rgba(5, 7, 10, .95), transparent 30%, transparent 70%, rgba(5, 7, 10, .95)); }
+  .film-centrerad { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; }
+  .film-centrerad .film-text { display: grid; justify-items: center; }
+  .film-centrerad h2 { max-width: 16ch; }
+  .mediakredit { position: absolute; right: 20px; bottom: 16px; font: 500 .62rem/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: rgba(238, 243, 245, .45); }
+
+  .galleri { display: grid; grid-template-columns: 5fr 3fr 4fr; gap: 16px; }
+  .galleri-kort { position: relative; height: clamp(440px, 40vw, 620px); margin: 0; overflow: hidden; border: 1px solid var(--linje); border-radius: var(--radie); background: var(--yta); }
+  .galleri-kort img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.9); transform: scale(1.06); transition: transform 1.6s cubic-bezier(.2, .7, .2, 1), filter .6s; }
+  .galleri-kort:hover img { filter: saturate(1.05); transform: scale(1.12); }
+  .galleri-kort:nth-child(3) img { object-position: 62% 50%; }
+  .galleri-kort.visas { clip-path: inset(8% 0 0 0 round var(--radie)); transition: clip-path 1.2s cubic-bezier(.2, .7, .2, 1), opacity .9s cubic-bezier(.2, .7, .2, 1), transform .9s cubic-bezier(.2, .7, .2, 1); }
+  .galleri-kort.visas.synlig { clip-path: inset(0 0 0 0 round var(--radie)); }
+  .galleri-kort::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(0deg, rgba(5, 7, 10, .92) 0%, rgba(5, 7, 10, .3) 45%, transparent 70%); }
+  .galleri-kort figcaption { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; display: grid; gap: 6px; padding: 26px; }
+  .galleri-nr { font: 500 .72rem/1 var(--mono); letter-spacing: .12em; color: var(--kvant); }
+  .galleri-kort figcaption strong { font: 500 1.35rem/1.2 var(--display); letter-spacing: -.02em; }
+  .galleri-kort figcaption span:last-child { font-size: .9rem; color: #C3CDD3; }
+
+  #kontakt { isolation: isolate; overflow: hidden; }
+  .kontakt-bakgrund { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+  .kontakt-bakgrund img { width: 100%; height: 100%; object-fit: cover; opacity: .55; }
+  .kontakt-bakgrund::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, var(--natt) 0%, rgba(5, 7, 10, .5) 30%, rgba(5, 7, 10, .5) 70%, var(--natt) 100%); }
+  .kontakt-kort { background: linear-gradient(180deg, rgba(20, 28, 37, .7), rgba(12, 17, 23, .78)); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+
+  .krediter { margin: 22px 0 0; font-size: .74rem; color: rgba(147, 162, 173, .75); }
+  .sidfot-ord { margin: 46px 0 0; overflow: hidden; font: 500 clamp(4.5rem, 19vw, 17rem)/.8 var(--display); letter-spacing: -.07em; text-align: center; white-space: nowrap; color: transparent; -webkit-text-stroke: 1px rgba(148, 226, 205, .22); user-select: none; }
+
+  @media (max-width: 1000px) {
+    .film-inre { grid-template-columns: minmax(0, 1fr); }
+    .film-sektion { min-height: auto; padding-block: 130px 64px; }
+    .galleri { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+    .galleri-kort.stor { grid-column: 1 / -1; }
+    .galleri-kort { height: 420px; }
+  }
+  @media (max-width: 600px) {
+    .galleri { grid-template-columns: minmax(0, 1fr); }
+    .galleri-kort { height: 380px; }
+    .hjalte-bakgrund .bakgrundsfilm { opacity: .32; }
+    .mediakredit { right: 16px; bottom: 12px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .galleri-kort.visas { clip-path: none; }
+    .galleri-kort img { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<a class="hoppa" href="#innehall">Hoppa till innehållet</a>
+
+<header class="nav" id="nav">
+  <div class="ram nav-inre">
+    <a class="logo" href="#top" aria-label="Kvant Akademi – till början">
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><ellipse cx="16" cy="16" rx="13.5" ry="5.2" stroke="#5BF0C4" stroke-width="1.4" transform="rotate(-32 16 16)"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" stroke="#E4C27F" stroke-width="1.4" transform="rotate(32 16 16)"/><circle cx="16" cy="16" r="3.3" fill="#5BF0C4"/></svg>
+      <span>Kvant <em>Akademi</em></span>
+    </a>
+    <ul class="nav-lankar">
+      <li><a href="#borsen" data-edit>Så funkar börsen</a></li>
+      <li><a href="#kursen" data-edit>Kursen</a></li>
+      <li><a href="#verktyg" data-edit>Verktyg</a></li>
+      <li><a href="#medlemskap" data-edit>Medlemskap</a></li>
+      <li><a href="#fragor" data-edit>Frågor</a></li>
+    </ul>
+    <a class="knapp liten" href="#medlemskap" data-edit>Bli medlem</a>
+  </div>
+</header>
+
+<main id="innehall">
+  <section class="hjalte" id="top">
+    <div class="hjalte-bakgrund" aria-hidden="true"><video class="bakgrundsfilm" data-hd="media/hjalte-hd.mp4" data-4k="media/hjalte-4k.mp4" poster="media/hjalte-poster.jpg" muted loop playsinline preload="none" aria-hidden="true"></video></div>
+    <div class="ram hjalte-grid">
+      <div class="visas">
+        <p class="etikett" data-edit>Aktieskola &amp; coachning</p>
+        <h1 data-edit>Förstå börsen. <em>Fatta egna beslut.</em></h1>
+        <p class="ingress" data-edit>Kvant Akademi lär dig hur aktier fungerar – från ditt första köp till att analysera ett bolag på egen hand. Korta lektioner på enkel svenska, smarta verktyg och personlig coachning.</p>
+        <div class="knapprad">
+          <a class="knapp" href="#medlemskap" data-edit>Se medlemskap</a>
+          <a class="knapp spok" href="#borsen" data-edit>Börja med grunderna</a>
+        </div>
+        <div class="fakta">
+          <div><strong data-edit>Utbildning</strong><span data-edit>Inga köptips – du lär dig själv</span></div>
+          <div><strong data-edit>Enkel svenska</strong><span data-edit>Förklarat från grunden</span></div>
+          <div><strong data-edit>Månadsvis</strong><span data-edit>Ingen bindningstid</span></div>
+        </div>
+      </div>
+      <div class="scen" aria-hidden="true">
+        <div class="scen-reserv" id="scenReserv">
+          <svg viewBox="0 0 400 400" fill="none"><defs><linearGradient id="reservYta" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5BF0C4" stop-opacity=".35"/><stop offset="1" stop-color="#5BF0C4" stop-opacity="0"/></linearGradient></defs><path d="M20 300L70 270L110 285L160 220L200 240L250 170L290 190L340 120L380 90V380H20Z" fill="url(#reservYta)"/><path d="M20 300L70 270L110 285L160 220L200 240L250 170L290 190L340 120L380 90" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>
+        </div>
+        <canvas id="scenKvant"></canvas>
+        <div class="scen-hud"><span>CHECKLISTA</span><span>Tidshorisont <b>5+ år</b></span><span>Riskspridning <b>bred</b></span><span>Plan <b>nedskriven</b></span></div>
+        <span class="scen-etikett">Illustration – inte verklig kursdata</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="band" aria-hidden="true">
+    <div class="band-spar" id="bandSpar">
+      <span>Aktie</span><span>Börs</span><span>Index</span><span>Utdelning</span><span>P/E-tal</span><span>Direktavkastning</span><span>Riskspridning</span><span>Courtage</span><span>ISK</span><span>Fonder</span><span>Ränta på ränta</span><span>Tidshorisont</span>
+    </div>
+  </div>
+
+  <section class="film-sektion" id="studio" aria-labelledby="studioRubrik">
+    <video class="bakgrundsfilm" data-hd="media/studio-hd.mp4" data-4k="media/studio-4k.mp4" poster="media/studio-poster.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+    <div class="ram film-inre">
+      <div class="film-text visas">
+        <p class="etikett" data-edit>Så lär du dig</p>
+        <h2 id="studioRubrik" data-edit>Kunskap som håller <em>hela livet</em></h2>
+        <p data-edit>Inga genvägar och inga heta tips – bara grunderna som gör att du förstår vad du investerar i, och varför.</p>
+      </div>
+      <ul class="film-punkter">
+        <li class="visas"><strong data-edit>Korta lektioner</strong><span data-edit>Några minuter om dagen räcker långt.</span></li>
+        <li class="visas"><strong data-edit>Verktyg på riktigt</strong><span data-edit>Räkna, jämför och se sambanden själv.</span></li>
+        <li class="visas"><strong data-edit>Personlig coachning</strong><span data-edit>Stöd när du bygger din egen plan.</span></li>
+      </ul>
+    </div>
+    <span class="mediakredit">Film: Pexels</span>
+  </section>
+
+  <section class="sektion" id="borsen">
+    <div class="ram">
+      <div class="huvud visas">
+        <div><p class="etikett" data-edit>Grunderna på två minuter</p><h2 data-edit>Så funkar <em>börsen</em></h2></div>
+        <p data-edit>Fyra steg som förklarar det viktigaste. Resten lär du dig i kursen – i din egen takt.</p>
+      </div>
+      <ol class="steg-grid">
+        <li class="kort steg visas">
+          <span class="steg-nr">01</span>
+          <div class="steg-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V8l8-4 8 4v12M9 20v-6h6v6M3 20h18"/></svg></div>
+          <h3 data-edit>Ett bolag delas i aktier</h3>
+          <p data-edit>När du köper en aktie blir du delägare i bolaget. Går det bra kan aktien öka i värde, och bolaget kan dela ut en del av vinsten till dig.</p>
+        </li>
+        <li class="kort steg visas">
+          <span class="steg-nr">02</span>
+          <div class="steg-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h14l-3-3M20 16H6l3 3"/></svg></div>
+          <h3 data-edit>Börsen är en marknadsplats</h3>
+          <p data-edit>På börsen möts köpare och säljare. Priset – kursen – ändras hela tiden efter vad folk är beredda att betala för aktien.</p>
+        </li>
+        <li class="kort steg visas">
+          <span class="steg-nr">03</span>
+          <div class="steg-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="3" width="12" height="18" rx="2.5"/><path d="M10 17h4M9 9l2 2 4-4"/></svg></div>
+          <h3 data-edit>Du köper via en bank</h3>
+          <p data-edit>Du öppnar ett konto hos en bank eller nätmäklare, till exempel ett investeringssparkonto (ISK), och lägger en order på aktien.</p>
+        </li>
+        <li class="kort steg visas">
+          <span class="steg-nr">04</span>
+          <div class="steg-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 16l5-6 4 3 5-7 4 4M3 21h18"/></svg></div>
+          <h3 data-edit>Värdet går upp och ner</h3>
+          <p data-edit>Kursen kan både stiga och falla kraftigt. Därför sprider du risken och sparar bara pengar som du inte behöver på flera år.</p>
+        </li>
+      </ol>
+      <div class="lofte visas">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+        <p data-edit><strong>Utbildning, inte köptips.</strong> Vi säger aldrig vilka aktier just du ska köpa eller sälja. Du lär dig förstå bolag, risk och avgifter – så att du kan fatta dina egna beslut.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sektion" id="kursen">
+    <div class="ram kurs-grid">
+      <div class="kurs-sida visas">
+        <p class="etikett" data-edit>Kursen</p>
+        <h2 data-edit>Från noll till <em>egen strategi</em></h2>
+        <p data-edit>Sex moduler som bygger på varandra. Varje lektion tar några minuter och avslutas med en övning – utan att du behöver köpa något.</p>
+        <div class="kurs-siffror">
+          <div><strong>6</strong><span>moduler</span></div>
+          <div><strong>24</strong><span>lektioner</span></div>
+          <div><strong>2</strong><span>verktyg</span></div>
+        </div>
+        <a class="knapp" href="#medlemskap" data-edit>Få tillgång till kursen</a>
+      </div>
+      <div class="moduler">
+        <details class="modul visas" open>
+          <summary><span class="modul-nr">01</span><span class="modul-titel"><strong data-edit>Grunderna</strong><span data-edit>Aktier, börsen och index</span></span><span class="plus" aria-hidden="true"></span></summary>
+          <div class="modul-inre">
+            <p data-edit>Du lär dig vad du faktiskt äger när du köper en aktie och varför priset rör sig.</p>
+            <ol class="lektioner">
+              <li><b>1.1</b><div><strong data-edit>Vad är en aktie?</strong><span data-edit>Delägarskap, röster och utdelning.</span></div></li>
+              <li><b>1.2</b><div><strong data-edit>Så fungerar börsen</strong><span data-edit>Köpare, säljare, orderbok och kurs.</span></div></li>
+              <li><b>1.3</b><div><strong data-edit>Index och marknaden</strong><span data-edit>Vad ett index som OMXS30 visar.</span></div></li>
+              <li><b>1.4</b><div><strong data-edit>Aktier, fonder och ETF:er</strong><span data-edit>Skillnaderna och vad de passar till.</span></div></li>
+            </ol>
+          </div>
+        </details>
+        <details class="modul visas">
+          <summary><span class="modul-nr">02</span><span class="modul-titel"><strong data-edit>Komma igång</strong><span data-edit>Konto, bank och första ordern</span></span><span class="plus" aria-hidden="true"></span></summary>
+          <div class="modul-inre">
+            <p data-edit>Allt praktiskt för att komma igång tryggt – steg för steg.</p>
+            <ol class="lektioner">
+              <li><b>2.1</b><div><strong data-edit>ISK, kapitalförsäkring och depå</strong><span data-edit>Hur kontona skiljer sig och hur de beskattas i stora drag.</span></div></li>
+              <li><b>2.2</b><div><strong data-edit>Välja bank eller nätmäklare</strong><span data-edit>Vad du ska jämföra: avgifter, utbud och app.</span></div></li>
+              <li><b>2.3</b><div><strong data-edit>Så lägger du en order</strong><span data-edit>Köp, sälj, limitpris och courtage.</span></div></li>
+              <li><b>2.4</b><div><strong data-edit>Avgifter som äter avkastning</strong><span data-edit>Därför spelar en halv procent stor roll över tid.</span></div></li>
+            </ol>
+          </div>
+        </details>
+        <details class="modul visas">
+          <summary><span class="modul-nr">03</span><span class="modul-titel"><strong data-edit>Analysera bolag</strong><span data-edit>Siffrorna bakom aktien</span></span><span class="plus" aria-hidden="true"></span></summary>
+          <div class="modul-inre">
+            <p data-edit>Lär dig läsa ett bolags siffror och ställa rätt frågor innan du bestämmer dig.</p>
+            <ol class="lektioner">
+              <li><b>3.1</b><div><strong data-edit>Omsättning, vinst och marginal</strong><span data-edit>Hur ett bolag tjänar sina pengar.</span></div></li>
+              <li><b>3.2</b><div><strong data-edit>P/E-tal och direktavkastning</strong><span data-edit>Vad nyckeltalen säger – och vad de inte säger.</span></div></li>
+              <li><b>3.3</b><div><strong data-edit>Skulder och kassaflöde</strong><span data-edit>Så ser du om ett bolag står stadigt.</span></div></li>
+              <li><b>3.4</b><div><strong data-edit>Läsa en årsredovisning</strong><span data-edit>Var du hittar det viktigaste på tio minuter.</span></div></li>
+            </ol>
+          </div>
+        </details>
+        <details class="modul visas">
+          <summary><span class="modul-nr">04</span><span class="modul-titel"><strong data-edit>Risk och spridning</strong><span data-edit>Så skyddar du ditt sparande</span></span><span class="plus" aria-hidden="true"></span></summary>
+          <div class="modul-inre">
+            <p data-edit>Risk går inte att ta bort, men den går att förstå och hantera.</p>
+            <ol class="lektioner">
+              <li><b>4.1</b><div><strong data-edit>Vad risk betyder</strong><span data-edit>Svängningar, förluster och tidshorisont.</span></div></li>
+              <li><b>4.2</b><div><strong data-edit>Sprida risken</strong><span data-edit>Flera bolag, branscher och länder.</span></div></li>
+              <li><b>4.3</b><div><strong data-edit>Buffert först</strong><span data-edit>Därför ska pengar du behöver snart inte ligga i aktier.</span></div></li>
+              <li><b>4.4</b><div><strong data-edit>Bedrägerier och varningssignaler</strong><span data-edit>Känn igen löften om snabba och säkra pengar.</span></div></li>
+            </ol>
+          </div>
+        </details>
+        <details class="modul visas">
+          <summary><span class="modul-nr">05</span><span class="modul-titel"><strong data-edit>Psykologi</strong><span data-edit>Känslorna som kostar pengar</span></span><span class="plus" aria-hidden="true"></span></summary>
+          <div class="modul-inre">
+            <p data-edit>De flesta misstag på börsen handlar om känslor, inte om matematik.</p>
+            <ol class="lektioner">
+              <li><b>5.1</b><div><strong data-edit>Rädsla och girighet</strong><span data-edit>Två känslor som styr marknaden.</span></div></li>
+              <li><b>5.2</b><div><strong data-edit>FOMO och trender</strong><span data-edit>När alla pratar om samma aktie.</span></div></li>
+              <li><b>5.3</b><div><strong data-edit>När börsen faller</strong><span data-edit>Så undviker du att sälja i panik.</span></div></li>
+              <li><b>5.4</b><div><strong data-edit>Tålamod och ränta på ränta</strong><span data-edit>Varför tid är din starkaste tillgång.</span></div></li>
+            </ol>
+          </div>
+        </details>
+        <details class="modul visas">
+          <summary><span class="modul-nr">06</span><span class="modul-titel"><strong data-edit>Din strategi</strong><span data-edit>Skriv en plan som håller</span></span><span class="plus" aria-hidden="true"></span></summary>
+          <div class="modul-inre">
+            <p data-edit>Du sätter ihop allt till en egen plan – dina mål, din risk och dina regler.</p>
+            <ol class="lektioner">
+              <li><b>6.1</b><div><strong data-edit>Mål och tidshorisont</strong><span data-edit>Vad sparar du till, och när behöver du pengarna?</span></div></li>
+              <li><b>6.2</b><div><strong data-edit>Din fördelning</strong><span data-edit>Hur mycket i aktier, fonder och buffert.</span></div></li>
+              <li><b>6.3</b><div><strong data-edit>Regler för köp och sälj</strong><span data-edit>Beslut du fattar innan känslorna tar över.</span></div></li>
+              <li><b>6.4</b><div><strong data-edit>Följ upp och för journal</strong><span data-edit>Lär dig av dina egna beslut.</span></div></li>
+            </ol>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="sektion" id="upplevelsen">
+    <div class="ram">
+      <div class="huvud visas">
+        <div><p class="etikett" data-edit>Upplevelsen</p><h2 data-edit>Gjord för att du ska <em>förstå</em></h2></div>
+        <p data-edit>Allt i Kvant Akademi är byggt för att vara enkelt att ta till sig – på datorn, i mobilen och i samtal.</p>
+      </div>
+      <div class="galleri">
+        <figure class="galleri-kort stor visas">
+          <img src="media/lektioner-1920.jpg" srcset="media/lektioner-960.jpg 960w, media/lektioner-1920.jpg 1920w, media/lektioner-3840.jpg 3840w" sizes="(max-width: 1000px) 100vw, 42vw" alt="Laptop med en aktiegraf på ett träbord" loading="lazy" decoding="async">
+          <figcaption><span class="galleri-nr">01</span><strong data-edit>Lektioner i din takt</strong><span data-edit>Korta genomgångar med övningar du gör direkt.</span></figcaption>
+        </figure>
+        <figure class="galleri-kort visas">
+          <img src="media/plan-1920.jpg" srcset="media/plan-960.jpg 960w, media/plan-1920.jpg 1920w, media/plan-3840.jpg 3840w" sizes="(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 26vw" alt="Anteckningsbok och penna på ett skrivbord" loading="lazy" decoding="async">
+          <figcaption><span class="galleri-nr">02</span><strong data-edit>En plan på papper</strong><span data-edit>Mål, risk och regler – innan du investerar.</span></figcaption>
+        </figure>
+        <figure class="galleri-kort visas">
+          <img src="media/coachning-1920.jpg" srcset="media/coachning-960.jpg 960w, media/coachning-1920.jpg 1920w, media/coachning-3840.jpg 3840w" sizes="(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 34vw" alt="Person i ett videosamtal vid en laptop" loading="lazy" decoding="async">
+          <figcaption><span class="galleri-nr">03</span><strong data-edit>Coachning via video</strong><span data-edit>Ni går igenom din plan och dina frågor.</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="sektion" id="verktyg">
+    <div class="ram">
+      <div class="huvud visas">
+        <div><p class="etikett" data-edit>Interaktiva verktyg</p><h2 data-edit>Räkna på det <em>själv</em></h2></div>
+        <p data-edit>Dra i reglagen och se hur tid, sparande och avgifter påverkar. Siffrorna är räkneexempel – ingen avkastning är garanterad.</p>
+      </div>
+      <div class="verktyg-grid">
+        <div class="kort verktyg visas">
+          <h3 data-edit>Ränta på ränta</h3>
+          <p class="verktyg-not" data-edit>Räkneexempel med jämn avkastning varje år. I verkligheten går börsen upp och ner, och du kan förlora pengar.</p>
+          <div class="reglage-grid">
+            <div class="reglage"><label for="rStart">Startbelopp <output id="oStart" for="rStart"></output></label><input type="range" id="rStart" min="0" max="200000" step="1000" value="10000"></div>
+            <div class="reglage"><label for="rManad">Sparande per månad <output id="oManad" for="rManad"></output></label><input type="range" id="rManad" min="0" max="10000" step="100" value="1000"></div>
+            <div class="reglage"><label for="rAr">Antal år <output id="oAr" for="rAr"></output></label><input type="range" id="rAr" min="1" max="40" step="1" value="20"></div>
+            <div class="reglage"><label for="rAvk">Antagen avkastning per år <output id="oAvk" for="rAvk"></output></label><input type="range" id="rAvk" min="-5" max="12" step="0.5" value="5"></div>
+            <div class="reglage"><label for="rAvg">Årlig avgift <output id="oAvg" for="rAvg"></output></label><input type="range" id="rAvg" min="0" max="2.5" step="0.1" value="0.5"></div>
+          </div>
+          <div class="resultat" aria-live="polite">
+            <div><span>Du sätter in</span><strong id="resInsatt">–</strong></div>
+            <div class="viktig"><span>Exempelvärde</span><strong id="resVarde">–</strong></div>
+            <div><span>Varav avkastning</span><strong id="resAvk">–</strong></div>
+          </div>
+          <div class="graf"><canvas id="grafRanta" role="img" aria-label="Diagram över hur sparandet kan växa i exemplet"></canvas></div>
+          <div class="graf-forklaring">
+            <span><i style="background:#5BF0C4"></i>Exempelvärde</span>
+            <span><i style="background:rgba(91,240,196,.28)"></i>Om avkastningen blir 3 procentenheter lägre eller högre</span>
+            <span><i style="background:#93A2AD"></i>Insatta pengar</span>
+          </div>
+          <p class="avgiftsrad">Avgiften kostar dig <strong id="resAvgift">–</strong> i det här exemplet.</p>
+        </div>
+        <div class="kort verktyg visas">
+          <h3 data-edit>Nyckeltal på sekunden</h3>
+          <p class="verktyg-not" data-edit>Fyll i siffror från ett bolags rapport och se vad de betyder. Förifyllt med ett påhittat exempelbolag.</p>
+          <div class="nyckel-falt">
+            <label for="nKurs">Aktiekurs<span class="inmatning"><input id="nKurs" type="number" inputmode="decimal" min="0" step="0.01" value="120"><span>kr</span></span></label>
+            <label for="nVinst">Vinst per aktie (senaste året)<span class="inmatning"><input id="nVinst" type="number" inputmode="decimal" step="0.01" value="8"><span>kr</span></span></label>
+            <label for="nUtd">Utdelning per aktie<span class="inmatning"><input id="nUtd" type="number" inputmode="decimal" min="0" step="0.01" value="3"><span>kr</span></span></label>
+          </div>
+          <div class="nyckeltal" aria-live="polite">
+            <div><span>P/E-tal <strong id="nPe">–</strong></span><p id="nPeText"></p></div>
+            <div><span>Direktavkastning <strong id="nDa">–</strong></span><p id="nDaText"></p></div>
+            <div><span>Utdelningsandel <strong id="nUa">–</strong></span><p id="nUaText"></p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="film-sektion film-stockholm" aria-labelledby="stockholmRubrik">
+    <video class="bakgrundsfilm" data-hd="media/stockholm-hd.mp4" data-4k="media/stockholm-4k.mp4" poster="media/stockholm-poster.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+    <div class="ram film-inre film-centrerad">
+      <div class="film-text visas">
+        <p class="etikett" data-edit>Kvant Akademi</p>
+        <h2 id="stockholmRubrik" data-edit>Börsen blir begriplig – <em>på svenska</em></h2>
+        <p data-edit>För dig som sparar i Sverige och vill förstå vad som händer med dina pengar.</p>
+        <a class="knapp" href="#medlemskap" data-edit>Se medlemskapen</a>
+      </div>
+    </div>
+    <span class="mediakredit">Film: Pexels</span>
+  </section>
+
+  <section class="sektion" id="medlemskap">
+    <div class="ram">
+      <div class="medlem-huvud">
+        <div class="visas">
+          <p class="etikett" data-edit>Medlemskap</p>
+          <h2 data-edit>Välj din <em>nivå</em></h2>
+          <p data-edit>Betala månadsvis och avsluta när du vill. Alla nivåer ger full tillgång till kursen och verktygen.</p>
+        </div>
+        <div class="karna" aria-hidden="true"><canvas id="scenKarna"></canvas></div>
+      </div>
+      <div class="planer">
+        <article class="kort plan visas">
+          <h3 data-edit>Start</h3>
+          <p class="plan-beskr" data-edit>För dig som vill lära dig grunderna i lugn och ro.</p>
+          <div class="pris"><strong data-edit>149 kr</strong><span data-edit>/ månad</span></div>
+          <ul>
+            <li data-edit>Hela kursen – 6 moduler och 24 lektioner</li>
+            <li data-edit>Verktygen för ränta på ränta och nyckeltal</li>
+            <li data-edit>Mallar för investeringsplan och aktiejournal</li>
+            <li data-edit>Nya lektioner när de släpps</li>
+          </ul>
+          <a class="knapp spok" href="#kontakt" data-plan="start" data-edit>Välj Start</a>
+        </article>
+        <article class="kort plan utvald visas">
+          <span class="plan-tag" data-edit>Bäst att börja med</span>
+          <h3 data-edit>Plus</h3>
+          <p class="plan-beskr" data-edit>För dig som vill ställa frågor och lära dig tillsammans med andra.</p>
+          <div class="pris"><strong data-edit>299 kr</strong><span data-edit>/ månad</span></div>
+          <ul>
+            <li data-edit>Allt i Start</li>
+            <li data-edit>Livegenomgång i grupp en gång i månaden</li>
+            <li data-edit>Frågestund om hur marknaden fungerar</li>
+            <li data-edit>Svar på dina frågor via e-post</li>
+          </ul>
+          <a class="knapp" href="#kontakt" data-plan="plus" data-edit>Välj Plus</a>
+        </article>
+        <article class="kort plan visas">
+          <h3 data-edit>Coachning</h3>
+          <p class="plan-beskr" data-edit>För dig som vill ha personligt stöd när du bygger din plan.</p>
+          <div class="pris"><strong data-edit>899 kr</strong><span data-edit>/ månad</span></div>
+          <ul>
+            <li data-edit>Allt i Plus</li>
+            <li data-edit>Ett 1:1-samtal på 45 minuter per månad</li>
+            <li data-edit>Genomgång av din plan och hur du analyserar</li>
+            <li data-edit>Inga köptips – du fattar besluten själv</li>
+          </ul>
+          <a class="knapp spok" href="#kontakt" data-plan="coach" data-edit>Välj Coachning</a>
+        </article>
+      </div>
+      <p class="agar-tips" id="agarTips" hidden>Bara du ser det här: klistra in dina Stripe-länkar i panelen "Redigera sidan". Tills dess leder knapparna till kontaktformuläret.</p>
+      <div class="villkorsrad">
+        <span data-edit>Säker betalning via Stripe med kort, Apple Pay, Google Pay eller Klarna</span>
+        <button class="lanklik" type="button" data-oppna-dialog="villkorDialog">Medlemsvillkor</button>
+        <a class="lanklik" id="portalLank" href="#medlemskap" rel="noopener" hidden>Hantera eller avsluta medlemskap</a>
+        <button class="lanklik" type="button" data-oppna-dialog="angraDialog">Ångra avtalet här</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="sektion" id="fragor">
+    <div class="ram fragor-grid">
+      <div class="visas">
+        <p class="etikett" data-edit>Frågor och svar</p>
+        <h2 data-edit>Bra att <em>veta</em></h2>
+        <p data-edit>Hittar du inte svaret? Skriv till oss längre ner på sidan.</p>
+      </div>
+      <div>
+        <details class="fraga visas" open><summary><span data-edit>Säger ni vilka aktier jag ska köpa?</span><span class="plus" aria-hidden="true"></span></summary><p data-edit>Nej. Kvant Akademi är utbildning och ger inte investeringsrådgivning. Personliga råd om vilka aktier någon ska köpa eller sälja kräver tillstånd från Finansinspektionen. Du lär dig i stället hur du själv analyserar bolag, risk och avgifter.</p></details>
+        <details class="fraga visas"><summary><span data-edit>Behöver jag kunna något innan?</span><span class="plus" aria-hidden="true"></span></summary><p data-edit>Nej. Kursen börjar från noll och förklarar alla ord på enkel svenska. Du behöver inte ens ha ett konto när du börjar.</p></details>
+        <details class="fraga visas"><summary><span data-edit>Kan jag förlora pengar på aktier?</span><span class="plus" aria-hidden="true"></span></summary><p data-edit>Ja. Aktier kan falla mycket i värde, och du kan förlora pengarna du har investerat. Därför lär du dig att sprida risken, ha en buffert och bara spara pengar som du inte behöver på flera år.</p></details>
+        <details class="fraga visas"><summary><span data-edit>Hur avslutar jag medlemskapet?</span><span class="plus" aria-hidden="true"></span></summary><p data-edit>Du avslutar när du vill, utan bindningstid. Mejla oss eller använd länken för att hantera ditt medlemskap. Medlemskapet gäller perioden ut som du redan har betalat.</p></details>
+        <details class="fraga visas"><summary><span data-edit>Kan jag ångra mitt köp?</span><span class="plus" aria-hidden="true"></span></summary><p data-edit>Ja. Som konsument har du 14 dagars ångerrätt. Klicka på "Ångra avtalet här" längst ner på sidan och bekräfta, så får du en bekräftelse via e-post.</p></details>
+        <details class="fraga visas"><summary><span data-edit>Hur går 1:1-coachningen till?</span><span class="plus" aria-hidden="true"></span></summary><p data-edit>Ni bokar ett videosamtal på 45 minuter. Du berättar vad du vill lära dig, och ni går igenom din plan, dina frågor och hur du analyserar. Besluten fattar du alltid själv.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="sektion" id="kontakt">
+    <div class="kontakt-bakgrund" aria-hidden="true"><img src="media/stockholm-1920.jpg" srcset="media/stockholm-960.jpg 960w, media/stockholm-1920.jpg 1920w, media/stockholm-3840.jpg 3840w" sizes="100vw" alt="" loading="lazy" decoding="async"></div>
+    <div class="ram">
+      <div class="kort kontakt-kort visas">
+        <div>
+          <p class="etikett" data-edit>Kontakt</p>
+          <h2 data-edit>Har du en <em>fråga?</em></h2>
+          <p data-edit>Undrar du vilken nivå som passar dig, eller vill du veta mer om kursen? Skriv några rader, så svarar vi inom två vardagar.</p>
+          <div class="direkt"><a href="#kontakt" id="epostLank" data-edit>hej@kvantakademi.se</a></div>
+        </div>
+        <form class="form" id="kontaktForm" novalidate>
+          <div class="falt"><label for="fNamn">Namn</label><input id="fNamn" name="namn" autocomplete="name" aria-describedby="fNamnFel" required><p class="falt-fel" id="fNamnFel"></p></div>
+          <div class="falt"><label for="fEpost">E-post</label><input id="fEpost" name="epost" type="email" autocomplete="email" aria-describedby="fEpostFel" required><p class="falt-fel" id="fEpostFel"></p></div>
+          <div class="falt bred"><label for="fPlan">Intresserad av</label><select id="fPlan" name="plan"><option value="Vet inte än">Vet inte än</option><option value="Start">Start</option><option value="Plus">Plus</option><option value="Coachning">Coachning</option></select></div>
+          <div class="falt bred"><label for="fMeddelande">Meddelande</label><textarea id="fMeddelande" name="meddelande"></textarea></div>
+          <input class="honung" id="fHonung" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button class="knapp" type="submit" id="skickaKnapp">Skicka meddelande</button>
+          <p class="form-not"><span data-edit>Vi använder bara dina uppgifter för att svara dig.</span> <button class="lanklik" type="button" data-oppna-dialog="integritetDialog">Integritetspolicy</button></p>
+        </form>
+        <div class="tack" id="tackRuta" hidden>
+          <h3 data-edit>Tack – ditt meddelande är skickat!</h3>
+          <p data-edit>Vi svarar inom två vardagar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="sidfot">
+  <div class="ram">
+    <div class="sidfot-topp">
+      <a class="logo" href="#top" aria-label="Kvant Akademi – till början">
+        <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><ellipse cx="16" cy="16" rx="13.5" ry="5.2" stroke="#5BF0C4" stroke-width="1.4" transform="rotate(-32 16 16)"/><ellipse cx="16" cy="16" rx="13.5" ry="5.2" stroke="#E4C27F" stroke-width="1.4" transform="rotate(32 16 16)"/><circle cx="16" cy="16" r="3.3" fill="#5BF0C4"/></svg>
+        <span>Kvant <em>Akademi</em></span>
+      </a>
+      <p class="riskruta" data-edit><strong>Riskinformation.</strong> Kvant Akademi erbjuder utbildning och ger inte investeringsrådgivning. Innehållet är allmän information och ingen uppmaning att köpa eller sälja värdepapper. Historisk avkastning är ingen garanti för framtida avkastning. Pengar som placeras i aktier kan både öka och minska i värde, och det är inte säkert att du får tillbaka hela det insatta kapitalet.</p>
+    </div>
+    <div class="sidfot-rad">
+      <span><span data-edit>© 2026 Kvant Akademi</span><span id="foretagsrad" hidden> · <span data-foretag>Kvant Akademi</span> · Org.nr <span data-orgnr></span></span></span>
+      <span class="sidfot-lankar">
+        <button class="lanklik" type="button" data-oppna-dialog="villkorDialog">Medlemsvillkor</button>
+        <button class="lanklik" type="button" data-oppna-dialog="integritetDialog">Integritetspolicy</button>
+        <button class="lanklik" type="button" data-oppna-dialog="angraDialog">Ångra avtalet här</button>
+      </span>
+    </div>
+    <p class="krediter">Foto: Tech Daily, Justin Morgan, Bluestonex och Julian Terenzio via Unsplash. Film: Pachon in Motion, Artem Shutkin och Mustafa Aksoy via Pexels. 3D: three.js.</p>
+    <p class="sidfot-ord" aria-hidden="true">Kvant</p>
+  </div>
+</footer>
+
+<dialog id="villkorDialog" aria-labelledby="villkorRubrik">
+  <div class="dialog-inre">
+    <h2 id="villkorRubrik">Medlemsvillkor</h2>
+    <div class="dialog-text">
+      <p data-edit><strong>Tjänsten.</strong> Medlemskapet ger tillgång till Kvant Akademis kurs och verktyg och, beroende på nivå, gruppgenomgångar och personlig coachning. Allt är utbildning. Vi ger inte investeringsrådgivning och inga personliga råd om att köpa eller sälja värdepapper.</p>
+      <p data-edit><strong>Pris och betalning.</strong> Priserna står på sidan i svenska kronor inklusive eventuell moms. Betalningen dras varje månad i förskott via Stripe med kort, Apple Pay, Google Pay eller Klarna, och du får kvitto på e-post.</p>
+      <p data-edit><strong>Ingen bindningstid.</strong> Du kan avsluta när du vill. Medlemskapet gäller då till slutet av perioden du redan har betalat, och sedan dras inga fler betalningar.</p>
+      <p data-edit><strong>Ångerrätt.</strong> Som konsument har du 14 dagars ångerrätt från köpet enligt distansavtalslagen. Använd knappen "Ångra avtalet här", som finns under Medlemskap och längst ner på sidan, eller mejla oss. Har du bett att få börja direkt kan du behöva betala för den del av tjänsten som du redan har fått. Pengarna betalas tillbaka senast 14 dagar efter att vi fått ditt meddelande.</p>
+      <p data-edit><strong>Coachning.</strong> Samtal bokas i förväg. Avbokar du senare än 24 timmar före samtalet räknas samtalet som genomfört.</p>
+      <p data-edit><strong>Ditt ansvar.</strong> Du fattar alla investeringsbeslut själv och ansvarar för dem. Kvant Akademi ansvarar inte för förluster som uppstår när du handlar med värdepapper.</p>
+      <p data-edit><strong>Ändringar.</strong> Prisändringar meddelas via e-post minst 30 dagar innan de börjar gälla.</p>
+      <p data-edit><strong>Frågor och klagomål.</strong> Kontakta oss via e-post, så hittar vi en lösning. Du kan också vända dig till Allmänna reklamationsnämnden (ARN).</p>
+      <p class="foretagsinfo"><span data-foretag>Kvant Akademi</span><span data-orgnr-rad></span> · <a data-epost-kopia href="#kontakt">hej@kvantakademi.se</a></p>
+    </div>
+    <button class="knapp" type="button" data-stang-dialog>Stäng</button>
+  </div>
+</dialog>
+
+<dialog id="integritetDialog" aria-labelledby="integritetRubrik">
+  <div class="dialog-inre">
+    <h2 id="integritetRubrik">Integritetspolicy</h2>
+    <div class="dialog-text">
+      <p data-edit><strong>Vilka uppgifter.</strong> Namn, e-post och det du skriver i formulären. När du blir medlem även uppgifter om ditt medlemskap och dina betalningar, till exempel belopp och datum.</p>
+      <p data-edit><strong>Varför.</strong> För att svara på dina frågor, ge dig tillgång till kursen, hantera medlemskap och ångerrätt och sköta bokföringen. Den rättsliga grunden är avtal och rättslig förpliktelse.</p>
+      <p data-edit><strong>Mottagare.</strong> Formulären skickas via FormSubmit till vår e-post. Betalningar hanteras av Stripe, som själv ansvarar för kortuppgifterna. Typsnitt hämtas från Google Fonts och 3D-grafiken från jsDelivr, vilket innebär att din IP-adress skickas till dem. Vi säljer aldrig uppgifter vidare.</p>
+      <p data-edit><strong>Hur länge.</strong> Frågor som inte leder till medlemskap raderas senast efter tolv månader. Bokföringsunderlag sparas så länge lagen kräver.</p>
+      <p data-edit><strong>Dina rättigheter.</strong> Du kan få veta vilka uppgifter vi har om dig och få dem rättade eller raderade. Du kan klaga till Integritetsskyddsmyndigheten (IMY).</p>
+      <p data-edit><strong>Kakor.</strong> Sidan använder inga spårningskakor.</p>
+      <p class="foretagsinfo"><strong>Personuppgiftsansvarig:</strong> <span data-foretag>Kvant Akademi</span><span data-orgnr-rad></span> · <a data-epost-kopia href="#kontakt">hej@kvantakademi.se</a></p>
+    </div>
+    <button class="knapp" type="button" data-stang-dialog>Stäng</button>
+  </div>
+</dialog>
+
+<dialog id="angraDialog" aria-labelledby="angraRubrik">
+  <div class="dialog-inre">
+    <p class="etikett">Ångerrätt</p>
+    <h2 id="angraRubrik">Ångra ditt <em>avtal</em></h2>
+    <div class="dialog-text"><p data-edit>Har du köpt ett medlemskap de senaste 14 dagarna kan du ångra köpet här. Fyll i uppgifterna och bekräfta. Du får en bekräftelse via e-post.</p></div>
+    <form class="form" id="angraForm" novalidate>
+      <div class="falt"><label for="aNamn">Namn</label><input id="aNamn" autocomplete="name" aria-describedby="aNamnFel" required><p class="falt-fel" id="aNamnFel"></p></div>
+      <div class="falt"><label for="aEpost">E-post som du använde vid köpet</label><input id="aEpost" type="email" autocomplete="email" aria-describedby="aEpostFel" required><p class="falt-fel" id="aEpostFel"></p></div>
+      <div class="falt"><label for="aPlan">Medlemskap</label><select id="aPlan"><option>Start</option><option>Plus</option><option>Coachning</option></select></div>
+      <div class="falt"><label for="aDatum">Köpdatum (om du vet)</label><input id="aDatum" type="date"></div>
+      <div class="falt bred angra-knappar">
+        <button class="knapp" type="submit" id="angraKnapp">Bekräfta att jag ångrar</button>
+        <button class="knapp spok" type="button" data-stang-dialog>Avbryt</button>
+      </div>
+    </form>
+    <div class="tack" id="angraKlar" hidden>
+      <h3>Vi har tagit emot att du ångrar</h3>
+      <p>Mottaget <span id="angraTid"></span>. En bekräftelse skickas till din e-post, och pengarna betalas tillbaka senast inom 14 dagar.</p>
+      <button class="knapp" type="button" data-stang-dialog>Stäng</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="valkommenDialog" aria-labelledby="valkommenRubrik">
+  <div class="dialog-inre">
+    <p class="etikett">Betalningen är klar</p>
+    <h2 id="valkommenRubrik" data-edit>Välkommen till <em>Kvant Akademi</em></h2>
+    <div class="dialog-text"><p data-edit>Kvittot skickas från Stripe till din e-post. Vi hör av oss inom en vardag med hur du kommer åt kursen.</p></div>
+    <button class="knapp" type="button" data-stang-dialog>Stäng</button>
+  </div>
+</dialog>
+
+<div class="redigera" id="redigera" hidden>
+  <div class="redigera-panel" id="redigeraPanel" hidden>
+    <strong class="panel-rubrik">Redigera sidan</strong>
+    <span>Klicka på en text på sidan och skriv. Ändringarna sparas i webbläsaren.</span>
+    <label for="agarEpost">Din e-post (formulären skickas hit)</label>
+    <input id="agarEpost" type="email" placeholder="namn@exempel.se">
+    <strong class="panel-rubrik">Företag</strong>
+    <label for="agarForetag">Företagsnamn</label>
+    <input id="agarForetag" placeholder="Fyll i när företaget är registrerat">
+    <label for="agarOrgnr">Org.nr</label>
+    <input id="agarOrgnr" placeholder="Fyll i när företaget är registrerat">
+    <strong class="panel-rubrik">Betalning med Stripe</strong>
+    <span>Klistra in länkar från Stripe (de börjar med https://). Utan länk leder knappen till kontaktformuläret.</span>
+    <div class="lankfalt" id="lankFalt"></div>
+    <button class="knapp" type="button" id="laddaNer">Ladda ner färdig sida</button>
+    <button class="aterstall" type="button" id="aterstall">Återställ allt till original</button>
+  </div>
+  <button class="knapp spok redigera-knapp" type="button" id="redigeraKnapp" aria-expanded="false" aria-controls="redigeraPanel">✎ Redigera sidan</button>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const LAGRING = 'kvant-akademi-v1';
+  const INST = 'kvant-akademi-installningar-v1';
+  const STANDARD_EPOST = 'hej@kvantakademi.se';
+  const THREE_URL = 'https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.min.js';
+  const minskadRorelse = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const iRam = window.self !== window.top;
+  // Ägarverktygen visas när filen öppnas från datorn, i förhandsvisning eller med #redigera
+  const agarlage = location.protocol === 'file:' || /redigera/i.test(location.hash) || iRam;
+  const redigerar = () => document.documentElement.classList.contains('redigerar');
+  const epostOk = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v || '');
+  const arLank = v => /^https:\/\/\S+$/i.test(v || '');
+  const kr = new Intl.NumberFormat('sv-SE', { maximumFractionDigits: 0 });
+  const tal = (n, dec) => new Intl.NumberFormat('sv-SE', { minimumFractionDigits: dec, maximumFractionDigits: dec }).format(n);
+  let fingeravtryck = '';
+
+  function lasJson(nyckel) { try { return JSON.parse(localStorage.getItem(nyckel)) || {}; } catch (e) { return {}; } }
+  function skrivJson(nyckel, d) { try { localStorage.setItem(nyckel, JSON.stringify(d)); return true; } catch (e) { return false; } }
+  let toastTimer;
+  function visaToast(text) {
+    const t = $('#toast');
+    t.textContent = text;
+    t.classList.add('synlig');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('synlig'), 4600);
+  }
+  function hash(text) {
+    let h = 5381;
+    for (let i = 0; i < text.length; i++) h = ((h << 5) + h + text.charCodeAt(i)) | 0;
+    return (h >>> 0).toString(36);
+  }
+
+  /* ---------- Texter, e-post och sparade ändringar ---------- */
+  const redigerbara = () => $$('[data-edit]');
+  const epostText = () => $('#epostLank').textContent.trim();
+  const kopplad = () => epostOk(epostText()) && epostText() !== STANDARD_EPOST;
+  function uppdateraEpostLankar() {
+    const v = epostText(), href = kopplad() ? 'mailto:' + v : '#kontakt';
+    $('#epostLank').setAttribute('href', href);
+    $$('[data-epost-kopia]').forEach(a => { a.textContent = v; a.setAttribute('href', href); });
+  }
+  function aterstallSparat() {
+    fingeravtryck = hash(redigerbara().map(el => el.innerHTML).join('§'));
+    const d = lasJson(LAGRING);
+    if (d.fingeravtryck === fingeravtryck && Array.isArray(d.texter)) {
+      redigerbara().forEach((el, i) => { if (typeof d.texter[i] === 'string') el.innerHTML = d.texter[i]; });
+    }
+    uppdateraEpostLankar();
+  }
+  function spara() { return skrivJson(LAGRING, { fingeravtryck, texter: redigerbara().map(el => el.innerHTML) }); }
+
+  /* ---------- Meny, inglidning, ljusskimmer och ordband ---------- */
+  function initNavigering() {
+    const nav = $('#nav');
+    const uppdatera = () => nav.classList.toggle('skrollad', window.scrollY > 30);
+    window.addEventListener('scroll', uppdatera, { passive: true });
+    uppdatera();
+    const visas = $$('.visas');
+    if ('IntersectionObserver' in window && !minskadRorelse) {
+      const o = new IntersectionObserver(poster => poster.forEach(p => { if (p.isIntersecting) { p.target.classList.add('synlig'); o.unobserve(p.target); } }), { threshold: 0.08 });
+      visas.forEach(el => o.observe(el));
+    } else visas.forEach(el => el.classList.add('synlig'));
+    document.addEventListener('pointermove', e => {
+      const k = e.target.closest && e.target.closest('.kort');
+      if (!k) return;
+      const r = k.getBoundingClientRect();
+      k.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      k.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    }, { passive: true });
+    const spar = $('#bandSpar');
+    Array.from(spar.children).forEach(s => { const k = s.cloneNode(true); k.setAttribute('data-kopia', ''); spar.appendChild(k); });
+  }
+
+  /* ---------- Dialogrutor ---------- */
+  // Webbläsaren fokuserar första knappen och kan rulla ner – texten ska börja överst
+  function oppnaDialog(d) { if (!d) return; if (typeof d.showModal === 'function') d.showModal(); else d.setAttribute('open', ''); d.scrollTop = 0; }
+  function stangDialog(d) { if (!d) return; if (typeof d.close === 'function') d.close(); else d.removeAttribute('open'); }
+  function initDialoger() {
+    document.addEventListener('click', e => {
+      const oppna = e.target.closest('[data-oppna-dialog]');
+      if (oppna) { oppnaDialog($('#' + oppna.dataset.oppnaDialog)); return; }
+      const stang = e.target.closest('[data-stang-dialog]');
+      if (stang) stangDialog(stang.closest('dialog'));
+    });
+    $$('dialog').forEach(d => d.addEventListener('click', e => { if (e.target === d) stangDialog(d); }));
+    // Stripe skickar tillbaka nya medlemmar med ?betalt=1
+    if (/[?&]betalt=1(&|$)/.test(location.search)) oppnaDialog($('#valkommenDialog'));
+  }
+
+  /* ---------- Företagsuppgifter och Stripe-länkar ---------- */
+  const PLANER = [['start', 'Start – betallänk'], ['plus', 'Plus – betallänk'], ['coach', 'Coachning – betallänk'], ['portal', 'Kundportal – hantera eller avsluta']];
+  const PLANNAMN = { start: 'Start', plus: 'Plus', coach: 'Coachning' };
+  const lankElement = n => n === 'portal' ? $('#portalLank') : $('[data-plan="' + n + '"]');
+  // Inställningarna ligger som attribut i sidan, så att de följer med när sidan laddas ner
+  function hamtaInst() {
+    const rad = $('#foretagsrad');
+    const d = { foretag: rad.dataset.instForetag || '', orgnr: rad.dataset.instOrgnr || '', lankar: {} };
+    PLANER.forEach(([n]) => { d.lankar[n] = lankElement(n).dataset.lank || ''; });
+    return d;
+  }
+  function tillampaInst(d) {
+    const rad = $('#foretagsrad');
+    rad.dataset.instForetag = d.foretag || '';
+    rad.dataset.instOrgnr = d.orgnr || '';
+    $$('[data-foretag]').forEach(el => { el.textContent = d.foretag || 'Kvant Akademi'; });
+    $$('[data-orgnr]').forEach(el => { el.textContent = d.orgnr || ''; });
+    $$('[data-orgnr-rad]').forEach(el => { el.textContent = d.orgnr ? ', org.nr ' + d.orgnr : ''; });
+    rad.hidden = !(d.foretag && d.orgnr);
+    let nagon = false;
+    PLANER.forEach(([n]) => {
+      const el = lankElement(n), lank = arLank((d.lankar || {})[n]) ? d.lankar[n] : '';
+      el.dataset.lank = lank;
+      if (n === 'portal') { el.hidden = !lank; el.setAttribute('href', lank || '#medlemskap'); return; }
+      el.setAttribute('href', lank || '#kontakt');
+      if (lank) nagon = true;
+    });
+    $('#agarTips').hidden = !(agarlage && !nagon);
+  }
+  function initInstallningar() {
+    const ifil = hamtaInst(), sparat = lasJson(INST);
+    // Det ägaren sparat i webbläsaren går före det som ligger i filen
+    const d = {
+      foretag: sparat.foretag !== undefined ? sparat.foretag : ifil.foretag,
+      orgnr: sparat.orgnr !== undefined ? sparat.orgnr : ifil.orgnr,
+      lankar: Object.assign({}, ifil.lankar, sparat.lankar || {})
+    };
+    tillampaInst(d);
+    // Utan betallänk fyller planknappen i kontaktformuläret
+    $$('[data-plan]').forEach(a => a.addEventListener('click', () => { if (!redigerar() && !a.dataset.lank) $('#fPlan').value = PLANNAMN[a.dataset.plan]; }));
+    if (!agarlage) return;
+    const falt = $('#lankFalt');
+    PLANER.forEach(([n, namn]) => {
+      const etikett = document.createElement('label');
+      etikett.htmlFor = 'lank-' + n;
+      etikett.textContent = namn;
+      const inp = document.createElement('input');
+      inp.id = 'lank-' + n; inp.type = 'url'; inp.dataset.nyckel = n;
+      inp.placeholder = n === 'portal' ? 'https://billing.stripe.com/…' : 'https://buy.stripe.com/…';
+      inp.value = d.lankar[n] || '';
+      falt.append(etikett, inp);
+    });
+    $('#agarForetag').value = d.foretag || '';
+    $('#agarOrgnr').value = d.orgnr || '';
+    const sparaInst = () => {
+      const ny = { foretag: $('#agarForetag').value.trim(), orgnr: $('#agarOrgnr').value.trim(), lankar: {} };
+      let fel = false;
+      $$('input', falt).forEach(i => {
+        const v = i.value.trim(), ok = !v || arLank(v);
+        if (ok) i.removeAttribute('aria-invalid'); else { fel = true; i.setAttribute('aria-invalid', 'true'); }
+        ny.lankar[i.dataset.nyckel] = v && ok ? v : '';
+      });
+      tillampaInst(ny);
+      skrivJson(INST, ny);
+      visaToast(fel ? 'En länk måste börja med https:// – kontrollera det markerade fältet.' : 'Företagsuppgifter och länkar är sparade.');
+    };
+    $('#agarForetag').addEventListener('change', sparaInst);
+    $('#agarOrgnr').addEventListener('change', sparaInst);
+    falt.addEventListener('change', sparaInst);
+  }
+
+  /* ---------- Formulär: kontakt och ångerrätt (FormSubmit till ägarens e-post) ---------- */
+  function visaFel(falt, text) {
+    $('#' + falt.getAttribute('aria-describedby')).textContent = text;
+    if (text) falt.setAttribute('aria-invalid', 'true'); else falt.removeAttribute('aria-invalid');
+    return !text;
+  }
+  function kontrolleraNamnEpost(namn, epost) {
+    const a = visaFel(namn, namn.value.trim() ? '' : 'Fyll i ditt namn.');
+    const b = visaFel(epost, epostOk(epost.value.trim()) ? '' : 'Fyll i en giltig e-postadress.');
+    if (!a) namn.focus(); else if (!b) epost.focus();
+    return a && b;
+  }
+  async function skicka(uppgifter, extra) {
+    const svar = await fetch('https://formsubmit.co/ajax/' + encodeURIComponent(epostText()), {
+      method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(Object.assign({ _template: 'table', _captcha: 'false' }, extra, uppgifter))
+    });
+    if (!svar.ok) throw new Error('HTTP ' + svar.status);
+    const data = await svar.json().catch(() => ({}));
+    if (String(data.success) === 'false') throw new Error(data.message || 'FormSubmit');
+  }
+  function reservMejl(amne, uppgifter) {
+    const kropp = Object.entries(uppgifter).map(([k, v]) => k + ': ' + v).join('\n');
+    window.location.href = 'mailto:' + epostText() + '?subject=' + encodeURIComponent(amne) + '&body=' + encodeURIComponent(kropp);
+    visaToast('Kunde inte skicka direkt – ditt e-postprogram öppnas med meddelandet ifyllt.');
+  }
+  const ejKopplad = () => visaToast(agarlage ? 'Skriv din e-post i panelen "Redigera sidan", så kopplas formulären.' : 'Formuläret är inte kopplat än – mejla oss gärna direkt.');
+  function initFormular() {
+    const form = $('#kontaktForm'), namn = $('#fNamn'), epost = $('#fEpost'), knapp = $('#skickaKnapp');
+    [namn, epost].forEach(f => f.addEventListener('input', () => { if (f.hasAttribute('aria-invalid')) kontrolleraNamnEpost(namn, epost); }));
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      if (!kontrolleraNamnEpost(namn, epost) || $('#fHonung').value) return;
+      if (!kopplad()) { ejKopplad(); return; }
+      const uppgifter = { Namn: namn.value.trim(), 'E-post': epost.value.trim(), 'Intresserad av': $('#fPlan').value, Meddelande: $('#fMeddelande').value.trim() || '–' };
+      knapp.disabled = true;
+      knapp.textContent = 'Skickar …';
+      try {
+        await skicka(uppgifter, { _subject: 'Ny fråga till Kvant Akademi – ' + uppgifter.Namn, _replyto: uppgifter['E-post'] });
+        form.hidden = true;
+        $('#tackRuta').hidden = false;
+      } catch (fel) { reservMejl('Fråga till Kvant Akademi – ' + uppgifter.Namn, uppgifter); }
+      finally { knapp.disabled = false; knapp.textContent = 'Skicka meddelande'; }
+    });
+  }
+  function initAngra() {
+    const form = $('#angraForm'), namn = $('#aNamn'), epost = $('#aEpost'), knapp = $('#angraKnapp');
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      if (!kontrolleraNamnEpost(namn, epost)) return;
+      if (!kopplad()) { ejKopplad(); return; }
+      const tid = new Date().toLocaleString('sv-SE', { dateStyle: 'long', timeStyle: 'short' });
+      const plan = $('#aPlan').value;
+      const uppgifter = { Namn: namn.value.trim(), 'E-post': epost.value.trim(), Medlemskap: plan, 'Köpdatum': $('#aDatum').value || 'ej angivet', 'Ångrat': tid };
+      knapp.disabled = true;
+      knapp.textContent = 'Skickar …';
+      try {
+        // FormSubmit skickar bekräftelsen med tidpunkt direkt till kundens e-post
+        await skicka(uppgifter, {
+          _subject: 'ÅNGRAT AVTAL – ' + uppgifter.Namn + ' (' + plan + ')', _replyto: uppgifter['E-post'], email: uppgifter['E-post'],
+          _autoresponse: 'Hej ' + uppgifter.Namn + '! Vi bekräftar att du har ångrat ditt medlemskap ' + plan + ' i Kvant Akademi. Vi tog emot det ' + tid + '. Pengarna betalas tillbaka senast inom 14 dagar. Hälsningar, Kvant Akademi'
+        });
+        $('#angraTid').textContent = tid;
+        form.hidden = true;
+        $('#angraKlar').hidden = false;
+      } catch (fel) { reservMejl('Jag ångrar mitt avtal – ' + uppgifter.Namn, uppgifter); }
+      finally { knapp.disabled = false; knapp.textContent = 'Bekräfta att jag ångrar'; }
+    });
+  }
+
+  /* ---------- Verktyg: ränta på ränta ---------- */
+  const kortBelopp = v => v >= 1e6 ? tal(v / 1e6, v >= 1e7 ? 0 : 1) + ' mn' : v >= 1000 ? kr.format(v / 1000) + ' tkr' : kr.format(v);
+  function initRanta() {
+    const id = n => $('#' + n);
+    const reglage = ['rStart', 'rManad', 'rAr', 'rAvk', 'rAvg'].map(id);
+    const canvas = id('grafRanta'), g = canvas.getContext('2d');
+    let senast = null;
+    // Månadssparande med jämn avkastning; avgiften dras av varje år
+    function berakna(start, manad, ar, avk, avg) {
+      const netto = (1 + avk / 100) * (1 - avg / 100);
+      const rm = Math.pow(Math.max(netto, 0.01), 1 / 12) - 1;
+      const varden = [start];
+      let v = start;
+      for (let m = 1; m <= ar * 12; m++) { v = v * (1 + rm) + manad; if (m % 12 === 0) varden.push(v); }
+      return varden;
+    }
+    function rita() {
+      if (!senast) return;
+      const b = canvas.clientWidth, h = canvas.clientHeight;
+      if (!b || !h) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(b * dpr);
+      canvas.height = Math.round(h * dpr);
+      g.setTransform(dpr, 0, 0, dpr, 0, 0);
+      g.clearRect(0, 0, b, h);
+      const { huvud, lag, hog, insatt, ar } = senast;
+      const vanster = 58, hoger = 14, topp = 12, botten = 28;
+      const max = Math.max(...hog, ...insatt, 1) * 1.05;
+      const X = i => vanster + (b - vanster - hoger) * (i / ar);
+      const Y = v => topp + (h - topp - botten) * (1 - Math.max(0, v) / max);
+      const linje = serie => serie.forEach((v, i) => i ? g.lineTo(X(i), Y(v)) : g.moveTo(X(i), Y(v)));
+      g.font = '500 11px "JetBrains Mono", Consolas, monospace';
+      g.fillStyle = '#93A2AD';
+      g.strokeStyle = 'rgba(148, 226, 205, .1)';
+      g.lineWidth = 1;
+      g.textAlign = 'right';
+      g.textBaseline = 'middle';
+      for (let i = 0; i <= 4; i++) {
+        const v = max / 4 * i;
+        g.beginPath(); g.moveTo(vanster, Y(v)); g.lineTo(b - hoger, Y(v)); g.stroke();
+        g.fillText(kortBelopp(v), vanster - 10, Y(v));
+      }
+      g.textAlign = 'center';
+      g.textBaseline = 'top';
+      const steg = Math.max(1, Math.round(ar / 5));
+      for (let i = 0; i <= ar; i += steg) g.fillText(i + ' år', X(i), h - botten + 9);
+      // Spann om avkastningen blir 3 procentenheter lägre eller högre
+      g.beginPath(); linje(hog);
+      for (let i = ar; i >= 0; i--) g.lineTo(X(i), Y(lag[i]));
+      g.closePath(); g.fillStyle = 'rgba(91, 240, 196, .12)'; g.fill();
+      g.beginPath(); linje(insatt);
+      g.setLineDash([5, 5]); g.strokeStyle = '#93A2AD'; g.lineWidth = 1.5; g.stroke(); g.setLineDash([]);
+      const yta = g.createLinearGradient(0, topp, 0, h - botten);
+      yta.addColorStop(0, 'rgba(91, 240, 196, .26)');
+      yta.addColorStop(1, 'rgba(91, 240, 196, 0)');
+      g.beginPath(); linje(huvud); g.lineTo(X(ar), Y(0)); g.lineTo(X(0), Y(0)); g.closePath(); g.fillStyle = yta; g.fill();
+      g.beginPath(); linje(huvud);
+      g.strokeStyle = '#5BF0C4'; g.lineWidth = 2.5; g.shadowColor = 'rgba(91, 240, 196, .8)'; g.shadowBlur = 12; g.stroke(); g.shadowBlur = 0;
+      g.beginPath(); g.arc(X(ar), Y(huvud[ar]), 4.5, 0, Math.PI * 2); g.fillStyle = '#EEF3F5'; g.fill();
+    }
+    function uppdatera() {
+      const [start, manad, ar, avk, avg] = reglage.map(r => Number(r.value));
+      reglage.forEach(r => r.style.setProperty('--fyll', ((r.value - r.min) / (r.max - r.min) * 100) + '%'));
+      id('oStart').textContent = kr.format(start) + ' kr';
+      id('oManad').textContent = kr.format(manad) + ' kr';
+      id('oAr').textContent = ar + ' år';
+      id('oAvk').textContent = tal(avk, avk % 1 ? 1 : 0) + ' %';
+      id('oAvg').textContent = tal(avg, 1) + ' %';
+      const huvud = berakna(start, manad, ar, avk, avg);
+      const insatt = Array.from({ length: ar + 1 }, (_, i) => start + manad * 12 * i);
+      const utanAvgift = berakna(start, manad, ar, avk, 0);
+      id('resInsatt').textContent = kr.format(insatt[ar]) + ' kr';
+      id('resVarde').textContent = kr.format(huvud[ar]) + ' kr';
+      id('resAvk').textContent = kr.format(huvud[ar] - insatt[ar]) + ' kr';
+      id('resAvgift').textContent = kr.format(Math.max(0, utanAvgift[ar] - huvud[ar])) + ' kr';
+      senast = { huvud, insatt, ar, lag: berakna(start, manad, ar, avk - 3, avg), hog: berakna(start, manad, ar, avk + 3, avg) };
+      rita();
+    }
+    reglage.forEach(r => r.addEventListener('input', uppdatera));
+    if ('ResizeObserver' in window) new ResizeObserver(rita).observe(canvas); else window.addEventListener('resize', rita);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(rita);
+    uppdatera();
+  }
+
+  /* ---------- Verktyg: nyckeltal ---------- */
+  function initNyckeltal() {
+    const kurs = $('#nKurs'), vinst = $('#nVinst'), utd = $('#nUtd');
+    const satt = (id, varde, text) => { $('#' + id).textContent = varde; $('#' + id + 'Text').textContent = text; };
+    function uppdatera() {
+      const k = parseFloat(kurs.value), v = parseFloat(vinst.value), u = parseFloat(utd.value);
+      if (k > 0 && v > 0) satt('nPe', tal(k / v, 1), 'Du betalar ' + tal(k / v, 1) + ' kr för varje krona som bolaget tjänar per aktie på ett år. Jämför med liknande bolag i samma bransch.');
+      else if (k > 0 && v <= 0) satt('nPe', 'säger inget', 'Bolaget går med förlust, så P/E-talet går inte att använda. Titta i stället på omsättning, kassaflöde och skulder.');
+      else satt('nPe', '–', 'Fyll i kurs och vinst per aktie.');
+      if (k > 0 && u >= 0) satt('nDa', tal(u / k * 100, 1) + ' %', 'Så stor del av aktiekursen får du i utdelning på ett år – om bolaget delar ut lika mycket igen, vilket inte är säkert.');
+      else satt('nDa', '–', 'Fyll i kurs och utdelning per aktie.');
+      if (v > 0 && u >= 0) satt('nUa', tal(u / v * 100, 0) + ' %', u > v ? 'Bolaget delar ut mer än det tjänar. Det brukar inte gå att fortsätta med i längden.' : 'Så stor del av vinsten delas ut. Resten kan bolaget använda för att växa eller betala av skulder.');
+      else satt('nUa', '–', 'Fyll i vinst och utdelning per aktie.');
+    }
+    [kurs, vinst, utd].forEach(i => i.addEventListener('input', uppdatera));
+    uppdatera();
+  }
+
+  /* ---------- 3D (three.js från jsDelivr) ---------- */
+  let threeLofte = null;
+  const laddaThree = () => (threeLofte = threeLofte || import(THREE_URL));
+  function glodTextur(THREE) {
+    const c = document.createElement('canvas');
+    c.width = c.height = 64;
+    const g = c.getContext('2d'), gr = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+    gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(0.25, 'rgba(255,255,255,.5)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
+    g.fillStyle = gr; g.fillRect(0, 0, 64, 64);
+    return new THREE.CanvasTexture(c);
+  }
+  // Ritar bara när scenen syns på skärmen
+  function korLoop(element, rita) {
+    if (minskadRorelse) { rita(2); return; }
+    let synlig = true, igang = false, start = null;
+    const loop = tid => {
+      if (!synlig) { igang = false; return; }
+      if (start === null) start = tid;
+      rita((tid - start) / 1000);
+      requestAnimationFrame(loop);
+    };
+    const kor = () => { if (!igang && synlig) { igang = true; requestAnimationFrame(loop); } };
+    if ('IntersectionObserver' in window) new IntersectionObserver(p => { synlig = p[0].isIntersecting; kor(); }, { rootMargin: '80px' }).observe(element);
+    kor();
+  }
+  function foljStorlek(canvas, andra) {
+    const storlek = () => { const b = canvas.clientWidth, h = canvas.clientHeight; if (b && h) andra(b, h); };
+    storlek();
+    if ('ResizeObserver' in window) new ResizeObserver(storlek).observe(canvas); else window.addEventListener('resize', storlek);
+  }
+
+  // Hjältescenen: ett landskap av staplar, en glödande kurva och svävande datapunkter
+  async function initScen() {
+    const canvas = $('#scenKvant');
+    let THREE, renderer;
+    try { THREE = await laddaThree(); renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true }); }
+    catch (e) { canvas.hidden = true; return; }
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.1;
+    const scen = new THREE.Scene();
+    scen.fog = new THREE.FogExp2(0x05070a, 0.075);
+    const kamera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
+    scen.add(new THREE.AmbientLight(0x9fffe6, 0.45));
+    const sol = new THREE.DirectionalLight(0xffffff, 1.6);
+    sol.position.set(3, 6, 4);
+    scen.add(sol);
+    const mintLjus = new THREE.PointLight(0x5bf0c4, 14, 12);
+    mintLjus.position.set(-2.2, 2.6, 2);
+    const guldLjus = new THREE.PointLight(0xe4c27f, 11, 10);
+    guldLjus.position.set(3, 2.2, -1);
+    scen.add(mintLjus, guldLjus);
+
+    let fro = 20260916;
+    const slump = () => { fro = (fro * 1664525 + 1013904223) >>> 0; return fro / 4294967296; };
+
+    const KOL = 34, RAD = 22, AVST = 0.26, ANTAL = KOL * RAD;
+    const stapelGeo = new THREE.BoxGeometry(0.17, 1, 0.17);
+    stapelGeo.translate(0, 0.5, 0);
+    const staplar = new THREE.InstancedMesh(stapelGeo, new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 0.35, roughness: 0.32, emissive: 0x06261e, emissiveIntensity: 0.5 }), ANTAL);
+    const bx = new Float32Array(ANTAL), bz = new Float32Array(ANTAL);
+    for (let r = 0, n = 0; r < RAD; r++) for (let k = 0; k < KOL; k++, n++) { bx[n] = (k - (KOL - 1) / 2) * AVST; bz[n] = (r - (RAD - 1) / 2) * AVST; }
+    const m4 = new THREE.Matrix4(), pos = new THREE.Vector3(), skala = new THREE.Vector3(), rot = new THREE.Quaternion();
+    const farg = new THREE.Color(), mint = new THREE.Color(0x5bf0c4), guld = new THREE.Color(0xe4c27f), djup = new THREE.Color(0x0e2b33);
+    const hojd = (x, z, t) => 0.18 + 0.5 * (Math.sin(x * 0.9 + t * 0.6) * 0.5 + 0.5) * (Math.cos(z * 1.1 - t * 0.4) * 0.5 + 0.5)
+      + 0.3 * Math.max(0, Math.sin((x + z) * 0.55 + t * 0.35)) + 0.95 * Math.exp(-((x - 1.1) ** 2 + (z + 0.5) ** 2) * 0.4);
+    function uppdateraStaplar(t) {
+      for (let n = 0; n < ANTAL; n++) {
+        const h = hojd(bx[n], bz[n], t);
+        m4.compose(pos.set(bx[n], 0, bz[n]), rot, skala.set(1, h, 1));
+        staplar.setMatrixAt(n, m4);
+        const a = Math.min(1, h / 1.55);
+        farg.copy(djup).lerp(mint, Math.min(1, a * 1.3));
+        if (a > 0.7) farg.lerp(guld, (a - 0.7) / 0.3);
+        staplar.setColorAt(n, farg);
+      }
+      staplar.instanceMatrix.needsUpdate = true;
+      staplar.instanceColor.needsUpdate = true;
+    }
+    scen.add(staplar);
+    const rutnat = new THREE.GridHelper(14, 54, 0x173a36, 0x173a36);
+    rutnat.material.transparent = true;
+    rutnat.material.opacity = 0.3;
+    scen.add(rutnat);
+
+    // Glödande kurva som ritas fram, med en ljuspuls som vandrar längs den
+    const punkter = [];
+    for (let k = 0, y = 1.75; k <= 24; k++) { y += (slump() - 0.42) * 0.34; punkter.push(new THREE.Vector3(-4.2 + k * 0.35, y, -0.7 + Math.sin(k * 0.5) * 0.3)); }
+    const kurva = new THREE.CatmullRomCurve3(punkter);
+    const tubGeo = new THREE.TubeGeometry(kurva, 240, 0.03, 10, false);
+    const tub = new THREE.Mesh(tubGeo, new THREE.MeshBasicMaterial({ color: 0x9dfbe0 }));
+    const tubAntal = tubGeo.index.count;
+    scen.add(tub);
+    const glod = glodTextur(THREE);
+    const puls = new THREE.Sprite(new THREE.SpriteMaterial({ map: glod, color: 0xe9fff8, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false }));
+    puls.scale.set(0.7, 0.7, 1);
+    scen.add(puls);
+    const NODER = 420, lagen = new Float32Array(NODER * 3);
+    for (let i = 0; i < NODER; i++) { lagen[i * 3] = (slump() - 0.5) * 11; lagen[i * 3 + 1] = slump() * 4.5; lagen[i * 3 + 2] = (slump() - 0.5) * 8; }
+    const nodGeo = new THREE.BufferGeometry();
+    nodGeo.setAttribute('position', new THREE.BufferAttribute(lagen, 3));
+    const noder = new THREE.Points(nodGeo, new THREE.PointsMaterial({ map: glod, color: 0x7ff5d2, size: 0.09, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending, depthWrite: false }));
+    scen.add(noder);
+
+    // Mjuk glöd runt kurvan: en bredare genomskinlig tub, så att canvasen kan vara genomskinlig ovanpå filmen
+    const glodGeo = new THREE.TubeGeometry(kurva, 240, 0.12, 12, false);
+    const glodAntal = glodGeo.index.count;
+    scen.add(new THREE.Mesh(glodGeo, new THREE.MeshBasicMaterial({ color: 0x5bf0c4, transparent: true, opacity: 0.16, blending: THREE.AdditiveBlending, depthWrite: false })));
+
+    foljStorlek(canvas, (b, h) => {
+      renderer.setSize(b, h, false);
+      kamera.aspect = b / h;
+      kamera.updateProjectionMatrix();
+    });
+    const mus = { x: 0, y: 0 }, mjuk = { x: 0, y: 0 };
+    window.addEventListener('pointermove', e => { mus.x = e.clientX / window.innerWidth - 0.5; mus.y = e.clientY / window.innerHeight - 0.5; }, { passive: true });
+    const p = new THREE.Vector3();
+    function rita(t) {
+      mjuk.x += (mus.x - mjuk.x) * 0.05;
+      mjuk.y += (mus.y - mjuk.y) * 0.05;
+      const vinkel = Math.sin(t * 0.12) * 0.55 + mjuk.x * 0.5;
+      kamera.position.set(Math.sin(vinkel) * 8.4, 3.3 - mjuk.y * 1.1, Math.cos(vinkel) * 8.4);
+      kamera.lookAt(0, 0.55, 0);
+      uppdateraStaplar(t);
+      const andel = Math.min(1, 0.15 + t / 3.5);
+      tubGeo.setDrawRange(0, Math.floor(tubAntal * andel / 60) * 60);
+      glodGeo.setDrawRange(0, Math.floor(glodAntal * andel / 72) * 72);
+      kurva.getPointAt((t * 0.12) % 1, p);
+      puls.position.copy(p);
+      noder.position.y = Math.sin(t * 0.3) * 0.12;
+      noder.rotation.y = t * 0.02;
+      renderer.render(scen, kamera);
+    }
+    rita(minskadRorelse ? 4 : 0);
+    $('#scenReserv').hidden = true;
+    korLoop(canvas, rita);
+  }
+
+  // Medlemskapets kärna: guldsfär i ett glödande skal med tre banor
+  async function initKarna() {
+    const canvas = $('#scenKarna');
+    let THREE, renderer;
+    try { THREE = await laddaThree(); renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true }); }
+    catch (e) { canvas.hidden = true; return; }
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.35;
+    const scen = new THREE.Scene();
+    const pm = new THREE.PMREMGenerator(renderer), rum = new THREE.Scene();
+    rum.add(new THREE.Mesh(new THREE.BoxGeometry(20, 20, 20), new THREE.MeshBasicMaterial({ color: 0x4a5a58, side: THREE.BackSide })));
+    [[14, 3, 0xffffff, 0, 9, 3], [3, 10, 0x9ff7dc, -9, 1, 4], [3, 9, 0xe4c27f, 9, -1, -2]].forEach(([b, h, f, x, y, z]) => {
+      const m = new THREE.Mesh(new THREE.PlaneGeometry(b, h), new THREE.MeshBasicMaterial({ color: f, side: THREE.DoubleSide }));
+      m.position.set(x, y, z); m.lookAt(0, 0, 0); rum.add(m);
+    });
+    scen.environment = pm.fromScene(rum, 0.04).texture;
+    pm.dispose();
+    const kamera = new THREE.PerspectiveCamera(35, 4 / 3, 0.1, 50);
+    kamera.position.set(0, 0, 8);
+    const grupp = new THREE.Group();
+    scen.add(grupp);
+    const karna = new THREE.Mesh(new THREE.IcosahedronGeometry(0.95, 5), new THREE.MeshPhysicalMaterial({ color: 0xe4c27f, metalness: 1, roughness: 0.2, clearcoat: 1, clearcoatRoughness: 0.1 }));
+    const skalGeo = new THREE.IcosahedronGeometry(1.7, 1);
+    const skal = new THREE.LineSegments(new THREE.EdgesGeometry(skalGeo), new THREE.LineBasicMaterial({ color: 0x5bf0c4, transparent: true, opacity: 0.5 }));
+    const glod = glodTextur(THREE);
+    const horn = new THREE.Points(skalGeo, new THREE.PointsMaterial({ map: glod, color: 0x9dfbe0, size: 0.22, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false }));
+    grupp.add(karna, skal, horn);
+    const banor = [[1.2, 0.3], [-0.9, 0.9], [0.2, -1.2]].map(([rx, ry], i) => {
+      const bana = new THREE.Group();
+      bana.rotation.set(rx, ry, 0);
+      bana.add(new THREE.Mesh(new THREE.TorusGeometry(2.35, 0.007, 8, 220), new THREE.MeshBasicMaterial({ color: i === 1 ? 0xe4c27f : 0x5bf0c4, transparent: true, opacity: 0.55 })));
+      const elektron = new THREE.Sprite(new THREE.SpriteMaterial({ map: glod, color: i === 1 ? 0xffe2a8 : 0xc8fff0, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false }));
+      elektron.scale.set(0.45, 0.45, 1);
+      bana.add(elektron);
+      scen.add(bana);
+      return { bana, elektron, fart: 0.7 + i * 0.25, fas: i * 2.1 };
+    });
+    foljStorlek(canvas, (b, h) => { renderer.setSize(b, h, false); kamera.aspect = b / h; kamera.position.z = b / h < 1.2 ? 9.5 : 8; kamera.updateProjectionMatrix(); });
+    function rita(t) {
+      grupp.rotation.y = t * 0.25;
+      grupp.rotation.x = Math.sin(t * 0.3) * 0.2;
+      skal.rotation.y = horn.rotation.y = -t * 0.12;
+      banor.forEach(({ elektron, fart, fas }) => elektron.position.set(Math.cos(t * fart + fas) * 2.35, Math.sin(t * fart + fas) * 2.35, 0));
+      renderer.render(scen, kamera);
+    }
+    rita(1);
+    korLoop(canvas, rita);
+  }
+
+  /* ---------- 4K-filmer: rätt upplösning och bara när de syns ---------- */
+  function initFilmer() {
+    const filmer = $$('video[data-hd]');
+    // 4K bara på skärmar som har nytta av det och när användaren inte vill spara data
+    const stor = () => Math.max(screen.width, screen.height) * (window.devicePixelRatio || 1) >= 2560 && !(navigator.connection && navigator.connection.saveData);
+    filmer.forEach(v => { v.muted = true; });
+    if (minskadRorelse) return;
+    const starta = v => {
+      if (!v.getAttribute('src')) { v.src = v.getAttribute(stor() ? 'data-4k' : 'data-hd'); v.load(); }
+      const spela = v.play();
+      if (spela && spela.catch) spela.catch(() => {});
+    };
+    if ('IntersectionObserver' in window) {
+      const o = new IntersectionObserver(poster => poster.forEach(p => { if (p.isIntersecting) starta(p.target); else if (!p.target.paused) p.target.pause(); }), { rootMargin: '300px' });
+      filmer.forEach(v => o.observe(v));
+    } else filmer.forEach(starta);
+  }
+
+  /* ---------- Redigering för ägaren ---------- */
+  let sparTimer;
+  const autoSpara = () => { clearTimeout(sparTimer); sparTimer = setTimeout(() => { if (!spara()) visaToast('Webbläsaren blockerar lagring – klicka på "Ladda ner färdig sida" för att behålla ändringarna.'); }, 500); };
+  function vaxlaRedigering(aktiv) {
+    document.documentElement.classList.toggle('redigerar', aktiv);
+    redigerbara().forEach(el => { if (aktiv) el.setAttribute('contenteditable', 'true'); else el.removeAttribute('contenteditable'); });
+    if (aktiv) $$('details').forEach(d => { d.open = true; });
+    $('#redigeraPanel').hidden = !aktiv;
+    const knapp = $('#redigeraKnapp');
+    knapp.textContent = aktiv ? '✓ Klar' : '✎ Redigera sidan';
+    knapp.setAttribute('aria-expanded', String(aktiv));
+    if (aktiv) visaToast('Klicka på en text och skriv. Allt sparas automatiskt.');
+    else { spara(); visaToast('Klart – dina ändringar är sparade.'); }
+  }
+  function laddaNer() {
+    spara();
+    if (iRam) { visaToast('Öppna index.html från mappen kvant-akademi på datorn för att ladda ner.'); return; }
+    const klon = document.documentElement.cloneNode(true);
+    klon.classList.remove('redigerar');
+    $$('[contenteditable]', klon).forEach(el => el.removeAttribute('contenteditable'));
+    $$('[data-kopia]', klon).forEach(el => el.remove());
+    $$('.visas', klon).forEach(el => el.classList.remove('synlig'));
+    $('#nav', klon).classList.remove('skrollad');
+    $('#redigera', klon).setAttribute('hidden', '');
+    $('#redigeraPanel', klon).setAttribute('hidden', '');
+    const knapp = $('#redigeraKnapp', klon); knapp.textContent = '✎ Redigera sidan'; knapp.setAttribute('aria-expanded', 'false');
+    const toast = $('#toast', klon); toast.className = 'toast'; toast.textContent = '';
+    ['#scenKvant', '#scenKarna', '#grafRanta'].forEach(s => { const c = $(s, klon); ['width', 'height', 'style', 'hidden'].forEach(a => c.removeAttribute(a)); });
+    $('#scenReserv', klon).removeAttribute('hidden');
+    $$('.kort, input[type="range"]', klon).forEach(el => el.removeAttribute('style'));
+    ['#kontaktForm', '#angraForm'].forEach(s => $(s, klon).removeAttribute('hidden'));
+    ['#tackRuta', '#angraKlar', '#agarTips'].forEach(s => $(s, klon).setAttribute('hidden', ''));
+    $$('.falt-fel', klon).forEach(p => { p.textContent = ''; });
+    $$('[aria-invalid]', klon).forEach(x => x.removeAttribute('aria-invalid'));
+    $$('.modul', klon).forEach((d, i) => { if (i === 0) d.setAttribute('open', ''); else d.removeAttribute('open'); });
+    $$('.fraga', klon).forEach((d, i) => { if (i === 0) d.setAttribute('open', ''); else d.removeAttribute('open'); });
+    $$('dialog', klon).forEach(d => d.removeAttribute('open'));
+    ['#agarEpost', '#agarForetag', '#agarOrgnr'].forEach(s => $(s, klon).removeAttribute('value'));
+    $('#lankFalt', klon).innerHTML = '';
+    $$('video[data-hd]', klon).forEach(v => v.removeAttribute('src'));
+    const html = '<!DOCTYPE html>\n' + klon.outerHTML;
+    const url = URL.createObjectURL(new Blob([html], { type: 'text/html;charset=utf-8' }));
+    const a = document.createElement('a');
+    a.href = url; a.download = 'index.html';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+    visaToast('index.html laddas ner – lägg den i mappen kvant-akademi och ersätt den gamla.');
+  }
+  function initRedigering() {
+    if (!agarlage) return;
+    $('#redigera').hidden = false;
+    $('#redigeraKnapp').addEventListener('click', () => vaxlaRedigering(!redigerar()));
+    const falt = $('#agarEpost');
+    falt.value = kopplad() ? epostText() : '';
+    falt.addEventListener('change', () => {
+      const v = falt.value.trim();
+      if (v && !epostOk(v)) { visaToast('Skriv en giltig e-postadress, till exempel namn@exempel.se.'); return; }
+      $('#epostLank').textContent = v || STANDARD_EPOST;
+      uppdateraEpostLankar();
+      spara();
+      visaToast(v ? 'E-postadressen är sparad – formulären skickas dit.' : 'E-postadressen är borttagen.');
+    });
+    document.addEventListener('input', e => {
+      if (!redigerar() || !e.target.closest || !e.target.closest('[data-edit]')) return;
+      if (e.target.closest('#epostLank')) { uppdateraEpostLankar(); falt.value = kopplad() ? epostText() : ''; }
+      autoSpara();
+    });
+    // Länkar, knappar och rubriker i frågorna ska inte följas eller fällas ihop medan man skriver
+    document.addEventListener('click', e => {
+      if (redigerar() && e.target.closest('[data-edit]') && e.target.closest('a, summary, button')) e.preventDefault();
+    }, true);
+    document.addEventListener('keydown', e => {
+      if (redigerar() && e.target.closest && e.target.closest('summary') && (e.key === ' ' || e.key === 'Enter')) {
+        e.preventDefault();
+        if (e.key === ' ') document.execCommand('insertText', false, ' ');
+      }
+    });
+    document.addEventListener('paste', e => {
+      if (!redigerar() || !e.target.closest || !e.target.closest('[data-edit]')) return;
+      e.preventDefault();
+      document.execCommand('insertText', false, (e.clipboardData || window.clipboardData).getData('text/plain'));
+    });
+    $('#laddaNer').addEventListener('click', laddaNer);
+    const aterstall = $('#aterstall');
+    let bekrafta = false, timer;
+    aterstall.addEventListener('click', () => {
+      if (!bekrafta) { bekrafta = true; aterstall.textContent = 'Klicka igen för att radera alla ändringar'; timer = setTimeout(() => { bekrafta = false; aterstall.textContent = 'Återställ allt till original'; }, 4000); return; }
+      clearTimeout(timer);
+      try { localStorage.removeItem(LAGRING); localStorage.removeItem(INST); } catch (e) {}
+      visaToast('Sidan återställs …');
+      setTimeout(() => location.reload(), 700);
+    });
+  }
+
+  /* ---------- Start ---------- */
+  aterstallSparat();
+  initNavigering();
+  initDialoger();
+  initInstallningar();
+  initFormular();
+  initAngra();
+  initRanta();
+  initNyckeltal();
+  initRedigering();
+  initScen();
+  initKarna();
+  initFilmer();
+})();
+</script>
+</body>
+</html>

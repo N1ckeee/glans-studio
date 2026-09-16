@@ -1,0 +1,2650 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Styrkeateljén</title>
+<meta name="description" content="Onlinecoachning med personligt träningsprogram, kostupplägg och uppföljning varje vecka – träna var du vill, helt anpassat efter din vardag och dina mål.">
+<meta property="og:title" content="Styrkeateljén – onlinecoachning inom träning och kost">
+<meta property="og:description" content="Träningsprogram, kostupplägg och veckovis uppföljning – anpassat efter dig.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#140806">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23140806'/%3E%3Ccircle cx='16' cy='18.5' r='8' fill='%23E3122C'/%3E%3Cpath d='M11 12.5v-3a5 5 0 0 1 10 0v3' fill='none' stroke='%23E3122C' stroke-width='2.6'/%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "ProfessionalService", "name": "Styrkeateljén", "description": "Onlinecoachning inom träning och kost med personligt program och uppföljning varje vecka.", "areaServed": "SE", "priceRange": "495–1 995 kr"}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Figtree:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&display=swap">
+<style>
+  /* ===== Designtokens – färger och typsnitt (cola) ===== */
+  :root {
+    --cola: #140806;
+    --cola-2: color-mix(in srgb, var(--cola) 91%, var(--karamell));
+    --cola-3: color-mix(in srgb, var(--cola) 84%, var(--karamell));
+    --rod: #E3122C;
+    --rod-ljus: color-mix(in srgb, var(--rod) 70%, #FFE9E4);
+    --karamell: #C9853F;
+    --skum: #F5EDE3;
+    --dampad: #B7A59A;
+    --linje: color-mix(in srgb, var(--karamell) 18%, transparent);
+    --gron: #5DBB86;
+    --display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+    --serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+    --text: "Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --mono: "DM Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+    --bredd: 1220px;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html { scroll-behavior: smooth; scrollbar-color: var(--cola-3) var(--cola); }
+  body {
+    margin: 0;
+    background: var(--cola);
+    color: var(--skum);
+    font: 400 1.0625rem/1.65 var(--text);
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Fint korn för en exklusiv, filmisk yta */
+  body::after {
+    content: ""; position: fixed; inset: 0; z-index: 80; pointer-events: none; opacity: .05;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  ::selection { background: var(--rod); color: var(--skum); }
+  img, video { max-width: 100%; display: block; }
+  a { color: inherit; }
+  p { margin: 0; }
+  h1, h2, h3 { margin: 0; font-family: var(--display); font-weight: 800; text-transform: uppercase; letter-spacing: 0.01em; line-height: 0.95; text-wrap: balance; }
+  h1 em, h2 em, blockquote em { font-family: var(--serif); font-style: italic; font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--rod); }
+  :focus-visible { outline: 2px solid var(--rod); outline-offset: 3px; }
+
+  .ram { max-width: var(--bredd); margin-inline: auto; padding-inline: clamp(16px, 4vw, 40px); }
+  .etikett { display: flex; align-items: center; gap: 12px; font: 500 0.75rem/1.2 var(--mono); letter-spacing: 0.18em; text-transform: uppercase; color: var(--karamell); }
+  .etikett::before { content: ""; flex: none; width: 28px; height: 2px; background: var(--rod); }
+
+  /* ===== Knappar ===== */
+  .knapp {
+    position: relative; overflow: hidden;
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 16px 28px; border: 1px solid var(--rod); border-radius: 999px;
+    background: var(--rod); color: var(--skum);
+    font: 700 0.9375rem/1 var(--text); letter-spacing: 0.02em; text-decoration: none; cursor: pointer;
+    box-shadow: 0 14px 30px -14px color-mix(in srgb, var(--rod) 80%, transparent);
+    transition: transform .25s, background-color .25s, border-color .25s, color .25s;
+  }
+  .knapp::after { content: ""; position: absolute; top: 0; bottom: 0; left: -70%; width: 45%; background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .35), transparent); transform: skewX(-20deg); transition: left .8s cubic-bezier(.16, 1, .3, 1); pointer-events: none; }
+  .knapp:hover { transform: translateY(-2px); background: color-mix(in srgb, var(--rod) 88%, #fff); }
+  .knapp:hover::after { left: 130%; }
+  .knapp:disabled { opacity: .6; cursor: progress; transform: none; }
+  .knapp.spok { background: transparent; border-color: color-mix(in srgb, var(--skum) 30%, transparent); box-shadow: none; }
+  .knapp.spok:hover { border-color: var(--skum); background: color-mix(in srgb, var(--skum) 6%, transparent); }
+  .knapp.liten { padding: 11px 20px; font-size: 0.875rem; }
+  .knapp.byt-media { position: absolute; z-index: 5; display: none; }
+  .redigerar .knapp.byt-media { display: inline-flex; }
+  .lanklik { background: none; border: 0; padding: 0; font: inherit; color: inherit; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+
+  /* ===== Läsframsteg och navigering ===== */
+  .framsteg { position: fixed; top: 0; left: 0; right: 0; z-index: 70; height: 3px; transform: scaleX(0); transform-origin: 0 50%; background: linear-gradient(90deg, var(--rod), var(--karamell)); pointer-events: none; }
+  .nav { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--cola) 80%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--linje); transition: background-color .4s; }
+  .nav.skrollad { background: color-mix(in srgb, var(--cola) 95%, transparent); }
+  .nav-inre { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-block: 14px; transition: padding .4s; }
+  .nav.skrollad .nav-inre { padding-block: 10px; }
+  .varumarke { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .varumarke svg { flex: none; }
+  .varumarke span { font: 800 1.55rem/1 var(--display); text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }
+  .nav-lankar { display: flex; gap: 30px; list-style: none; margin: 0; padding: 0; }
+  .nav-lankar a { position: relative; text-decoration: none; font-size: 0.9375rem; font-weight: 500; color: var(--dampad); transition: color .2s; }
+  .nav-lankar a:hover, .nav-lankar a.aktiv { color: var(--skum); }
+  .nav-lankar a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -7px; height: 2px; background: var(--rod); transform: scaleX(0); transform-origin: left; transition: transform .35s cubic-bezier(.16, 1, .3, 1); }
+  .nav-lankar a:hover::after, .nav-lankar a.aktiv::after { transform: scaleX(1); }
+  .nav-hoger { display: flex; align-items: center; gap: 12px; }
+  .meny-knapp { display: none; width: 46px; height: 46px; padding: 0; background: none; border: 1px solid var(--linje); border-radius: 50%; cursor: pointer; align-items: center; justify-content: center; flex-direction: column; gap: 6px; }
+  .meny-knapp span { display: block; width: 18px; height: 2px; background: var(--skum); transition: transform .3s; }
+  .meny-knapp[aria-expanded="true"] span:first-child { transform: translateY(4px) rotate(45deg); }
+  .meny-knapp[aria-expanded="true"] span:last-child { transform: translateY(-4px) rotate(-45deg); }
+
+  /* ===== Hjälte ===== */
+  .hjalte { position: relative; overflow: hidden; padding-block: clamp(56px, 8vw, 110px) clamp(56px, 7vw, 96px);
+    background:
+      radial-gradient(640px 520px at 76% 48%, color-mix(in srgb, var(--rod) 28%, transparent), transparent 70%),
+      radial-gradient(900px 500px at 10% 110%, color-mix(in srgb, var(--karamell) 10%, transparent), transparent 70%),
+      var(--cola); }
+  .ingen-webgl .hjalte { background: linear-gradient(90deg, var(--cola) 40%, rgba(20, 8, 6, .5)), url("media/marklyft.jpg") right center / cover no-repeat; }
+  .hjalte-rad { position: relative; display: grid; grid-template-columns: 6fr 5fr; gap: 24px; align-items: center; }
+  .hjalte-text { position: relative; z-index: 1; display: grid; gap: 26px; }
+  .hjalte h1 { font-size: clamp(3.4rem, 8.4vw, 7.4rem); }
+  .hjalte h1 em { font-size: 0.92em; }
+  .ingress { max-width: 34rem; font-size: clamp(1.0625rem, 1.5vw, 1.2rem); color: var(--dampad); }
+  .knapprad { display: flex; flex-wrap: wrap; gap: 12px; }
+  .fakta { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 14px 36px; margin: 6px 0 0; padding-top: 24px; border-top: 1px solid var(--linje); }
+  .fakta div { display: grid; gap: 6px; }
+  .fakta dt, .meriter dt, .resultat dt { font: 500 0.6875rem/1 var(--mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--dampad); }
+  .fakta dd { margin: 0; font: 700 1.05rem/1.2 var(--text); }
+  .hjalte-scen { position: relative; aspect-ratio: 1 / 1; max-width: 100%; }
+  .hjalte-scen canvas { position: absolute; inset: -12%; width: 124%; height: 124%; display: block; }
+  .hjalte-scen::after { content: ""; position: absolute; left: 12%; right: 12%; bottom: 4%; height: 12%; border-radius: 50%; background: radial-gradient(closest-side, rgba(0, 0, 0, .55), transparent); pointer-events: none; }
+  @media (prefers-reduced-motion: no-preference) {
+    .hjalte-text > * { animation: stiga 1.1s cubic-bezier(.16, 1, .3, 1) both; }
+    .hjalte-text > :nth-child(2) { animation-delay: .08s; }
+    .hjalte-text > :nth-child(3) { animation-delay: .18s; }
+    .hjalte-text > :nth-child(4) { animation-delay: .28s; }
+    .hjalte-text > :nth-child(5) { animation-delay: .38s; }
+    .hjalte-scen { animation: tona 1.6s ease both; }
+  }
+  @keyframes stiga { from { opacity: 0; transform: translateY(24px); } }
+  @keyframes tona { from { opacity: 0; } }
+
+  /* ===== Principlöpare (röd remsa) ===== */
+  .principer { overflow: hidden; background: var(--rod); color: var(--cola); padding-block: 14px; }
+  .principer-spar { display: flex; width: max-content; animation: rulla 38s linear infinite; }
+  .redigerar .principer-spar { animation-play-state: paused; }
+  .principer-grupp { display: flex; align-items: center; margin: 0; white-space: nowrap; }
+  .principer-grupp span { padding-inline: clamp(18px, 2.4vw, 34px); font: 900 clamp(1.6rem, 3vw, 2.4rem)/1 var(--display); text-transform: uppercase; letter-spacing: 0.03em; }
+  .principer-grupp i { font-style: normal; font-size: 1.1rem; opacity: .55; }
+  @keyframes rulla { to { transform: translateX(-50%); } }
+
+  /* ===== Sektioner ===== */
+  .sektion { padding-block: clamp(80px, 10vw, 136px); }
+  .sektion.mork { background: var(--cola-2); }
+  .sektionshuvud { display: grid; gap: 18px; max-width: 48rem; margin-bottom: clamp(40px, 6vw, 64px); }
+  .sektionshuvud h2 { font-size: clamp(2.6rem, 5.6vw, 4.6rem); }
+  .sektionshuvud p { max-width: 40rem; color: var(--dampad); }
+
+  /* Media med röda hörnmarkeringar */
+  .media-ram { position: relative; overflow: hidden; border-radius: 18px; background: var(--cola-3); }
+  .media-ram img, .media-ram video { width: 100%; height: 100%; object-fit: cover; transition: transform 1.8s cubic-bezier(.16, 1, .3, 1); }
+  figure { margin: 0; }
+  figure:hover .media-ram img, figure:hover .media-ram video { transform: scale(1.04); }
+  figcaption { margin-top: 12px; font: 400 0.8125rem/1.5 var(--mono); color: var(--dampad); }
+  .media-ram > .byt-media { left: 50%; bottom: 20px; transform: translateX(-50%); }
+  .video-iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; pointer-events: none; transform: scale(1.35); }
+
+  /* Så går det till */
+  .steg-rad { display: grid; grid-template-columns: 7fr 5fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
+  .steg { list-style: none; margin: 0; padding: 0; display: grid; }
+  .steg li { display: grid; grid-template-columns: 76px 1fr; gap: 6px 22px; padding-block: 26px; border-top: 1px solid var(--linje); }
+  .steg li:last-child { border-bottom: 1px solid var(--linje); }
+  .steg .nr { grid-row: span 2; font: 900 3.6rem/0.85 var(--display); color: var(--rod); }
+  .steg h3 { font-size: 1.9rem; }
+  .steg p { color: var(--dampad); }
+  .steg-bild .media-ram { aspect-ratio: 4 / 5; }
+
+  /* Filmband */
+  .filmband { position: relative; overflow: hidden; isolation: isolate; padding-block: clamp(110px, 15vw, 200px); }
+  .filmband .video-lager { position: absolute; inset: 0; z-index: -2; }
+  .filmband .video-lager video { width: 100%; height: 100%; object-fit: cover; }
+  .filmband::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(20, 8, 6, .95) 0%, rgba(20, 8, 6, .7) 55%, rgba(20, 8, 6, .35) 100%), linear-gradient(0deg, rgba(227, 18, 44, .16), transparent 60%); }
+  .filmband blockquote { margin: 0; max-width: 16ch; font: 800 clamp(2.6rem, 6vw, 5.4rem)/0.95 var(--display); text-transform: uppercase; text-wrap: balance; }
+  .filmband .etikett { margin-top: 26px; }
+  .filmband > .byt-media { top: 20px; right: 20px; }
+
+  /* Coachen */
+  .coach { display: grid; grid-template-columns: 5fr 6fr; gap: clamp(40px, 7vw, 100px); align-items: center; }
+  .coach-bilder { position: relative; padding: 0 18% 18% 0; }
+  .portratt { aspect-ratio: 4 / 5; display: grid; place-items: center; background: radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--rod) 35%, var(--cola-3)), var(--cola-2) 70%); }
+  .portratt img { position: absolute; inset: 0; }
+  .monogram { font: 900 clamp(5rem, 12vw, 9rem)/1 var(--display); color: var(--skum); letter-spacing: 0.02em; }
+  .bild-liten { position: absolute; right: 0; bottom: 0; width: 52%; }
+  .bild-liten .media-ram { aspect-ratio: 4 / 3; outline: 8px solid var(--cola); box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .8); }
+  .coach-text { display: grid; gap: 22px; }
+  .coach-text h2 { font-size: clamp(2.6rem, 5vw, 4.2rem); }
+  .coach-text > p:not(.etikett) { max-width: 38rem; color: var(--dampad); }
+  .meriter { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px; margin: 4px 0 0; }
+  .meriter div { display: grid; gap: 6px; padding-block: 16px; border-top: 1px solid var(--linje); }
+  .meriter dd { margin: 0; font-weight: 600; }
+
+  /* Program och priser */
+  .program { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; align-items: start; }
+  [data-tilt] { --rx: 0deg; --ry: 0deg; --lyft: 0px; transform: perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(var(--lyft)); transition: transform .4s cubic-bezier(.2, .7, .2, 1); }
+  .kort { position: relative; display: grid; gap: 22px; align-content: start; padding: clamp(28px, 3vw, 38px); background: var(--cola-3); border: 1px solid var(--linje); border-radius: 22px; }
+  .kort.utvald { --lyft: -14px; background: linear-gradient(170deg, color-mix(in srgb, var(--rod) 22%, var(--cola-3)), var(--cola-3) 60%); border-color: var(--rod); box-shadow: 0 34px 70px -34px color-mix(in srgb, var(--rod) 70%, transparent); }
+  .kort-markor { position: absolute; top: -13px; left: 32px; padding: 6px 14px; border-radius: 999px; background: var(--rod); font: 500 0.6875rem/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; }
+  .kort h3 { font-size: 2.1rem; }
+  .kort .beskrivning { color: var(--dampad); font-size: 0.9875rem; }
+  .pris { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; padding-block: 16px; border-block: 1px solid var(--linje); }
+  .pris strong { font: 900 3.2rem/1 var(--display); letter-spacing: 0.01em; }
+  .pris span { font: 400 0.8125rem/1.3 var(--mono); color: var(--dampad); }
+  .kort ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .kort li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; font-size: 0.9875rem; }
+  .kort li::before { content: "✓"; color: var(--rod); font-weight: 700; }
+  .kort .knapp { width: 100%; }
+  .trygghet { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; list-style: none; margin: clamp(44px, 6vw, 64px) 0 0; padding: 26px 0 0; border-top: 1px solid var(--linje); }
+  .trygghet li { display: grid; grid-template-columns: 30px 1fr; gap: 12px; color: var(--dampad); font-size: 0.9875rem; }
+  .trygghet strong { display: block; color: var(--skum); font-weight: 600; }
+
+  /* Galleri */
+  .galleri { display: grid; grid-template-columns: 7fr 5fr; grid-template-rows: auto auto; gap: 20px; }
+  .galleri .stor { grid-row: span 2; display: grid; grid-template-rows: 1fr auto; }
+  .galleri .stor .media-ram { min-height: 460px; }
+  .galleri .stor .media-ram video, .galleri .stor .media-ram img { position: absolute; inset: 0; }
+  .galleri .liten .media-ram { aspect-ratio: 16 / 10; }
+
+  /* Veckan */
+  .veckan { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 6vw, 80px); align-items: start; }
+  .veckan-media { position: sticky; top: 100px; }
+  .veckan-media .media-ram { aspect-ratio: 4 / 5; }
+  .vecka { list-style: none; margin: 0; padding: 0; display: grid; }
+  .vecka li { display: grid; grid-template-columns: 70px 1fr auto; gap: 4px 18px; align-items: baseline; padding-block: 18px; border-top: 1px solid var(--linje); }
+  .vecka li:last-child { border-bottom: 1px solid var(--linje); }
+  .vecka .dag { font: 500 0.8125rem/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--karamell); }
+  .vecka .pass { font: 800 1.45rem/1.05 var(--display); text-transform: uppercase; }
+  .vecka .tid { font: 400 0.8125rem/1 var(--mono); color: var(--dampad); white-space: nowrap; }
+  .vecka .detalj { grid-column: 2 / -1; font: 400 0.875rem/1.5 var(--mono); color: var(--dampad); }
+  .vecka li.vila .pass { color: var(--dampad); }
+  .exempelnot { margin-top: 18px; font: 400 0.8125rem/1.5 var(--mono); color: var(--dampad); }
+  .exempelnot:empty { display: none; }
+
+  /* Kalkylator */
+  .kalkylator { display: grid; grid-template-columns: 6fr 6fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+  .kalk-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  .val-rad { grid-column: 1 / -1; display: flex; gap: 8px; margin: 0; padding: 0; border: 0; }
+  .val-rad legend { width: 100%; margin-bottom: 8px; font: 500 0.6875rem/1.2 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--dampad); }
+  .val-rad label { position: relative; flex: 1; }
+  .val-rad input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .val-rad span { display: block; padding: 12px 14px; text-align: center; border: 1px solid var(--linje); border-radius: 999px; font-weight: 600; cursor: pointer; transition: background-color .2s, border-color .2s; }
+  .val-rad input:checked + span { background: var(--rod); border-color: var(--rod); }
+  .val-rad input:focus-visible + span { outline: 2px solid var(--rod); outline-offset: 3px; }
+  .resultat { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 26px 0 0; }
+  .resultat div { display: grid; gap: 8px; padding: 18px; border-radius: 16px; background: var(--cola-3); border: 1px solid var(--linje); }
+  .resultat dd { margin: 0; font: 900 2.3rem/1 var(--display); }
+  .resultat dd small { font: 400 0.8125rem var(--mono); color: var(--dampad); }
+  .resultat .kcal dd { color: var(--rod-ljus); }
+  .resultat .protein dd { color: var(--karamell); }
+  .kalk-varning { min-height: 1.5em; margin-top: 12px; font-size: 0.9375rem; color: var(--rod-ljus); }
+  .kalk-scen { display: grid; gap: 14px; }
+  .kalk-scen canvas { width: 100%; aspect-ratio: 1 / 1; max-width: 100%; display: block; border-radius: 24px; background: radial-gradient(circle at 50% 35%, color-mix(in srgb, var(--rod) 18%, var(--cola-3)), var(--cola-2) 72%); }
+  .legend { display: flex; flex-wrap: wrap; gap: 10px 24px; list-style: none; margin: 0; padding: 0; font: 400 0.8125rem/1.3 var(--mono); color: var(--dampad); }
+  .legend li { display: flex; align-items: center; gap: 8px; }
+  .legend i { width: 12px; height: 12px; border-radius: 50%; }
+  .l-kcal { background: var(--rod); }
+  .l-protein { background: var(--karamell); }
+  .kalk-not { font-size: 0.8125rem; color: var(--dampad); }
+
+  /* Formulärfält */
+  .falt { display: grid; gap: 8px; align-content: start; }
+  .falt.hel { grid-column: 1 / -1; }
+  .falt label { font: 500 0.6875rem/1.2 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--dampad); }
+  .falt input, .falt select, .falt textarea { width: 100%; padding: 13px 16px; font: 400 1rem/1.4 var(--text); color: var(--skum); background: var(--cola); border: 1px solid var(--linje); border-radius: 12px; transition: border-color .2s; }
+  .falt textarea { min-height: 110px; resize: vertical; }
+  .falt input:focus, .falt select:focus, .falt textarea:focus { outline: none; border-color: var(--rod); }
+  .falt input[aria-invalid="true"] { border-color: var(--rod); }
+  .falt-fel { margin: 0; font-size: 0.8125rem; color: var(--rod-ljus); }
+  .falt-fel:empty { display: none; }
+
+  /* Omdömen */
+  .omdomen { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 20px; }
+  .omdome { display: grid; gap: 18px; align-content: start; padding: 30px; border-radius: 22px; background: var(--cola-3); border: 1px solid var(--linje); }
+  .omdome::before { content: "\201D"; display: block; height: 30px; font: 400 4rem/1 var(--serif); color: var(--rod); }
+  .omdome blockquote { margin: 0; font: italic 400 clamp(1.3rem, 2vw, 1.55rem)/1.35 var(--serif); }
+  .omdome figcaption { margin: 0; }
+
+  /* Frågor */
+  .fragor { display: grid; grid-template-columns: 4fr 8fr; gap: clamp(32px, 6vw, 80px); }
+  .fragor .sektionshuvud { margin-bottom: 0; align-content: start; }
+  details { border-top: 1px solid var(--linje); }
+  details:last-child { border-bottom: 1px solid var(--linje); }
+  summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 24px; padding-block: 22px; font: 700 1.15rem/1.35 var(--text); }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--linje); font: 400 1.3rem/1 var(--text); color: var(--rod); transition: transform .3s, background-color .3s; }
+  details[open] summary::after { transform: rotate(45deg); background: var(--rod); color: var(--skum); border-color: var(--rod); }
+  details p { padding-bottom: 24px; color: var(--dampad); max-width: 42rem; }
+
+  /* Boka */
+  .boka-sektion { position: relative; isolation: isolate; overflow: hidden; background: linear-gradient(90deg, rgba(20, 8, 6, .97) 30%, rgba(20, 8, 6, .82)), url("media/skivstang.jpg") center / cover no-repeat; }
+  .boka { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 6vw, 80px); align-items: start; }
+  .boka .sektionshuvud { margin-bottom: 0; }
+  .kontaktrad { display: grid; gap: 8px; margin-top: 18px; }
+  .kontaktrad a { font: 800 clamp(1.4rem, 2.6vw, 1.9rem)/1.1 var(--display); text-transform: none; letter-spacing: 0.01em; text-decoration-color: var(--rod); text-underline-offset: 6px; overflow-wrap: anywhere; }
+  .bokningsruta { padding: clamp(24px, 4vw, 44px); border-radius: 26px; background: color-mix(in srgb, var(--cola-2) 92%, transparent); border: 1px solid var(--linje); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .bokningsruta form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  .bokningsruta .knapp { grid-column: 1 / -1; justify-self: start; }
+  .formnot { grid-column: 1 / -1; font-size: 0.8125rem; color: var(--dampad); }
+  .honung { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .tack { display: grid; gap: 14px; }
+  .tack h3 { font-size: 2.4rem; }
+  .tack p { color: var(--dampad); }
+
+  /* Sidfot */
+  .sidfot { background: var(--cola); border-top: 1px solid var(--linje); padding-block: clamp(64px, 8vw, 100px) 56px; }
+  .sidfot-topp { display: grid; gap: clamp(26px, 4vw, 40px); padding-bottom: clamp(34px, 5vw, 52px); margin-bottom: 40px; border-bottom: 1px solid var(--linje); }
+  .sidfot-lankar { display: flex; flex-wrap: wrap; gap: 12px 34px; list-style: none; margin: 0; padding: 0; }
+  .sidfot-lankar a { text-decoration: none; font: 500 0.75rem/1 var(--mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--dampad); }
+  .sidfot-lankar a:hover { color: var(--skum); }
+  .ordmarke { margin: 0; padding-top: 0.14em; font: 900 min(14vw, 11rem)/0.95 var(--display); text-transform: uppercase; letter-spacing: 0.01em; white-space: nowrap; overflow: hidden; color: transparent; -webkit-text-stroke: 1.5px color-mix(in srgb, var(--rod) 80%, transparent); }
+  .sidfot-inre { display: grid; grid-template-columns: 1fr auto; gap: 26px 48px; align-items: start; }
+  .halsoinfo { max-width: 70ch; font-size: 0.8125rem; line-height: 1.65; color: var(--dampad); }
+  .halsoinfo strong { color: var(--skum); font-weight: 600; }
+  .sidfot-meta { display: grid; gap: 6px; justify-items: end; font: 400 0.75rem/1.7 var(--mono); color: var(--dampad); text-align: right; }
+  .krediter { grid-column: 1 / -1; font: 400 0.6875rem/1.6 var(--mono); color: color-mix(in srgb, var(--dampad) 70%, transparent); }
+
+  /* Dialoger */
+  dialog { max-width: min(680px, calc(100vw - 32px)); max-height: calc(100vh - 48px); padding: 0; color: var(--skum); background: var(--cola-2); border: 1px solid var(--rod); border-radius: 22px; overflow-y: auto; }
+  dialog::backdrop { background: rgba(10, 4, 3, .78); backdrop-filter: blur(4px); }
+  .dialog-inre { display: grid; gap: 18px; padding: clamp(24px, 4vw, 44px); }
+  .dialog-inre h2 { font-size: 2.6rem; }
+  .dialog-text { display: grid; gap: 12px; color: var(--dampad); font-size: 0.9375rem; }
+  .dialog-text strong { color: var(--skum); }
+  .dialog-inre > .knapp { justify-self: start; }
+
+  /* Guide för ägaren */
+  .guide { width: min(780px, calc(100vw - 32px)); max-width: none; }
+  .guide form { display: grid; gap: 22px; }
+  .guide fieldset { min-width: 0; margin: 0; padding: 20px 0 0; border: 0; border-top: 1px solid var(--linje); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; }
+  .guide legend { float: left; grid-column: 1 / -1; width: 100%; padding: 0 0 4px; font: 500 0.75rem/1 var(--mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--rod-ljus); }
+  .guide .hel { grid-column: 1 / -1; }
+  .hjalp { margin: 0; font-size: 0.8125rem; line-height: 1.5; color: var(--dampad); }
+  .guide textarea { min-height: 72px; }
+  .guide input[type="file"] { padding: 9px 10px; font-size: 0.8125rem; }
+  .portratt-rad { display: flex; gap: 14px; align-items: center; }
+  .portratt-mini { flex: none; width: 56px; height: 70px; object-fit: cover; border-radius: 8px; border: 1px solid var(--linje); background: var(--cola); }
+  .kryss { display: flex; gap: 10px; align-items: flex-start; font-size: 0.9375rem; line-height: 1.45; cursor: pointer; }
+  .kryss input { flex: none; width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--rod); }
+  .guide-knappar { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  /* Mobil – fast bokningsknapp och till toppen */
+  .mobil-cta { display: none; }
+  .till-toppen { position: fixed; right: 16px; bottom: 16px; z-index: 44; width: 48px; height: 48px; display: grid; place-items: center; padding: 0; cursor: pointer; color: var(--skum); background: color-mix(in srgb, var(--cola-2) 90%, transparent); border: 1px solid var(--linje); border-radius: 50%; opacity: 0; visibility: hidden; transform: translateY(12px); transition: opacity .35s, transform .35s, border-color .25s, visibility 0s .35s; }
+  .till-toppen.synlig { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+  .till-toppen:hover { border-color: var(--rod); }
+
+  /* Redigeringsläge (bara för ägaren) */
+  .redigera-panel { position: fixed; left: 16px; bottom: 16px; z-index: 90; display: grid; gap: 10px; justify-items: start; }
+  .redigera-knapp { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; font: 500 0.8125rem/1 var(--mono); color: var(--skum); background: var(--cola-3); border: 1px solid var(--rod); border-radius: 999px; cursor: pointer; box-shadow: 0 12px 30px -10px rgba(0, 0, 0, .7); }
+  .redigera-verktyg, .uppgift-kort { width: min(330px, calc(100vw - 32px)); display: grid; gap: 12px; padding: 18px; background: var(--cola-3); border: 1px solid var(--linje); border-radius: 16px; box-shadow: 0 24px 50px -20px rgba(0, 0, 0, .8); font-size: 0.875rem; }
+  .redigera-verktyg { max-height: calc(100vh - 120px); overflow-y: auto; }
+  .uppgift-kort { border-color: var(--rod); }
+  .uppgift-kort p, .redigera-verktyg p { margin: 0; line-height: 1.5; }
+  .redigera-verktyg p { color: var(--dampad); }
+  .redigera-verktyg h4 { margin: 4px 0 0; font: 500 0.6875rem/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--rod-ljus); }
+  .redigera-verktyg .knapp, .uppgift-kort .knapp { width: 100%; padding: 12px 16px; }
+  .checklista { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  .checklista li { display: flex; gap: 10px; color: var(--dampad); }
+  .checklista li span { width: 16px; }
+  .checklista li.klar { color: var(--skum); }
+  .checklista li.klar span { color: var(--gron); }
+  .verktygsrad { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .verktygsrad label { font: 500 0.6875rem/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--dampad); }
+  .verktygsrad input[type="color"] { width: 44px; height: 32px; padding: 0; border: 1px solid var(--linje); border-radius: 6px; background: none; cursor: pointer; }
+  .textknapp { justify-self: start; padding: 4px 0; background: none; border: 0; color: var(--dampad); font: 400 0.8125rem/1 var(--mono); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+  .textknapp.bekrafta, .textknapp:hover { color: var(--rod-ljus); }
+  .redigerar [data-edit] { outline: 1px dashed color-mix(in srgb, var(--rod) 70%, transparent); outline-offset: 4px; cursor: text; }
+  .redigerar [data-edit]:focus { outline: 1px solid var(--rod); background: color-mix(in srgb, var(--rod) 10%, transparent); }
+  .toast { position: fixed; left: 50%; bottom: 24px; z-index: 95; max-width: calc(100vw - 32px); padding: 12px 20px; transform: translate(-50%, 20px); background: var(--skum); color: var(--cola); font-size: 0.875rem; font-weight: 600; border-radius: 999px; opacity: 0; pointer-events: none; transition: opacity .3s, transform .3s; }
+  .toast.synlig { opacity: 1; transform: translate(-50%, 0); }
+
+  /* ===== Träningsprogram ===== */
+  .flikar { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 26px; scrollbar-width: thin; }
+  .flik { flex: none; padding: 12px 20px; border-radius: 999px; border: 1px solid var(--linje); background: transparent; color: var(--dampad); font: 600 0.9375rem/1 var(--text); cursor: pointer; transition: background-color .2s, color .2s, border-color .2s; }
+  .flik:hover { color: var(--skum); border-color: var(--skum); }
+  .flik[aria-selected="true"] { background: var(--rod); border-color: var(--rod); color: var(--skum); }
+  .programlista > [data-program] { display: none; }
+  .programlista > [data-program].vald { display: grid; }
+  .tprogram { gap: 24px; padding: clamp(22px, 4vw, 44px); border-radius: 26px; background: var(--cola-2); border: 1px solid var(--linje); }
+  .tprogram-huvud { display: grid; grid-template-columns: 1fr auto; gap: 20px 40px; align-items: start; }
+  .tprogram-huvud h3 { font-size: clamp(2.2rem, 4.4vw, 3.4rem); }
+  .tprogram-beskrivning { margin-top: 12px; max-width: 40rem; color: var(--dampad); }
+  .tprogram-fakta { display: grid; grid-template-columns: repeat(4, auto); gap: 12px 26px; margin: 0; }
+  .tprogram-fakta div { display: grid; gap: 6px; }
+  .tprogram-fakta dt { font: 500 0.6875rem/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--dampad); }
+  .tprogram-fakta dd { margin: 0; font: 800 1.35rem/1 var(--display); text-transform: uppercase; color: var(--karamell); }
+  .pass-lista { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 18px; }
+  .pass { display: grid; gap: 12px; align-content: start; padding: 22px; border-radius: 18px; background: var(--cola-3); border: 1px solid var(--linje); }
+  .pass h4 { margin: 0; font: 800 1.5rem/1 var(--display); text-transform: uppercase; letter-spacing: 0.02em; }
+  .tabell-ram { overflow-x: auto; padding-top: 6px; }
+  .ovningar { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+  .ovningar th { padding: 0 10px 10px 0; text-align: left; font: 500 0.6875rem/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--dampad); border-bottom: 1px solid var(--linje); }
+  .ovningar td { padding: 11px 10px 11px 0; border-bottom: 1px solid color-mix(in srgb, var(--karamell) 10%, transparent); vertical-align: top; }
+  .ovningar td:not(:first-child), .ovningar th:not(:first-child) { white-space: nowrap; }
+  .ovningar td:not(:first-child) { font: 400 0.875rem/1.5 var(--mono); }
+  .ovningar td:first-child { font-weight: 600; }
+  .ovningar tbody tr:last-child td { border-bottom: 0; }
+  .pass-not { font-size: 0.875rem; color: var(--dampad); }
+  .tprogram-not { padding: 16px 18px; font-size: 0.9375rem; color: var(--dampad); border-left: 3px solid var(--rod); border-radius: 0 12px 12px 0; background: color-mix(in srgb, var(--rod) 8%, transparent); }
+  .tprogram-not strong { color: var(--skum); }
+  .tprogram-fot { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+  .program-cta { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: center; color: var(--dampad); }
+
+  /* Löpande remsa och steg fungerar när man lägger till eller tar bort */
+  .principer-grupp span::after { content: "●"; display: inline-block; margin-left: clamp(18px, 2.4vw, 34px); font-size: 0.45em; vertical-align: middle; opacity: .55; }
+  .steg { counter-reset: steg; }
+  .steg li { counter-increment: steg; }
+  .steg .nr::before { content: counter(steg, decimal-leading-zero); }
+  .utan-3d .hjalte { background: linear-gradient(90deg, var(--cola) 40%, rgba(20, 8, 6, .5)), url("media/marklyft.jpg") right center / cover no-repeat; }
+
+  /* Dolda avsnitt syns inte för besökare */
+  [data-dolt] { display: none !important; }
+  .redigerar [data-dolt] { display: block !important; opacity: .4; outline: 2px dashed var(--rod); outline-offset: -2px; }
+
+  /* Verktyg för listor i redigeringsläget */
+  .redigerar [data-lista] > *, .redigerar [data-lista] > tr > td:last-child, .redigerar [data-lista] > details > summary { position: relative; }
+  .lista-verktyg { position: absolute; top: -14px; right: 6px; z-index: 30; display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: var(--cola); border: 1px solid var(--rod); box-shadow: 0 8px 20px -8px rgba(0, 0, 0, .8); opacity: 0; transition: opacity .15s; font: 400 0.8125rem/1 var(--text); text-transform: none; letter-spacing: 0; }
+  :hover > .lista-verktyg, :focus-within > .lista-verktyg, tr:hover > td > .lista-verktyg { opacity: 1; }
+  @media (hover: none) { .lista-verktyg { opacity: .9; } }
+  .lista-verktyg button { width: 28px; height: 28px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--skum); font: 700 0.875rem/1 var(--text); cursor: pointer; }
+  .lista-verktyg button:hover { background: var(--rod); }
+  .lista-verktyg button.bekrafta { background: #8a0f1c; }
+
+  /* Panelens avsnittslista, videofält och länkruta */
+  .avsnittslista { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+  .avsnittslista li { display: flex; align-items: center; gap: 6px; padding: 6px 8px; border-radius: 8px; background: var(--cola-2); }
+  .avsnittslista label { flex: 1; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+  .avsnittslista input { accent-color: var(--rod); }
+  .avsnittslista button { width: 26px; height: 26px; padding: 0; border: 1px solid var(--linje); border-radius: 6px; background: transparent; color: var(--skum); cursor: pointer; }
+  .avsnittslista button:hover { border-color: var(--rod); }
+  .fargrad { display: grid; gap: 8px; }
+  .videofalt { display: grid; gap: 6px; }
+  .videofalt label { font: 500 0.6875rem/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--dampad); }
+  .videofalt div { display: flex; gap: 6px; }
+  .videofalt input { flex: 1; min-width: 0; padding: 9px 10px; font: 400 0.8125rem/1.3 var(--text); color: var(--skum); background: var(--cola); border: 1px solid var(--linje); border-radius: 8px; }
+  .videofalt button { padding: 8px 12px; border: 0; border-radius: 8px; background: var(--rod); color: var(--skum); font: 700 0.75rem/1 var(--text); cursor: pointer; }
+  .lank-ruta { position: fixed; z-index: 97; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; width: min(360px, calc(100vw - 32px)); padding: 12px; background: var(--cola-3); border: 1px solid var(--rod); border-radius: 14px; box-shadow: 0 20px 40px -16px rgba(0, 0, 0, .8); }
+  .lank-ruta label { width: 100%; font: 500 0.6875rem/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--dampad); }
+  .lank-ruta input { flex: 1; min-width: 0; padding: 9px 10px; color: var(--skum); background: var(--cola); border: 1px solid var(--linje); border-radius: 8px; font: 400 0.875rem var(--text); }
+  .lank-ruta button { padding: 9px 14px; border: 0; border-radius: 8px; background: var(--rod); color: var(--skum); font-weight: 700; cursor: pointer; }
+
+  @media (max-width: 980px) {
+    .tprogram-huvud { grid-template-columns: 1fr; }
+    .tprogram-fakta { grid-template-columns: repeat(2, auto); justify-content: start; }
+  }
+
+  /* Utskrift av ett träningsprogram */
+  @media print {
+    body { background: #fff !important; padding: 0 !important; }
+    body::after, .nav, .framsteg, .mobil-cta, .till-toppen, .redigera-panel, .toast, .sidfot { display: none !important; }
+    body.skriver-ut main > *:not(#traningsprogram) { display: none !important; }
+    body.skriver-ut #traningsprogram { padding: 0 !important; background: #fff !important; }
+    body.skriver-ut #traningsprogram .sektionshuvud, body.skriver-ut .flikar, body.skriver-ut .program-cta, body.skriver-ut [data-skriv-ut] { display: none !important; }
+    body.skriver-ut .tprogram, body.skriver-ut .pass { background: #fff !important; border-color: #bbb !important; }
+    body.skriver-ut .tprogram * { color: #000 !important; }
+    body.skriver-ut .pass { break-inside: avoid; }
+  }
+
+  /* ===== Förklaringsfilm ===== */
+  .spela-lank { display: inline-flex; align-items: center; gap: 14px; margin-top: 22px; padding: 4px 0; background: none; border: 0; color: var(--skum); font: 600 0.9375rem/1.25 var(--text); text-align: left; cursor: pointer; }
+  .spela-lank small { display: block; margin-top: 3px; font: 400 0.75rem/1.3 var(--mono); letter-spacing: 0.06em; color: var(--dampad); }
+  .spela-ikon { display: grid; place-items: center; flex: none; width: 76px; height: 76px; border-radius: 50%; color: #fff; background: color-mix(in srgb, var(--rod) 88%, transparent); border: 1px solid color-mix(in srgb, var(--skum) 35%, transparent); box-shadow: 0 16px 40px -12px color-mix(in srgb, var(--rod) 80%, transparent); transition: transform .3s, background-color .3s; }
+  .spela-ikon svg { margin-left: 4px; }
+  .spela-lank .spela-ikon { width: 50px; height: 50px; }
+  .spela-lank .spela-ikon svg { width: 14px; height: 16px; margin-left: 3px; }
+  .spela-lank:hover .spela-ikon { background: var(--rod); transform: scale(1.07); }
+  .video-kort-knapp { position: absolute; inset: 0; z-index: 2; display: grid; place-items: center; width: 100%; padding: 0; border: 0; color: var(--skum); cursor: pointer; background: linear-gradient(180deg, rgba(20, 8, 6, .05) 30%, rgba(20, 8, 6, .9)); }
+  .video-kort-knapp:hover .spela-ikon { background: var(--rod); transform: scale(1.08); }
+  .video-kort-text { position: absolute; left: 26px; right: 26px; bottom: 24px; display: grid; gap: 8px; text-align: left; }
+  .video-kort-text strong { font: 800 clamp(1.7rem, 2.6vw, 2.2rem)/1 var(--display); text-transform: uppercase; letter-spacing: 0.01em; }
+  .video-kort-text span { font: 400 0.8125rem/1.3 var(--mono); color: var(--dampad); }
+  .redigerar .video-kort-knapp { pointer-events: none; }
+  dialog.video-dialog { width: min(1100px, calc(100vw - 32px)); max-width: none; background: #000; border-color: color-mix(in srgb, var(--skum) 16%, transparent); overflow: hidden; }
+  .video-dialog::backdrop { background: rgba(10, 4, 3, .88); backdrop-filter: blur(6px); }
+  .video-inre { display: grid; }
+  .video-inre video, .video-inre iframe { display: block; width: 100%; aspect-ratio: 16 / 9; height: auto; max-height: calc(100vh - 50px); border: 0; background: #000; }
+  .video-stang { position: absolute; top: 12px; right: 12px; z-index: 2; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(245, 237, 227, .35); background: rgba(20, 8, 6, .72); color: var(--skum); font-size: 1rem; cursor: pointer; }
+  .video-stang:hover { background: var(--rod); border-color: var(--rod); }
+
+  /* ===== Hitta rätt nivå ===== */
+  .niva-sektion { border-top: 1px solid var(--linje); }
+  .niva { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 6vw, 80px); align-items: start; }
+  .niva .sektionshuvud { margin-bottom: 0; }
+  .niva-kort { display: grid; gap: 28px; padding: clamp(22px, 4vw, 40px); border-radius: 26px; background: linear-gradient(160deg, color-mix(in srgb, var(--rod) 12%, var(--cola-3)), var(--cola-3) 55%); border: 1px solid var(--linje); box-shadow: 0 40px 80px -50px rgba(0, 0, 0, .9); }
+  .niva-fraga { display: flex; flex-wrap: wrap; gap: 8px; min-width: 0; margin: 0; padding: 0; border: 0; }
+  .niva-fraga legend { float: left; width: 100%; margin-bottom: 12px; padding: 0; font: 700 1.1rem/1.3 var(--text); }
+  .niva-val { position: relative; }
+  .niva-val input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+  .niva-val span { display: block; padding: 11px 18px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--skum) 22%, transparent); font-size: 0.9375rem; transition: background-color .2s, border-color .2s; }
+  .niva-val:hover span { border-color: var(--skum); }
+  .niva-val input:checked + span { background: var(--rod); border-color: var(--rod); color: #fff; }
+  .niva-val input:focus-visible + span { outline: 2px solid var(--karamell); outline-offset: 3px; }
+  .redigerar .niva-val input { pointer-events: none; }
+  .niva-resultat { display: grid; gap: 12px; justify-items: start; padding-top: 26px; border-top: 1px solid var(--linje); }
+  .niva-namn { font-size: clamp(2.6rem, 5vw, 3.6rem); }
+  .niva-pris { margin: 0; font: 500 0.9375rem/1 var(--mono); color: var(--karamell); }
+  .niva-beskrivning { margin: 0; max-width: 34rem; color: var(--dampad); }
+  .niva-knappar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; margin-top: 6px; }
+  .kort.markerad { outline: 2px solid var(--karamell); outline-offset: 6px; }
+  .sektionshuvud p a { color: var(--skum); text-decoration-color: var(--rod); text-underline-offset: 4px; }
+
+  /* ===== Trygg betalning och jämförelse ===== */
+  .kort-betal { display: flex; align-items: center; justify-content: center; gap: 8px; margin: -8px 0 0; font: 400 0.75rem/1.3 var(--mono); color: var(--dampad); }
+  .kort-betal svg, .betalsatt-rubrik svg { flex: none; color: var(--gron); }
+  .betalsatt { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 18px; margin-top: 34px; padding: 18px 22px; border-radius: 18px; border: 1px solid var(--linje); background: color-mix(in srgb, var(--gron) 6%, transparent); }
+  .betalsatt-rubrik { display: inline-flex; align-items: center; gap: 10px; margin: 0; font-weight: 600; }
+  .betalsatt-lista { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+  .betalsatt-lista li { padding: 7px 13px; border-radius: 999px; border: 1px solid var(--linje); background: color-mix(in srgb, var(--skum) 5%, transparent); font: 500 0.75rem/1 var(--mono); letter-spacing: 0.06em; }
+  .betalsatt-not { margin: 0; font: 400 0.8125rem/1.4 var(--mono); color: var(--dampad); }
+  details.jamfor { margin-top: 22px; border: 1px solid var(--linje); border-radius: 22px; background: color-mix(in srgb, var(--cola-3) 55%, transparent); }
+  .jamfor > summary { padding: 18px clamp(20px, 3vw, 30px); }
+  .jamfor[open] > summary { border-bottom: 1px solid var(--linje); }
+  .jamfor .tabell-ram { padding: 6px clamp(20px, 3vw, 30px) 18px; }
+  .jamfor-tabell { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+  .jamfor-tabell th { padding: 16px 12px 12px; text-align: center; font: 800 1.3rem/1 var(--display); text-transform: uppercase; letter-spacing: 0.02em; border-bottom: 1px solid var(--linje); }
+  .jamfor-tabell th.utvald-kolumn { color: var(--rod-ljus); }
+  .jamfor-tabell td { padding: 13px 12px; text-align: center; white-space: nowrap; color: var(--skum); border-bottom: 1px solid color-mix(in srgb, var(--karamell) 10%, transparent); }
+  .jamfor-tabell th:first-child, .jamfor-tabell td:first-child { padding-left: 0; text-align: left; }
+  .jamfor-tabell th:first-child { font: 500 0.6875rem/1 var(--mono); letter-spacing: 0.14em; color: var(--dampad); vertical-align: bottom; }
+  .jamfor-tabell td:first-child { min-width: 12rem; white-space: normal; color: var(--dampad); }
+  .jamfor-tabell tbody tr:last-child td { border-bottom: 0; }
+
+  @media (max-width: 980px) {
+    .niva { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .spela-ikon { width: 64px; height: 64px; }
+    .video-kort-text { left: 18px; right: 18px; bottom: 18px; }
+    .betalsatt { justify-content: flex-start; }
+    .jamfor-tabell { font-size: 0.8125rem; }
+    .jamfor-tabell th { padding: 14px 4px 10px; font-size: 1.05rem; }
+    .jamfor-tabell td { padding: 12px 4px; white-space: normal; }
+    .jamfor-tabell td:first-child { width: 34%; min-width: 0; }
+  }
+
+  /* ===== Surfplatta ===== */
+  @media (max-width: 980px) {
+    .meny-knapp { display: inline-flex; }
+    .nav-lankar { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0; padding: 8px clamp(16px, 4vw, 40px) 20px; background: var(--cola); border-bottom: 1px solid var(--linje); }
+    .nav-lankar.oppen { display: flex; }
+    .nav-lankar a { display: block; padding-block: 14px; font: 800 1.6rem/1 var(--display); text-transform: uppercase; color: var(--skum); border-bottom: 1px solid var(--linje); }
+    .nav-lankar a::after { display: none; }
+    .hjalte-rad { grid-template-columns: 1fr; }
+    .hjalte-scen { width: min(440px, 100%); justify-self: center; margin-top: -10px; }
+    .steg-rad, .coach, .veckan, .kalkylator, .fragor, .boka, .galleri { grid-template-columns: 1fr; }
+    .steg-bild .media-ram { aspect-ratio: 16 / 10; }
+    .veckan-media { position: static; }
+    .veckan-media .media-ram { aspect-ratio: 16 / 10; }
+    .coach-bilder { max-width: 520px; }
+    .program, .trygghet { grid-template-columns: 1fr; }
+    .program { gap: 34px; }
+    .kort.utvald { --lyft: 0px; }
+    .galleri .stor { grid-row: auto; }
+    .galleri .stor .media-ram { min-height: 0; aspect-ratio: 16 / 10; }
+    .kalk-scen { max-width: 560px; }
+    .sidfot-inre { grid-template-columns: 1fr; }
+    .sidfot-meta { justify-items: start; text-align: left; }
+  }
+  /* ===== Mobil ===== */
+  @media (max-width: 760px) {
+    body { padding-bottom: 78px; }
+    .nav-hoger > .knapp { display: none; }
+    .mobil-cta { display: flex; position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 45; transition: transform .35s, opacity .35s; }
+    .mobil-cta .knapp { width: 100%; }
+    .mobil-cta.dold { transform: translateY(120%); opacity: 0; pointer-events: none; }
+    .till-toppen { bottom: 86px; }
+    .redigera-panel { bottom: 86px; }
+    .fakta { grid-template-columns: repeat(2, auto); }
+    .resultat { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .fakta, .meriter, .kalk-form, .bokningsruta form, .guide fieldset { grid-template-columns: 1fr; }
+    .varumarke span { font-size: 1.3rem; }
+    .vecka li { grid-template-columns: 56px 1fr; }
+    .vecka .tid { grid-column: 2; }
+    .coach-bilder { padding: 0 10% 22% 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .principer-spar { animation: none; }
+    [data-tilt], .knapp, .toast, .mobil-cta, .media-ram img, .media-ram video { transition: none; }
+    .knapp::after { display: none; }
+  }
+</style>
+
+<div class="framsteg" id="framsteg" aria-hidden="true"></div>
+
+<!-- ===== Navigering ===== -->
+<header class="nav" data-region="meny">
+  <div class="ram nav-inre">
+    <a class="varumarke" href="#top" aria-label="Till början">
+      <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true">
+        <circle cx="15" cy="18" r="9" fill="var(--rod)"/>
+        <path d="M9.5 12V9a5.5 5.5 0 0 1 11 0v3" fill="none" stroke="var(--rod)" stroke-width="2.8" stroke-linecap="round"/>
+        <circle cx="15" cy="18.5" r="3.2" fill="none" stroke="var(--cola)" stroke-width="1.6"/>
+      </svg>
+      <span data-edit="varumarke">Styrkeateljén</span>
+    </a>
+    <ul class="nav-lankar" id="navLankar" data-lista="Menyn">
+      <li><a href="#sa-funkar-det" data-edit="nav-1">Så går det till</a></li>
+      <li><a href="#priser" data-edit="nav-2">Priser</a></li>
+      <li><a href="#traningsprogram" data-edit="nav-3">Träningsprogram</a></li>
+      <li><a href="#kalkylator" data-edit="nav-4">Kalkylator</a></li>
+      <li><a href="#fragor" data-edit="nav-5">Frågor</a></li>
+    </ul>
+    <div class="nav-hoger">
+      <a class="knapp liten" href="#boka" data-edit="nav-cta">Boka konsultation</a>
+      <button class="meny-knapp" id="menyKnapp" type="button" aria-expanded="false" aria-controls="navLankar" aria-label="Öppna menyn"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top" data-region="innehall">
+  <div hidden data-installningar data-priserok="nej" data-villkorok="nej" data-hjalte3d="pa" data-kalk3d="pa"></div>
+  <!-- ===== Hjälte ===== -->
+  <section class="hjalte" id="hjalte" data-avsnitt="Toppen">
+    <div class="ram hjalte-rad">
+      <div class="hjalte-text">
+        <p class="etikett" data-edit="hjalte-etikett">Onlinecoachning · Träning &amp; kost</p>
+        <h1 data-edit="hjalte-rubrik">Bygg styrka <em>som håller</em></h1>
+        <p class="ingress" data-edit="hjalte-ingress">Personlig onlinecoachning med träningsprogram, kostupplägg och uppföljning varje vecka – träna på gymmet, hemma eller på resan, helt efter din vardag och dina mål.</p>
+        <div class="knapprad">
+          <a class="knapp" href="#boka" data-edit="hjalte-cta">Boka kostnadsfri konsultation</a>
+          <a class="knapp spok" href="#traningsprogram" data-edit="hjalte-cta2">Se träningsprogrammen</a>
+        </div>
+        <button class="spela-lank" type="button" data-spela-video><span class="spela-ikon" aria-hidden="true"><svg width="18" height="20" viewBox="0 0 18 20" aria-hidden="true"><path d="M2 1.8v16.4L16.5 10 2 1.8Z" fill="currentColor"/></svg></span><span>Se hur coachningen fungerar<small>Film · under en halv minut</small></span></button>
+        <dl class="fakta" data-lista="Fakta">
+          <div><dt data-edit="fakta1-etikett">Upplägg</dt><dd data-edit="fakta1-varde">100 % online</dd></div>
+          <div><dt data-edit="fakta2-etikett">Uppföljning</dt><dd data-edit="fakta2-varde">Varje vecka</dd></div>
+          <div><dt data-edit="fakta3-etikett">Första samtalet</dt><dd data-edit="fakta3-varde">Kostnadsfritt</dd></div>
+        </dl>
+      </div>
+      <div class="hjalte-scen" aria-hidden="true"><canvas id="scenKettlebell"></canvas></div>
+    </div>
+  </section>
+
+  <!-- ===== Principer ===== -->
+  <div class="principer" aria-label="Det vi tränar" data-avsnitt="Löpande remsa">
+    <div class="principer-spar">
+      <p class="principer-grupp" id="principerForsta" data-lista="Löpande ord">
+        <span data-edit="princip1">Styrka</span>
+        <span data-edit="princip2">Kondition</span>
+        <span data-edit="princip3">Rörlighet</span>
+        <span data-edit="princip4">Kost</span>
+        <span data-edit="princip5">Återhämtning</span>
+        <span data-edit="princip6">Vanor</span>
+      </p>
+      <p class="principer-grupp" id="principerAndra" aria-hidden="true" data-genererad></p>
+    </div>
+  </div>
+
+  <!-- ===== Så går det till ===== -->
+  <section class="sektion" id="sa-funkar-det" data-avsnitt="Så går det till">
+    <div class="ram steg-rad">
+      <div>
+        <div class="sektionshuvud">
+          <p class="etikett" data-edit="steg-etikett">Så går det till</p>
+          <h2 data-edit="steg-rubrik">Tre steg till <em>en starkare</em> du</h2>
+        </div>
+        <ol class="steg" data-lista="Steg">
+          <li><span class="nr" aria-hidden="true"></span><h3 data-edit="steg1-rubrik">Kostnadsfri konsultation</h3><p data-edit="steg1-text">Vi ses i ett videosamtal och pratar om dina mål, din erfarenhet och din vardag. Tjugo minuter, helt utan förpliktelser.</p></li>
+          <li><span class="nr" aria-hidden="true"></span><h3 data-edit="steg2-rubrik">Din personliga plan</h3><p data-edit="steg2-text">Du får ditt träningsprogram och kostupplägg digitalt – anpassat efter din nivå, din tid och den utrustning du har.</p></li>
+          <li><span class="nr" aria-hidden="true"></span><h3 data-edit="steg3-rubrik">Träna, följ upp, bli starkare</h3><p data-edit="steg3-text">Du rapporterar din vecka och skickar teknikvideor, och jag ger feedback och justerar planen så att du hela tiden utvecklas.</p></li>
+        </ol>
+      </div>
+      <figure class="steg-bild" data-tilt>
+        <div class="media-ram video-kort" data-bild-slot="steg">
+          <img src="media/chins.jpg" alt="Person som gör chins i ett gym" loading="lazy">
+          <button class="video-kort-knapp" type="button" data-spela-video aria-label="Spela filmen om hur coachningen fungerar"><span class="spela-ikon" aria-hidden="true"><svg width="18" height="20" viewBox="0 0 18 20" aria-hidden="true"><path d="M2 1.8v16.4L16.5 10 2 1.8Z" fill="currentColor"/></svg></span><span class="video-kort-text"><strong>Se hur det fungerar</strong><span>Film · under en halv minut</span></span></button>
+          <button class="knapp liten byt-media" type="button" data-byt-bild="steg">Byt bild</button>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===== Filmband ===== -->
+  <section class="filmband" aria-label="Filosofi" data-avsnitt="Videoband">
+    <div class="video-lager" data-video-slot="film" data-bakgrund>
+      <video src="media/video-battlerope.mp4" poster="media/video-battlerope.jpg" muted loop playsinline preload="metadata" aria-hidden="true"></video>
+    </div>
+    <div class="ram">
+      <blockquote data-edit="film-citat">Motivation tar dig igång. <em>Vanor</em> tar dig hela vägen.</blockquote>
+      <p class="etikett" data-edit="film-kalla">Filosofin bakom träningen</p>
+    </div>
+  </section>
+
+  <!-- ===== Coachen ===== -->
+  <section class="sektion" id="coach" data-avsnitt="Om mig">
+    <div class="ram coach">
+      <div class="coach-bilder">
+        <div class="media-ram portratt" data-bild-slot="portratt">
+          <span class="monogram" data-edit="monogram">DN</span>
+          <img alt="Porträtt av coachen" hidden>
+          <button class="knapp liten byt-media" type="button" data-byt-bild="portratt">Ladda upp porträtt</button>
+        </div>
+        <figure class="bild-liten">
+          <div class="media-ram" data-bild-slot="marklyft">
+            <img src="media/marklyft.jpg" alt="Person som förbereder ett marklyft i ett mörkt gym" loading="lazy">
+            <button class="knapp liten byt-media" type="button" data-byt-bild="marklyft">Byt bild</button>
+          </div>
+        </figure>
+      </div>
+      <div class="coach-text">
+        <p class="etikett" data-edit="coach-etikett">Din coach</p>
+        <h2 data-edit="coach-namn">Ditt namn</h2>
+        <p data-edit="coach-text1">Jag hjälper dig att träna smart, äta rätt och bygga vanor som håller – oavsett om du är helt ny på gymmet eller vill ta nästa steg.</p>
+        <p data-edit="coach-text2">Varje plan byggs utifrån dina mål och din vardag. Du får tydliga övningar, rimliga krav och någon som följer upp på riktigt.</p>
+        <dl class="meriter" data-lista="Meriter">
+          <div><dt data-edit="merit1-etikett">Utbildning</dt><dd data-edit="coach-utbildning">Din utbildning</dd></div>
+          <div><dt data-edit="merit2-etikett">Inriktning</dt><dd data-edit="merit2-varde">Styrka, kondition och kost</dd></div>
+          <div><dt data-edit="merit3-etikett">Upplägg</dt><dd data-edit="merit3-varde">Online – träna var du vill</dd></div>
+          <div><dt data-edit="merit4-etikett">Uppföljning</dt><dd data-edit="merit4-varde">Varje vecka, via chatt och videosamtal</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Hitta rätt nivå ===== -->
+  <section class="sektion niva-sektion" id="hitta-niva" data-avsnitt="Hitta rätt nivå">
+    <div class="ram niva">
+      <div class="sektionshuvud">
+        <p class="etikett" data-edit>Hitta rätt nivå</p>
+        <h2 data-edit>Tre frågor. <em>Ett tydligt svar.</em></h2>
+        <p data-edit>Svara på tre korta frågor så föreslår testet den nivå som passar dig bäst. Det tar under en minut och du binder dig inte till något.</p>
+      </div>
+      <form class="niva-kort" id="nivaTest" novalidate>
+        <fieldset class="niva-fraga">
+          <legend data-edit>Vad vill du uppnå?</legend>
+          <label class="niva-val"><input type="radio" name="nivaMal" value="1"><span data-edit>Komma igång och skapa vanor</span></label>
+          <label class="niva-val"><input type="radio" name="nivaMal" value="2"><span data-edit>Bli starkare och forma kroppen</span></label>
+          <label class="niva-val"><input type="radio" name="nivaMal" value="3"><span data-edit>Nå ett tydligt mål med maximalt stöd</span></label>
+        </fieldset>
+        <fieldset class="niva-fraga">
+          <legend data-edit>Hur mycket stöd vill du ha?</legend>
+          <label class="niva-val"><input type="radio" name="nivaStod" value="1"><span data-edit>En tydlig plan räcker</span></label>
+          <label class="niva-val"><input type="radio" name="nivaStod" value="2"><span data-edit>Uppföljning varje vecka</span></label>
+          <label class="niva-val"><input type="radio" name="nivaStod" value="3"><span data-edit>Tätt stöd och videosamtal</span></label>
+        </fieldset>
+        <fieldset class="niva-fraga">
+          <legend data-edit>Hur vill du ha hjälp med kosten?</legend>
+          <label class="niva-val"><input type="radio" name="nivaKost" value="1"><span data-edit>Enkla kostråd räcker</span></label>
+          <label class="niva-val"><input type="radio" name="nivaKost" value="2"><span data-edit>Ett kostschema att följa</span></label>
+          <label class="niva-val"><input type="radio" name="nivaKost" value="3"><span data-edit>Löpande justering av kosten</span></label>
+        </fieldset>
+        <div class="niva-resultat" id="nivaResultat" aria-live="polite" hidden data-genererad></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== Program och priser ===== -->
+  <section class="sektion mork" id="priser" data-avsnitt="Coachning &amp; priser">
+    <div class="ram">
+      <div class="sektionshuvud">
+        <p class="etikett" data-edit="program-etikett">Coachning &amp; priser</p>
+        <h2 data-edit="program-rubrik">Välj det upplägg <em>som passar dig</em></h2>
+        <p data-edit="program-ingress">Samtliga priser anges inklusive moms. Osäker på vilken nivå som passar? <a href="#hitta-niva">Gör nivåtestet</a> eller boka en kostnadsfri konsultation, så hjälper jag dig att välja.</p>
+      </div>
+      <div class="program" data-lista="Priskort">
+        <article class="kort" data-tilt>
+          <h3 data-edit="prog1-namn">Start</h3>
+          <p class="beskrivning" data-edit="prog1-beskrivning">För dig som vill komma igång med en tydlig plan och träna på egen hand.</p>
+          <div class="pris"><strong data-edit="prog1-pris">495 kr</strong><span data-edit="prog1-period">per månad</span></div>
+          <ul data-lista="Punkter">
+            <li data-edit="prog1-p1">Personligt träningsprogram</li>
+            <li data-edit="prog1-p2">Kostråd och proteinmål</li>
+            <li data-edit="prog1-p3">Uppföljning varannan vecka</li>
+            <li data-edit="prog1-p4">Teknikfeedback via video</li>
+          </ul>
+          <a class="knapp spok" href="#boka" data-edit="prog1-cta" data-betallank>Välj Start</a>
+          <p class="kort-betal" data-betalnot hidden><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span data-edit>Säker betalning via Stripe</span></p>
+        </article>
+        <article class="kort utvald" data-tilt>
+          <span class="kort-markor" data-edit="prog2-markor">Rekommenderas</span>
+          <h3 data-edit="prog2-namn">Coachning</h3>
+          <p class="beskrivning" data-edit="prog2-beskrivning">Personlig coachning med tät uppföljning – träning och kost i ett.</p>
+          <div class="pris"><strong data-edit="prog2-pris">995 kr</strong><span data-edit="prog2-period">per månad</span></div>
+          <ul data-lista="Punkter">
+            <li data-edit="prog2-p1">Allt i Start</li>
+            <li data-edit="prog2-p2">Uppföljning varje vecka</li>
+            <li data-edit="prog2-p3">Detaljerat kostschema</li>
+            <li data-edit="prog2-p4">Chatt med mig på vardagar</li>
+          </ul>
+          <a class="knapp" href="#boka" data-edit="prog2-cta" data-betallank>Välj Coachning</a>
+          <p class="kort-betal" data-betalnot hidden><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span data-edit>Säker betalning via Stripe</span></p>
+        </article>
+        <article class="kort" data-tilt>
+          <h3 data-edit="prog3-namn">Premium</h3>
+          <p class="beskrivning" data-edit="prog3-beskrivning">För dig som vill ha maximalt stöd och utvecklas så snabbt som möjligt.</p>
+          <div class="pris"><strong data-edit="prog3-pris">1 995 kr</strong><span data-edit="prog3-period">per månad</span></div>
+          <ul data-lista="Punkter">
+            <li data-edit="prog3-p1">Allt i Coachning</li>
+            <li data-edit="prog3-p2">Videosamtal varje vecka, 30 minuter</li>
+            <li data-edit="prog3-p3">Obegränsad teknikfeedback via video</li>
+            <li data-edit="prog3-p4">Svar i chatten samma dag på vardagar</li>
+          </ul>
+          <a class="knapp spok" href="#boka" data-edit="prog3-cta" data-betallank>Välj Premium</a>
+          <p class="kort-betal" data-betalnot hidden><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span data-edit>Säker betalning via Stripe</span></p>
+        </article>
+      </div>
+      <ul class="trygghet" data-lista="Trygghet">
+        <li><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.5" fill="none" stroke="var(--rod)" stroke-width="1.5"/><path d="m7.5 12.2 3 3 6-6.2" fill="none" stroke="var(--rod)" stroke-width="1.5"/></svg><div><strong data-edit="trygg1-rubrik">Kostnadsfri konsultation</strong><span data-edit="trygg1-text">Du bestämmer dig först när du vet vad du får.</span></div></li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h3l2-6 4 12 2-6h5" fill="none" stroke="var(--rod)" stroke-width="1.5" stroke-linejoin="round"/></svg><div><strong data-edit="trygg2-rubrik">Anpassat efter dig</strong><span data-edit="trygg2-text">Nivå, tid och utrustning styr planen.</span></div></li>
+        <li><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 20 6.5v5c0 4.5-3.3 8.3-8 9.5-4.7-1.2-8-5-8-9.5v-5L12 3Z" fill="none" stroke="var(--rod)" stroke-width="1.5"/></svg><div><strong data-edit="trygg3-rubrik">14 dagars ångerrätt</strong><span data-edit="trygg3-text">Enligt distansavtalslagen.</span></div></li>
+      </ul>
+      <div class="betalsatt" data-betalinfo hidden>
+        <p class="betalsatt-rubrik"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><span data-edit>Säker betalning via Stripe</span></p>
+        <ul class="betalsatt-lista" data-lista="Betalsätt">
+          <li data-edit>Kort</li>
+          <li data-edit>Apple Pay</li>
+          <li data-edit>Google Pay</li>
+          <li data-edit>Klarna</li>
+        </ul>
+        <p class="betalsatt-not" data-edit>Kvitto direkt på e-post · Säg upp när du vill</p>
+      </div>
+      <details class="jamfor">
+        <summary data-edit>Jämför alla nivåer</summary>
+        <div class="tabell-ram">
+          <table class="jamfor-tabell">
+            <thead>
+              <tr><th scope="col" data-edit>Det här ingår</th><th scope="col" data-edit>Start</th><th scope="col" class="utvald-kolumn" data-edit>Coachning</th><th scope="col" data-edit>Premium</th></tr>
+            </thead>
+            <tbody data-lista="Jämförelserader">
+              <tr><td data-edit>Personligt träningsprogram</td><td data-edit>✓</td><td data-edit>✓</td><td data-edit>✓</td></tr>
+              <tr><td data-edit>Kostråd och proteinmål</td><td data-edit>✓</td><td data-edit>✓</td><td data-edit>✓</td></tr>
+              <tr><td data-edit>Teknikfeedback via video</td><td data-edit>✓</td><td data-edit>✓</td><td data-edit>Obegränsad</td></tr>
+              <tr><td data-edit>Uppföljning</td><td data-edit>Varannan vecka</td><td data-edit>Varje vecka</td><td data-edit>Varje vecka</td></tr>
+              <tr><td data-edit>Detaljerat kostschema</td><td data-edit>–</td><td data-edit>✓</td><td data-edit>✓</td></tr>
+              <tr><td data-edit>Chatt med mig</td><td data-edit>–</td><td data-edit>Vardagar</td><td data-edit>Svar samma dag</td></tr>
+              <tr><td data-edit>Videosamtal, 30 minuter</td><td data-edit>–</td><td data-edit>–</td><td data-edit>Varje vecka</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ===== Träningsprogram ===== -->
+  <section class="sektion" id="traningsprogram" data-avsnitt="Träningsprogram">
+    <div class="ram">
+      <div class="sektionshuvud">
+        <p class="etikett" data-edit>Träningsprogram</p>
+        <h2 data-edit>Program <em>för alla nivåer</em></h2>
+        <p data-edit>Välj ett program och följ det vecka för vecka. Värm upp i 8–10 minuter före varje pass och prioritera alltid teknik före vikt. Känner du smärta – avbryt och rådgör med mig eller en läkare.</p>
+      </div>
+      <div class="flikar" id="programFlikar" role="tablist" aria-label="Välj träningsprogram" data-genererad></div>
+      <div class="programlista" data-lista="Träningsprogram">
+
+        <article class="tprogram" data-program>
+          <header class="tprogram-huvud">
+            <div>
+              <h3 data-edit>Kom igång – helkropp</h3>
+              <p class="tprogram-beskrivning" data-edit>Ett tryggt första program för dig som är ny på gymmet. Du lär dig grundövningarna och bygger styrka i hela kroppen.</p>
+            </div>
+            <dl class="tprogram-fakta" data-lista="Fakta om programmet">
+              <div><dt data-edit>Nivå</dt><dd data-edit>Nybörjare</dd></div>
+              <div><dt data-edit>Pass per vecka</dt><dd data-edit>3</dd></div>
+              <div><dt data-edit>Längd</dt><dd data-edit>8 veckor</dd></div>
+              <div><dt data-edit>Mål</dt><dd data-edit>Grundstyrka</dd></div>
+            </dl>
+          </header>
+          <div class="pass-lista" data-lista="Pass">
+            <section class="pass">
+              <h4 data-edit>Pass A · Helkropp</h4>
+              <div class="tabell-ram"><table class="ovningar">
+                <thead><tr><th data-edit>Övning</th><th data-edit>Set</th><th data-edit>Reps</th><th data-edit>Vila</th></tr></thead>
+                <tbody data-lista="Övningar">
+                  <tr><td data-edit>Goblet squat</td><td data-edit>3</td><td data-edit>10</td><td data-edit>90 s</td></tr>
+                  <tr><td data-edit>Armhävningar (på knä vid behov)</td><td data-edit>3</td><td data-edit>8–12</td><td data-edit>90 s</td></tr>
+                  <tr><td data-edit>Hantelrodd</td><td data-edit>3</td><td data-edit>10/sida</td><td data-edit>90 s</td></tr>
+                  <tr><td data-edit>Rumänsk marklyft med hantlar</td><td data-edit>3</td><td data-edit>10</td><td data-edit>90 s</td></tr>
+                  <tr><td data-edit>Planka</td><td data-edit>3</td><td data-edit>30 s</td><td data-edit>60 s</td></tr>
+                </tbody>
+              </table></div>
+            </section>
+            <section class="pass">
+              <h4 data-edit>Pass B · Helkropp</h4>
+              <div class="tabell-ram"><table class="ovningar">
+                <thead><tr><th data-edit>Övning</th><th data-edit>Set</th><th data-edit>Reps</th><th data-edit>Vila</th></tr></thead>
+                <tbody data-lista="Övningar">
+                  <tr><td data-edit>Utfallssteg</td><td data-edit>3</td><td data-edit>8/ben</td><td data-edit>90 s</td></tr>
+                  <tr><td data-edit>Axelpress med hantlar</td><td data-edit>3</td><td data-edit>10</td><td data-edit>90 s</td></tr>
+                  <tr><td data-edit>Latsdrag</td><td data-edit>3</td><td data-edit>10</td><td data-edit>90 s</td></tr>
+                  <tr><td data-edit>Höftlyft</td><td data-edit>3</td><td data-edit>12</td><td data-edit>60 s</td></tr>
+                  <tr><td data-edit>Dead bug</td><td data-edit>3</td><td data-edit>8/sida</td><td data-edit>60 s</td></tr>
+                </tbody>
+              </table></div>
+              <p class="pass-not" data-edit>Kör A–B–A ena veckan och B–A–B nästa, med minst en vilodag mellan passen.</p>
+            </section>
+          </div>
+          <div class="tprogram-fot">
+            <p class="tprogram-not" data-edit><strong>Progression:</strong> När du klarar alla set i övre delen av repintervallet ökar du vikten med 2–5 %. Avsluta varje set med en till två repetitioner kvar i reserv.</p>
+            <button class="knapp spok liten" type="button" data-skriv-ut>Skriv ut programmet</button>
+          </div>
+        </article>
+
+        <article class="tprogram" data-program>
+          <header class="tprogram-huvud">
+            <div>
+              <h3 data-edit>Styrka – över- och underkropp</h3>
+              <p class="tprogram-beskrivning" data-edit>För dig som har tränat ett tag och vill bli märkbart starkare i basövningarna.</p>
+            </div>
+            <dl class="tprogram-fakta" data-lista="Fakta om programmet">
+              <div><dt data-edit>Nivå</dt><dd data-edit>Van</dd></div>
+              <div><dt data-edit>Pass per vecka</dt><dd data-edit>4</dd></div>
+              <div><dt data-edit>Längd</dt><dd data-edit>10 veckor</dd></div>
+              <div><dt data-edit>Mål</dt><dd data-edit>Maxstyrka</dd></div>
+            </dl>
+          </header>
+          <div class="pass-lista" data-lista="Pass">
+            <section class="pass">
+              <h4 data-edit>Underkropp 1</h4>
+              <div class="tabell-ram"><table class="ovningar">
+                <thead><tr><th data-edit>Övning</th><th data-edit>Set</th><th data-edit>Reps</th><th data-edit>Vila</th></tr></thead>
+                <tbody data-lista="Övningar">
+                  <tr><td data-edit>Knäböj</td><td data-edit>4</td><td data-edit>5</td><td data-edit>2–3 min</td></tr>
+                  <tr><td data-edit>Rumänsk marklyft</td><td data-edit>3</td><td data-edit>8</td><td data-edit>2 min</td></tr>
+                  <tr><td data-edit>Bulgarisk utfallsböj</td><td data-edit>3</td><td data-edit>8/ben</td><td data-edit>90 s</td></tr>
+                  <tr><td data-edit>Vadpress</td><td data-edit>3</td><td data-edit>12</td><td data-edit>60 s</td></tr>
+                  <tr><td data-edit>Hängande benlyft</td><td data-edit>3</td><td data-edit>10</td><td data-edit>60 s</td></tr>
+                </tbody>
+              </table></div>
+            </section>
+            <section class="pass">
+              <h4 data-edit>Överkropp 1</h4>
+              <div class="tabell-ram"><table class="ovningar">
+                <thead><tr><th data-edit>Övning</th><th data-edit>Set</th><th data-edit>Reps</th><th data-edit>Vila</th></tr></thead>
+                <tbody data-lista="Övningar">
+                  <tr><td data-edit>Bänkpress</td><td data-edit>4</td><td data-edit>5</td><td data-edit>2–3 min</td></tr>
+                  <tr><td data-edit>Skivstångsrodd</td><td data-edit>4</td><td data-edit>6</td><td data-edit>2 min</td></tr>
+                  <tr><td data-edit>Stående axelpress</td><td data-edit>3</td><td data-edit>8</td><td data-edit>2 min</td></tr>
+                  <tr><td data-edit>Chins</td><td data-edit>3</td><td data-edit>max −2</td><td data-edit>2 min</td></tr>
+                  <tr><td data-edit>Triceps pushdown</td><td data-edit>3</td><td data-edit>12</td><td data-edit>60 s</td></tr>
+                </tbody>
+              </table></div>
+            </section>
+            <section class="pass">
+              <h4 data-edit>Underkropp 2</h4>
+              <div class="tabell-ram"><table class="ovningar">
+                <thead><tr><th data-edit>Övning</th><th data-edit>Set</th><th data-edit>Reps</th><th data-edit>Vila</th></tr></thead>
+                <tbody data-lista="Övningar">
+                  <tr><td data-edit>Marklyft</td><td data-edit>4</td><td data-edit>4</td><td data-edit>3 min</td></tr>
+                  <tr><td data-edit>Frontböj</td><td data-edit>3</td><td data-edit>6</td><td data-edit>2 min</td></tr>
+                  <tr><td data-edit>Höftlyft med skivstång</td><td data-edit>3</td><td data-edit>8</td><td data-edit>90 s</td></tr>
+                  <tr><td data-edit>Liggande lårcurl</td><td data-edit>3</td><td data-edit>10</td><td data-edit>60 s</td></tr>
+                  <tr><td data-edit>Pallof press</td><td data-edit>3</td><td data-edit>10/sida</td><td data-edit>60 s</td></tr>
+                </tbody>
+              </table></div>
+            </section>
+            <section class="pass">
+              <h4 data-edit>Överkropp 2</h4>
+              <div class="tabell-ram"><table class="ovningar">
+                <thead><tr><th data-edit>Övning</th><th data-edit>Set</th><th data-edit>Reps</th><th data-edit>Vila</th></tr></thead>
+                <tbody data-lista="Övningar">
+                  <tr><td data-edit>Lutande hantelpress</td><td data-edit>4</td><td data-edit>8</td><td data-edit>2 min</td></tr>
+                  <tr><td data-edit>Latsdrag</td><td data-edit>4</td><td data-edit>8</td><td data-edit>90 s</td></tr>
+                  <tr><td data-edit>Sittande kabelrodd</td><td data-edit>3</td><td data-edit>10</td><td data-edit>90 s</td></tr>
+                  <tr><td data-edit>Sidolyft</td><td data-edit>3</td><td data-edit>12</td><td data-edit>60 s</td></tr>
+                  <tr><td data-edit>Bicepscurl</td><td data-edit>3</td><td data-edit>10</td><td data-edit>60 s</td></tr>
+                </tbody>
+              </table></div>
+              <p class="pass-not" data-edit>Förslag: måndag underkropp 1, tisdag överkropp 1, torsdag underkropp 2 och fredag överkropp 2.</p>
+            </section>
+          </div>
+          <div class="tprogram-fot">
+            <p class="tprogram-not" data-edit><strong>Progression:</strong> Träna på en ansträngning motsvarande 7–8 av 10. Öka vikten när alla set klaras med god teknik. Var fjärde vecka kan du sänka vikterna med 10 % för bättre återhämtning.</p>
+            <button class="knapp spok liten" type="button" data-skriv-ut>Skriv ut programmet</button>
+          </div>
+        </article>
+
+        <article class="tprogram" data-program>
+          <header class="tprogram-huvud">
+            <div>
+              <h3 data-edit>Hemmaträning utan utrustning</h3>
+              <p class="tprogram-beskrivning" data-edit>Effektiv träning i vardagsrummet – perfekt när tiden är knapp eller gymmet ligger långt bort.</p>
+            </div>
+            <dl class="tprogram-fakta" data-lista="Fakta om programmet">
+              <div><dt data-edit>Nivå</dt><dd data-edit>Alla nivåer</dd></div>
+              <div><dt data-edit>Pass per vecka</dt><dd data-edit>3</dd></div>
+              <div><dt data-edit>Längd</dt><dd data-edit>6 veckor</dd></div>
+              <div><dt data-edit>Mål</dt><dd data-edit>Styrka &amp; uthållighet</dd></div>
+            </dl>
+          </header>
+          <div class="pass-lista" data-lista="Pass">
+            <section class="pass">
+              <h4 data-edit>Helkroppscirkel</h4>
+              <div class="tabell-ram"><table class="ovningar">
+                <thead><tr><th data-edit>Övning</th><th data-edit>Set</th><th data-edit>Reps</th><th data-edit>Vila</th></tr></thead>
+                <tbody data-lista="Övningar">
+                  <tr><td data-edit>Knäböj</td><td data-edit>4</td><td data-edit>15</td><td data-edit>60 s</td></tr>
+                  <tr><td data-edit>Armhävningar</td><td data-edit>4</td><td data-edit>max −2</td><td data-edit>60 s</td></tr>
+                  <tr><td data-edit>Utfall bakåt</td><td data-edit>3</td><td data-edit>10/ben</td><td data-edit>60 s</td></tr>
+                  <tr><td data-edit>Pikepress</td><td data-edit>3</td><td data-edit>8</td><td data-edit>60 s</td></tr>
+                  <tr><td data-edit>Glute bridge</td><td data-edit>3</td><td data-edit>15</td><td data-edit>45 s</td></tr>
+                  <tr><td data-edit>Superman</td><td data-edit>3</td><td data-edit>12</td><td data-edit>45 s</td></tr>
+                  <tr><td data-edit>Mountain climbers</td><td data-edit>3</td><td data-edit>30 s</td><td data-edit>45 s</td></tr>
+                </tbody>
+              </table></div>
+              <p class="pass-not" data-edit>Gör passet tre gånger i veckan med en vilodag emellan.</p>
+            </section>
+          </div>
+          <div class="tprogram-fot">
+            <p class="tprogram-not" data-edit><strong>Progression:</strong> Lägg till två repetitioner per set varje vecka, eller gör övningarna långsammare – tre sekunder ner och en sekund upp.</p>
+            <button class="knapp spok liten" type="button" data-skriv-ut>Skriv ut programmet</button>
+          </div>
+        </article>
+
+        <article class="tprogram" data-program>
+          <header class="tprogram-huvud">
+            <div>
+              <h3 data-edit>Kondition och fettförbränning</h3>
+              <p class="tprogram-beskrivning" data-edit>Tre varierade pass som förbättrar konditionen och ökar energiförbrukningen. Kombinera gärna med två styrkepass i veckan.</p>
+            </div>
+            <dl class="tprogram-fakta" data-lista="Fakta om programmet">
+              <div><dt data-edit>Nivå</dt><dd data-edit>Alla nivåer</dd></div>
+              <div><dt data-edit>Pass per vecka</dt><dd data-edit>3</dd></div>
+              <div><dt data-edit>Längd</dt><dd data-edit>8 veckor</dd></div>
+              <div><dt data-edit>Mål</dt><dd data-edit>Kondition</dd></div>
+            </dl>
+          </header>
+          <div class="pass-lista" data-lista="Pass">
+            <section class="pass">
+              <h4 data-edit>Pass A · Intervaller</h4>
+              <div class="tabell-ram"><table class="ovningar">
+                <thead><tr><th data-edit>Moment</th><th data-edit>Omgångar</th><th data-edit>Tid</th><th data-edit>Vila</th></tr></thead>
+                <tbody data-lista="Övningar">
+                  <tr><td data-edit>Uppvärmning, lugnt tempo</td><td data-edit>1</td><td data-edit>8 min</td><td data-edit>–</td></tr>
+                  <tr><td data-edit>Intervaller, ansträngning 8 av 10</td><td data-edit>8</td><td data-edit>1 min</td><td data-edit>1 min</td></tr>
+                  <tr><td data-edit>Nedvarvning</td><td data-edit>1</td><td data-edit>5 min</td><td data-edit>–</td></tr>
+                </tbody>
+              </table></div>
+            </section>
+            <section class="pass">
+              <h4 data-edit>Pass B · Kettlebellcirkel</h4>
+              <div class="tabell-ram"><table class="ovningar">
+                <thead><tr><th data-edit>Övning</th><th data-edit>Varv</th><th data-edit>Reps</th><th data-edit>Vila</th></tr></thead>
+                <tbody data-lista="Övningar">
+                  <tr><td data-edit>Kettlebellsving</td><td data-edit>4</td><td data-edit>15</td><td data-edit>–</td></tr>
+                  <tr><td data-edit>Goblet squat</td><td data-edit>4</td><td data-edit>10</td><td data-edit>–</td></tr>
+                  <tr><td data-edit>Enarmsrodd</td><td data-edit>4</td><td data-edit>10/sida</td><td data-edit>–</td></tr>
+                  <tr><td data-edit>Armhävningar</td><td data-edit>4</td><td data-edit>10</td><td data-edit>90 s per varv</td></tr>
+                </tbody>
+              </table></div>
+            </section>
+            <section class="pass">
+              <h4 data-edit>Pass C · Lugn distans</h4>
+              <div class="tabell-ram"><table class="ovningar">
+                <thead><tr><th data-edit>Moment</th><th data-edit>Omgångar</th><th data-edit>Tid</th><th data-edit>Vila</th></tr></thead>
+                <tbody data-lista="Övningar">
+                  <tr><td data-edit>Rask promenad, cykel eller jogg</td><td data-edit>1</td><td data-edit>30–45 min</td><td data-edit>–</td></tr>
+                  <tr><td data-edit>Rörlighet för höfter och bröstrygg</td><td data-edit>1</td><td data-edit>10 min</td><td data-edit>–</td></tr>
+                </tbody>
+              </table></div>
+              <p class="pass-not" data-edit>Tempot ska vara så lugnt att du kan prata under hela passet.</p>
+            </section>
+          </div>
+          <div class="tprogram-fot">
+            <p class="tprogram-not" data-edit><strong>Progression:</strong> Lägg till en intervall varannan vecka upp till tolv, och förläng distanspasset med fem minuter per vecka.</p>
+            <button class="knapp spok liten" type="button" data-skriv-ut>Skriv ut programmet</button>
+          </div>
+        </article>
+
+      </div>
+      <div class="program-cta">
+        <span data-edit>Vill du ha ett program som är byggt helt efter dig?</span>
+        <a class="knapp" href="#boka" data-edit>Boka kostnadsfri konsultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Galleri ===== -->
+  <section class="sektion mork" id="galleri" data-avsnitt="Galleri">
+    <div class="ram">
+      <div class="sektionshuvud">
+        <p class="etikett" data-edit="galleri-etikett">Inblick</p>
+        <h2 data-edit="galleri-rubrik">Träning <em>på riktigt</em></h2>
+      </div>
+      <div class="galleri" data-lista="Galleri">
+        <figure class="stor" data-tilt>
+          <div class="media-ram" data-video-slot="galleri" data-bakgrund>
+            <video src="media/video-knaboj.mp4" poster="media/video-knaboj.jpg" muted loop playsinline preload="metadata" aria-label="Film: en person förbereder sig för knäböj"></video>
+          </div>
+          <figcaption data-edit="galleri1-text">Teknik först – vikterna kommer sedan.</figcaption>
+        </figure>
+        <figure class="liten" data-tilt>
+          <div class="media-ram" data-bild-slot="skivstang">
+            <img src="media/skivstang.jpg" alt="Person som står vid en skivstång i ett mörkt gym" loading="lazy">
+            <button class="knapp liten byt-media" type="button" data-byt-bild="skivstang">Byt bild</button>
+          </div>
+          <figcaption data-edit="galleri2-text">Du tränar där det passar dig – jag följer upp på distans.</figcaption>
+        </figure>
+        <figure class="liten" data-tilt>
+          <div class="media-ram" data-bild-slot="hantel">
+            <img src="media/hantel.jpg" alt="Hantel på ett mörkt golv" loading="lazy">
+            <button class="knapp liten byt-media" type="button" data-byt-bild="hantel">Byt bild</button>
+          </div>
+          <figcaption data-edit="galleri3-text">Rätt vikt, rätt antal repetitioner, rätt vila.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== En vecka ===== -->
+  <section class="sektion" id="veckan" data-avsnitt="En vecka">
+    <div class="ram veckan">
+      <figure class="veckan-media">
+        <div class="media-ram" data-video-slot="veckan" data-bakgrund>
+          <video src="media/video-kettlebell.mp4" poster="media/video-kettlebell.jpg" muted loop playsinline preload="metadata" aria-label="Film: kettlebellträning i ett gym"></video>
+        </div>
+      </figure>
+      <div>
+        <div class="sektionshuvud">
+          <p class="etikett" data-edit="veckan-etikett">En vecka med coachning</p>
+          <h2 data-edit="veckan-rubrik">Så kan <em>din vecka</em> se ut</h2>
+          <p data-edit="veckan-ingress">Ett exempel för dig som vill bygga muskler och bli starkare med fyra pass i veckan.</p>
+        </div>
+        <ul class="vecka" data-lista="Veckodagar">
+          <li><span class="dag" data-edit>Mån</span><span class="pass" data-edit="vecka1-pass">Underkropp</span><span class="tid" data-edit>60 min</span><span class="detalj" data-edit="vecka1-detalj">Knäböj 4 × 6 · Rumänsk marklyft 3 × 8 · Utfall 3 × 10</span></li>
+          <li><span class="dag" data-edit>Tis</span><span class="pass" data-edit="vecka2-pass">Kondition</span><span class="tid" data-edit>30 min</span><span class="detalj" data-edit="vecka2-detalj">Intervaller 8 × 1 min · Lugn nedvarvning</span></li>
+          <li class="vila"><span class="dag" data-edit>Ons</span><span class="pass" data-edit="vecka3-pass">Återhämtning</span><span class="tid" data-edit>20 min</span><span class="detalj" data-edit="vecka3-detalj">Promenad och rörlighet</span></li>
+          <li><span class="dag" data-edit>Tor</span><span class="pass" data-edit="vecka4-pass">Överkropp</span><span class="tid" data-edit>60 min</span><span class="detalj" data-edit="vecka4-detalj">Bänkpress 4 × 6 · Chins 3 × max · Hantelrodd 3 × 10</span></li>
+          <li><span class="dag" data-edit>Fre</span><span class="pass" data-edit="vecka5-pass">Helkropp</span><span class="tid" data-edit>45 min</span><span class="detalj" data-edit="vecka5-detalj">Marklyft 3 × 5 · Kettlebellsving 4 × 15 · Planka 3 × 45 s</span></li>
+          <li class="vila"><span class="dag" data-edit>Lör</span><span class="pass" data-edit="vecka6-pass">Rörlighet</span><span class="tid" data-edit>20 min</span><span class="detalj" data-edit="vecka6-detalj">Stretching och andning</span></li>
+          <li class="vila"><span class="dag" data-edit>Sön</span><span class="pass" data-edit="vecka7-pass">Vila</span><span class="tid" data-edit>–</span><span class="detalj" data-edit="vecka7-detalj">Uppföljning av veckan och planering</span></li>
+        </ul>
+        <p class="exempelnot" data-edit="veckan-not">Exempel – din plan anpassas efter dina mål, din tid och din erfarenhet.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Kalkylator med 3D-viktskivor ===== -->
+  <section class="sektion mork" id="kalkylator" data-avsnitt="Kalkylator">
+    <div class="ram kalkylator">
+      <div>
+        <div class="sektionshuvud">
+          <p class="etikett" data-edit="kalk-etikett">Kalkylator</p>
+          <h2 data-edit="kalk-rubrik">Vad behöver <em>din kropp?</em></h2>
+          <p data-edit="kalk-ingress">Fyll i dina uppgifter och se ungefär hur mycket energi och protein du behöver per dag. Viktskivorna staplas upp i takt med behovet.</p>
+        </div>
+        <form class="kalk-form" id="kalkForm" onsubmit="return false">
+          <fieldset class="val-rad">
+            <legend>Kön</legend>
+            <label><input type="radio" name="kon" id="kKvinna" value="kvinna" checked><span>Kvinna</span></label>
+            <label><input type="radio" name="kon" id="kMan" value="man"><span>Man</span></label>
+          </fieldset>
+          <div class="falt"><label for="kAlder">Ålder (år)</label><input id="kAlder" type="number" inputmode="numeric" min="16" max="90" value="30"></div>
+          <div class="falt"><label for="kLangd">Längd (cm)</label><input id="kLangd" type="number" inputmode="numeric" min="130" max="220" value="170"></div>
+          <div class="falt"><label for="kVikt">Vikt (kg)</label><input id="kVikt" type="number" inputmode="decimal" min="35" max="250" step="0.5" value="70"></div>
+          <div class="falt">
+            <label for="kAktivitet">Aktivitet</label>
+            <select id="kAktivitet">
+              <option value="1.2">Stillasittande</option>
+              <option value="1.375">1–3 pass i veckan</option>
+              <option value="1.55" selected>3–5 pass i veckan</option>
+              <option value="1.725">6–7 pass i veckan</option>
+            </select>
+          </div>
+          <div class="falt hel">
+            <label for="kMal">Ditt mål</label>
+            <select id="kMal">
+              <option value="-0.15">Gå ner i vikt</option>
+              <option value="0">Behålla vikten</option>
+              <option value="0.1" selected>Bygga muskler</option>
+            </select>
+          </div>
+        </form>
+        <dl class="resultat">
+          <div class="kcal"><dt>Energi per dag</dt><dd id="rKalorier">2 300 <small>kcal</small></dd></div>
+          <div class="protein"><dt>Protein per dag</dt><dd id="rProtein">110–155 <small>g</small></dd></div>
+          <div><dt>Vatten per dag</dt><dd id="rVatten">2,5 <small>liter</small></dd></div>
+        </dl>
+        <p class="kalk-varning" id="kVarning" role="status"></p>
+      </div>
+      <div class="kalk-scen">
+        <canvas id="scenPlattor" role="img" aria-label="3D-bild med två staplar av viktskivor. Den röda stapeln visar energibehovet och den karamellfärgade visar proteinbehovet."></canvas>
+        <ul class="legend">
+          <li><i class="l-kcal"></i>1 röd skiva = 250 kcal</li>
+          <li><i class="l-protein"></i>1 karamellskiva = 20 g protein</li>
+        </ul>
+        <p class="kalk-not">En uppskattning enligt Mifflin–St Jeors formel. Den ersätter inte råd från läkare eller dietist.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Omdömen ===== -->
+  <section class="sektion" id="resultat" data-avsnitt="Omdömen">
+    <div class="ram">
+      <div class="sektionshuvud">
+        <p class="etikett" data-edit="omdomen-etikett">Omdömen</p>
+        <h2 data-edit="omdomen-rubrik">Vad mina <em>kunder</em> säger</h2>
+      </div>
+      <div class="omdomen" data-lista="Omdömen">
+        <figure class="omdome">
+          <blockquote data-edit="omdome1-text">Jag har aldrig tränat så regelbundet. Planen är enkel att följa och uppföljningen varje vecka gör att jag inte hoppar över pass.</blockquote>
+          <figcaption data-edit="omdome1-namn">Kund, Coachning · Stockholm</figcaption>
+        </figure>
+        <figure class="omdome">
+          <blockquote data-edit="omdome2-text">Teknikfeedbacken via video är guld värd. Jag lyfter tyngre än någonsin, fast jag tränar ensam på mitt eget gym.</blockquote>
+          <figcaption data-edit="omdome2-namn">Kund, Premium · Göteborg</figcaption>
+        </figure>
+        <figure class="omdome">
+          <blockquote data-edit="omdome3-text">Kostupplägget var det som gjorde skillnad. Inga förbud, bara tydliga mål som går att leva med.</blockquote>
+          <figcaption data-edit="omdome3-namn">Kund, Start · Malmö</figcaption>
+        </figure>
+      </div>
+      <p class="exempelnot" data-edit="omdomen-not">Exempelomdömen – ersätt med riktiga omdömen från dina kunder innan sidan publiceras.</p>
+    </div>
+  </section>
+
+  <!-- ===== Frågor ===== -->
+  <section class="sektion mork" id="fragor" data-avsnitt="Vanliga frågor">
+    <div class="ram fragor">
+      <div class="sektionshuvud">
+        <p class="etikett" data-edit="fragor-etikett">Vanliga frågor</p>
+        <h2 data-edit="fragor-rubrik">Innan <em>du bokar</em></h2>
+      </div>
+      <div class="fragelista" data-lista="Frågor">
+        <details open>
+          <summary data-edit="fraga1">Passar det här för nybörjare?</summary>
+          <p data-edit="svar1">Ja. Planen utgår från din nivå, och vi börjar med tekniken. Du behöver inte ha tränat tidigare.</p>
+        </details>
+        <details>
+          <summary data-edit="fraga2">Behöver jag gymkort?</summary>
+          <p data-edit="svar2">Nej. Programmet anpassas efter den utrustning du har – på gym, hemma eller utomhus.</p>
+        </details>
+        <details>
+          <summary data-edit="fraga3">Hur fungerar onlinecoachningen?</summary>
+          <p data-edit="svar3">Du får ditt program och kostupplägg digitalt, rapporterar din träning varje vecka och får feedback och justeringar av mig. Teknik går vi igenom via video.</p>
+        </details>
+        <details>
+          <summary data-edit>Träffas vi någon gång på plats?</summary>
+          <p data-edit>Nej. All coachning sker online – via videosamtal, chatt och teknikvideor. Därför kan du träna var du vill i hela Sverige.</p>
+        </details>
+        <details>
+          <summary data-edit="fraga4">Måste jag följa en strikt diet?</summary>
+          <p data-edit="svar4">Nej. Kostupplägget bygger på vanlig mat och tydliga mål för energi och protein – anpassat efter det du tycker om.</p>
+        </details>
+        <details>
+          <summary data-edit="fraga5">Hur betalar jag?</summary>
+          <p data-edit="svar5">Välj nivå under Priser och betala säkert via Stripe med kort, Apple Pay, Google Pay eller Klarna. Vill du prata först bokar du en kostnadsfri konsultation och betalar när du har bestämt dig. Dina kortuppgifter hanteras bara av Stripe och når aldrig mig.</p>
+        </details>
+        <details>
+          <summary data-edit="fraga6">Kan jag avsluta coachningen?</summary>
+          <p data-edit="svar6">Ja. Coachningen löper månadsvis och du kan säga upp den när som helst – den gäller perioden ut och sedan görs inga fler dragningar. Villkoren finns i köpvillkoren längst ner på sidan.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Boka ===== -->
+  <section class="sektion boka-sektion" id="boka" data-avsnitt="Boka">
+    <div class="ram boka">
+      <div class="sektionshuvud">
+        <p class="etikett" data-edit="boka-etikett">Boka konsultation</p>
+        <h2 data-edit="boka-rubrik">Ta första steget <em>i dag</em></h2>
+        <p data-edit="boka-text">Fyll i formuläret så återkommer jag inom två arbetsdagar med förslag på tid för ett kostnadsfritt videosamtal.</p>
+        <div class="kontaktrad">
+          <span class="etikett" data-edit="kontakt-etikett">Eller mejla mig direkt</span>
+          <a href="#boka" id="epostLank" data-edit="epost">kontakt@styrkeateljen.se</a>
+        </div>
+      </div>
+      <div class="bokningsruta">
+        <form id="bokaForm" novalidate>
+          <div class="falt"><label for="fNamn">Namn</label><input id="fNamn" name="namn" autocomplete="name" required aria-describedby="felNamn"><p class="falt-fel" id="felNamn" aria-live="polite"></p></div>
+          <div class="falt"><label for="fEpost">E-post</label><input id="fEpost" name="epost" type="email" autocomplete="email" required aria-describedby="felEpost"><p class="falt-fel" id="felEpost" aria-live="polite"></p></div>
+          <div class="falt"><label for="fTelefon">Telefon (valfritt)</label><input id="fTelefon" name="telefon" type="tel" autocomplete="tel"></div>
+          <div class="falt">
+            <label for="fMal">Ditt mål</label>
+            <select id="fMal" name="mal">
+              <option>Bli starkare</option>
+              <option>Bygga muskler</option>
+              <option>Gå ner i vikt</option>
+              <option>Bättre kondition</option>
+              <option>Komma igång</option>
+            </select>
+          </div>
+          <div class="falt hel">
+            <label for="fNiva">Din erfarenhet</label>
+            <select id="fNiva" name="niva">
+              <option>Nybörjare</option>
+              <option selected>Tränar ibland</option>
+              <option>Tränar regelbundet</option>
+            </select>
+          </div>
+          <div class="falt hel"><label for="fMeddelande">Berätta gärna mer (valfritt)</label><textarea id="fMeddelande" name="meddelande"></textarea></div>
+          <div class="honung" aria-hidden="true"><label for="fHonung">Lämna tomt</label><input id="fHonung" name="_honey" tabindex="-1" autocomplete="off"></div>
+          <button class="knapp" type="submit" id="skickaKnapp">Skicka förfrågan</button>
+          <p class="formnot"><span data-edit="form-not">Dina uppgifter används enbart för att kontakta dig om konsultationen.</span> <button class="lanklik" type="button" data-oppna-dialog="integritetDialog">Läs integritetspolicyn</button></p>
+        </form>
+        <div class="tack" id="tackRuta" hidden>
+          <p class="etikett">Skickat</p>
+          <h3 data-edit="tack-rubrik">Tack! Jag hör av mig inom två arbetsdagar.</h3>
+          <p data-edit="tack-text">Svaret skickas till den e-postadress du angav. Kontrollera gärna även skräpposten.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== Sidfot ===== -->
+<footer class="sidfot" data-region="sidfot">
+  <div class="ram sidfot-topp">
+    <ul class="sidfot-lankar" data-lista="Sidfotslänkar">
+      <li><a href="#sa-funkar-det" data-edit>Så går det till</a></li>
+      <li><a href="#priser" data-edit>Priser</a></li>
+      <li><a href="#traningsprogram" data-edit>Träningsprogram</a></li>
+      <li><a href="#kalkylator" data-edit>Kalkylator</a></li>
+      <li><a href="#fragor" data-edit>Frågor</a></li>
+      <li><a href="#boka" data-edit>Boka konsultation</a></li>
+    </ul>
+    <p class="ordmarke" data-edit="sidfot-ordmarke">Styrkeateljén</p>
+  </div>
+  <div class="ram sidfot-inre">
+    <p class="halsoinfo" data-edit="halsoinfo"><strong>Hälsa och säkerhet.</strong> Rådgör med läkare innan du börjar träna om du har en sjukdom, en skada eller är gravid. Kalkylatorn och coachningen ger vägledning om träning och kost och ersätter inte medicinsk rådgivning.</p>
+    <div class="sidfot-meta">
+      <span data-edit="sidfot-namn">Styrkeateljén</span>
+      <span data-edit="sidfot-orgnr">Org.nr <span data-falt="orgnr">000000-0000</span></span>
+      <button class="lanklik" type="button" data-oppna-dialog="integritetDialog">Integritetspolicy</button>
+      <button class="lanklik" type="button" data-oppna-dialog="villkorDialog">Köpvillkor</button>
+      <span data-edit="sidfot-ar">© 2026</span>
+    </div>
+    <p class="krediter">Foto: Anastase Maragos, Paweł Bulwan och Edgar Chaparro via Unsplash · Film: Coverr</p>
+  </div>
+</footer>
+
+<!-- ===== Integritetspolicy ===== -->
+<dialog id="integritetDialog" aria-labelledby="integritetRubrik">
+  <div class="dialog-inre">
+    <h2 id="integritetRubrik">Integritetspolicy</h2>
+    <div class="dialog-text" data-edit="integritet-text" data-region="integritet">
+      <p><strong>Personuppgiftsansvarig:</strong> <span data-falt="foretag">Styrkeateljén</span>, org.nr <span data-falt="orgnr">000000-0000</span>.</p>
+      <p><strong>Vilka uppgifter:</strong> namn, e-post, telefon och det du skriver i formuläret. Vid köp även uppgifter om betalningen, till exempel belopp, datum och betalsätt.</p>
+      <p><strong>Varför:</strong> för att besvara din förfrågan, boka en konsultation och genomföra coachningen du har köpt. Den rättsliga grunden är avtal (och åtgärder innan ett avtal ingås) samt rättslig förpliktelse enligt bokföringslagen.</p>
+      <p><strong>Hur länge:</strong> uppgifter från formuläret raderas senast tolv månader efter senaste kontakt om inget avtal ingås. Kvitton och annat bokföringsunderlag sparas i sju år enligt bokföringslagen.</p>
+      <p><strong>Vem får del av dem:</strong> formuläret skickas via e-posttjänsten FormSubmit till min inkorg. Betalningar hanteras av Stripe Payments Europe Ltd., som själv ansvarar för dina betaluppgifter. Jag får ditt namn, din e-postadress och uppgifter om betalningen – aldrig ditt fullständiga kortnummer. Uppgifterna säljs eller delas aldrig vidare.</p>
+      <p><strong>Tredjepartstjänster på sidan:</strong> typsnitten hämtas från Google Fonts och 3D-grafiken från tjänsten jsDelivr. När sidan laddas skickas därför din IP-adress till dessa tjänster. Sidan använder inga spårningskakor och ingen annonsering.</p>
+      <p><strong>Dina rättigheter:</strong> du kan när som helst begära att få se, rätta eller radera dina uppgifter genom att kontakta mig via e-post. Du kan också lämna klagomål till Integritetsskyddsmyndigheten (IMY).</p>
+    </div>
+    <button class="knapp" type="button" data-stang-dialog>Stäng</button>
+  </div>
+</dialog>
+
+<!-- ===== Köpvillkor ===== -->
+<dialog id="villkorDialog" aria-labelledby="villkorRubrik">
+  <div class="dialog-inre">
+    <h2 id="villkorRubrik">Köpvillkor</h2>
+    <div class="dialog-text" data-edit="villkor-text" data-region="villkor">
+      <p><strong>Tjänsten:</strong> <span data-falt="foretag">Styrkeateljén</span> erbjuder onlinecoachning inom träning och kost. All coachning sker digitalt. Tjänsten ersätter inte medicinsk rådgivning.</p>
+      <p><strong>Din hälsa:</strong> Du ansvarar för att din hälsa tillåter träning. Rådgör med läkare innan du börjar om du har en sjukdom, en skada eller är gravid, och berätta om sådant vid konsultationen.</p>
+      <p><strong>Beställning och betalning:</strong> Du beställer genom att välja nivå och betala på Stripes säkra betalsida med kort, Apple Pay, Google Pay eller Klarna. Avtalet ingås när betalningen är genomförd, och kvittot skickas till din e-post. Coachningen betalas månadsvis i förskott och dras automatiskt varje månad tills du säger upp den. Vill du hellre betala mot faktura går det att ordna efter den kostnadsfria konsultationen. Samtliga priser anges inklusive moms.</p>
+      <p><strong>Ångerrätt:</strong> Du har 14 dagars ångerrätt enligt lagen om distansavtal och avtal utanför affärslokaler. Om du uttryckligen begär att tjänsten ska påbörjas under ångerfristen och sedan ångrar dig, betalar du för den del som redan har utförts. Pengarna betalas tillbaka inom 14 dagar till samma betalsätt som du använde.</p>
+      <p><strong>Ombokning av videosamtal:</strong> Bokade videosamtal kan flyttas kostnadsfritt fram till <span data-falt="avbokning">24</span> timmar före avtalad tid. Samtal som uteblir utan avbokning räknas som genomförda.</p>
+      <p><strong>Uppsägning:</strong> Alla coachningsnivåer löper månadsvis och kan sägas upp när som helst via e-post. Uppsägningen gäller från nästa betalningsperiod, och därefter görs inga fler dragningar.</p>
+      <p><strong>Frågor och klagomål:</strong> Kontakta mig via e-post. Om vi inte kommer överens kan du vända dig till Allmänna reklamationsnämnden (ARN).</p>
+    </div>
+    <button class="knapp" type="button" data-stang-dialog>Stäng</button>
+  </div>
+</dialog>
+
+<!-- ===== Förklaringsfilm ===== -->
+<dialog class="video-dialog" id="videoDialog" aria-label="Film: så fungerar coachningen">
+  <div class="video-inre" data-region="forklaringsfilm" data-video-slot="forklaring">
+    <video src="media/forklaring.mp4" poster="media/forklaring.jpg" controls playsinline preload="none"></video>
+  </div>
+  <button class="video-stang" type="button" data-stang-dialog aria-label="Stäng filmen">✕</button>
+</dialog>
+
+<!-- ===== Välkommen efter betalning (Stripe skickar tillbaka kunden med ?betalt=1) ===== -->
+<dialog id="valkommenDialog" aria-labelledby="valkommenRubrik">
+  <div class="dialog-inre">
+    <p class="etikett">Betalningen är klar</p>
+    <h2 id="valkommenRubrik">Välkommen – <em>nu kör vi</em></h2>
+    <div class="dialog-text" data-edit="valkommen-text" data-region="valkommen">
+      <p><strong>Tack för ditt köp!</strong> Kvittot skickas från Stripe till den e-postadress du angav vid betalningen.</p>
+      <p>Jag hör av mig inom två arbetsdagar med några frågor om dina mål och förslag på tid för vårt första videosamtal.</p>
+      <p>Har du frågor redan nu? Mejla mig gärna – adressen finns under Boka konsultation.</p>
+    </div>
+    <button class="knapp" type="button" data-stang-dialog>Stäng</button>
+  </div>
+</dialog>
+
+<!-- ===== Guide: fyll i dina uppgifter (öppnas bara av ägaren) ===== -->
+<dialog class="guide" id="uppgiftsDialog" aria-labelledby="guideRubrik">
+  <div class="dialog-inre">
+    <h2 id="guideRubrik">Fyll i dina uppgifter</h2>
+    <p class="hjalp">Det du skriver här uppdateras automatiskt överallt på sidan. Lämna ett fält tomt för att behålla det som står i dag. Du kan ändra allt igen senare.</p>
+    <form id="guideForm" novalidate>
+      <fieldset>
+        <legend>Om dig</legend>
+        <div class="falt"><label for="gNamn">Ditt namn</label><input id="gNamn" autocomplete="name" placeholder="Förnamn Efternamn"></div>
+        <div class="falt"><label for="gUtbildning">Din utbildning</label><input id="gUtbildning" placeholder="T.ex. licensierad personlig tränare"></div>
+        <div class="falt"><label for="gEpost">Din e-postadress</label><input id="gEpost" type="email" autocomplete="email" placeholder="namn@exempel.se" aria-describedby="gEpostFel"><p class="falt-fel" id="gEpostFel" aria-live="polite"></p></div>
+        <div class="falt"><label for="gOrgnr">Organisationsnummer</label><input id="gOrgnr" inputmode="numeric" placeholder="556677-8899" aria-describedby="gOrgnrFel"><p class="falt-fel" id="gOrgnrFel" aria-live="polite"></p></div>
+        <div class="falt"><label for="gForetag">Företagets namn</label><input id="gForetag" placeholder="Styrkeateljén"></div>
+        <div class="falt"><label for="gPortratt">Porträtt</label><div class="portratt-rad"><img class="portratt-mini" id="gPortrattBild" alt="Förhandsvisning av porträttet" hidden><input id="gPortratt" type="file" accept="image/*"></div></div>
+        <p class="hjalp hel">Bokningsförfrågningar från formuläret skickas till din e-postadress.</p>
+      </fieldset>
+      <fieldset>
+        <legend>Priser</legend>
+        <div class="falt"><label for="gPrisOnline">Start</label><input id="gPrisOnline" placeholder="495 kr"></div>
+        <div class="falt"><label for="gPrisPremium">Coachning</label><input id="gPrisPremium" placeholder="995 kr"></div>
+        <div class="falt"><label for="gPrisPt">Premium</label><input id="gPrisPt" placeholder="1 995 kr"></div>
+        <label class="kryss hel"><input type="checkbox" id="gPriserOk"> Priserna stämmer för min verksamhet</label>
+      </fieldset>
+      <fieldset>
+        <legend>Betalning med Stripe</legend>
+        <p class="hjalp hel">Klistra in betallänken från Stripe för varje nivå, så kan kunderna betala säkert direkt på sidan. Hur du skapar länkarna står i avsnitt 8 i filen LÄS MIG. Töm ett fält så leder knappen till bokningsformuläret igen.</p>
+        <div class="falt hel"><label for="gBetal1">Betallänk – Start</label><input id="gBetal1" type="url" inputmode="url" autocomplete="off" placeholder="https://buy.stripe.com/…" aria-describedby="gBetal1Fel"><p class="falt-fel" id="gBetal1Fel" aria-live="polite"></p></div>
+        <div class="falt hel"><label for="gBetal2">Betallänk – Coachning</label><input id="gBetal2" type="url" inputmode="url" autocomplete="off" placeholder="https://buy.stripe.com/…" aria-describedby="gBetal2Fel"><p class="falt-fel" id="gBetal2Fel" aria-live="polite"></p></div>
+        <div class="falt hel"><label for="gBetal3">Betallänk – Premium</label><input id="gBetal3" type="url" inputmode="url" autocomplete="off" placeholder="https://buy.stripe.com/…" aria-describedby="gBetal3Fel"><p class="falt-fel" id="gBetal3Fel" aria-live="polite"></p></div>
+        <p class="hjalp hel">Tips: låt Stripe skicka kunden tillbaka till din sida med <strong>?betalt=1</strong> sist i adressen, så visas en välkomstruta. <button class="lanklik" type="button" data-oppna-dialog="valkommenDialog">Visa välkomstrutan</button></p>
+      </fieldset>
+      <fieldset>
+        <legend>Omdömen</legend>
+        <label class="kryss hel"><input type="checkbox" id="gVisaOmdomen" checked> Visa avsnittet med omdömen på sidan</label>
+        <p class="hjalp hel">Använd bara riktiga omdömen som kunden har godkänt. Ett omdöme som lämnas tomt döljs när du har fyllt i minst ett.</p>
+        <div class="falt hel"><label for="gOmdome1">Omdöme 1</label><textarea id="gOmdome1" rows="2"></textarea></div>
+        <div class="falt hel"><label for="gOmdomeNamn1">Vem som skrev omdöme 1</label><input id="gOmdomeNamn1" placeholder="Förnamn, program · stad"></div>
+        <div class="falt hel"><label for="gOmdome2">Omdöme 2</label><textarea id="gOmdome2" rows="2"></textarea></div>
+        <div class="falt hel"><label for="gOmdomeNamn2">Vem som skrev omdöme 2</label><input id="gOmdomeNamn2" placeholder="Förnamn, program · stad"></div>
+        <div class="falt hel"><label for="gOmdome3">Omdöme 3</label><textarea id="gOmdome3" rows="2"></textarea></div>
+        <div class="falt hel"><label for="gOmdomeNamn3">Vem som skrev omdöme 3</label><input id="gOmdomeNamn3" placeholder="Förnamn, program · stad"></div>
+      </fieldset>
+      <fieldset>
+        <legend>Villkor</legend>
+        <div class="falt"><label for="gAvbokning">Ombokning av videosamtal (timmar före)</label><input id="gAvbokning" type="number" min="0" step="1" inputmode="numeric"></div>
+        <p class="hjalp hel"><button class="lanklik" type="button" data-oppna-dialog="villkorDialog">Läs köpvillkoren</button> · <button class="lanklik" type="button" data-oppna-dialog="integritetDialog">Läs integritetspolicyn</button></p>
+        <label class="kryss hel"><input type="checkbox" id="gVillkorGranskade"> Jag har läst köpvillkoren och integritetspolicyn och de stämmer för min verksamhet</label>
+      </fieldset>
+      <div class="guide-knappar"><button class="knapp" type="submit">Spara uppgifterna</button><button class="knapp spok" type="button" data-stang-dialog>Avbryt</button></div>
+    </form>
+  </div>
+</dialog>
+
+<!-- ===== Till toppen och fast bokningsknapp ===== -->
+<button class="till-toppen" id="tillToppen" type="button" aria-label="Till toppen av sidan"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+<div class="mobil-cta" id="mobilCta" data-region="mobilknapp"><a class="knapp" href="#boka" data-edit="mobil-cta">Boka kostnadsfri konsultation</a></div>
+
+<!-- ===== Redigeringsverktyg (visas bara för ägaren) ===== -->
+<div class="redigera-panel" id="redigeraPanel" hidden>
+  <div class="redigera-verktyg" id="redigeraVerktyg" hidden>
+    <button class="knapp" type="button" data-oppna-guide>Fyll i dina uppgifter</button>
+    <p>Klicka på en text för att skriva. För musen över ett kort, en rad eller en övning för att flytta den (↑ ↓), lägga till en kopia (+) eller ta bort den (✕). Klicka på en knapp eller länk för att ändra vart den leder.</p>
+    <h4>Innan du publicerar</h4>
+    <ul class="checklista" id="checklista" data-genererad></ul>
+    <h4>Avsnitt på sidan</h4>
+    <p>Kryssa ur för att dölja ett avsnitt för besökare. Flytta med pilarna.</p>
+    <ul class="avsnittslista" id="avsnittslista" data-genererad></ul>
+    <h4>Färger</h4>
+    <div class="fargrad">
+      <div class="verktygsrad"><label for="fargAccent">Accentfärg</label><input type="color" id="fargAccent" value="#E3122C"></div>
+      <div class="verktygsrad"><label for="fargDetalj">Detaljfärg</label><input type="color" id="fargDetalj" value="#C9853F"></div>
+      <div class="verktygsrad"><label for="fargBakgrund">Bakgrund</label><input type="color" id="fargBakgrund" value="#140806"></div>
+      <button class="textknapp" type="button" id="aterstallFarger">Återställ färgerna</button>
+    </div>
+    <h4>3D</h4>
+    <label class="kryss"><input type="checkbox" id="val3dHjalte" checked> Kettlebell i toppen</label>
+    <label class="kryss"><input type="checkbox" id="val3dKalk" checked> Viktskivor i kalkylatorn</label>
+    <h4>Videor</h4>
+    <p>Skriv namnet på en videofil i mappen <em>media</em> eller klistra in en YouTube-länk.</p>
+    <div class="videofalt"><label for="videoFilm">Videobandet</label><div><input id="videoFilm" placeholder="video-battlerope.mp4"><button type="button" data-anvand-video="film" data-falt="videoFilm">Använd</button></div></div>
+    <div class="videofalt"><label for="videoGalleri">Galleriet</label><div><input id="videoGalleri" placeholder="video-knaboj.mp4"><button type="button" data-anvand-video="galleri" data-falt="videoGalleri">Använd</button></div></div>
+    <div class="videofalt"><label for="videoVeckan">En vecka</label><div><input id="videoVeckan" placeholder="video-kettlebell.mp4"><button type="button" data-anvand-video="veckan" data-falt="videoVeckan">Använd</button></div></div>
+    <div class="videofalt"><label for="videoForklaring">Förklaringsfilmen</label><div><input id="videoForklaring" placeholder="forklaring.mp4"><button type="button" data-anvand-video="forklaring" data-falt="videoForklaring">Använd</button></div></div>
+    <h4>Spara</h4>
+    <button class="knapp" type="button" id="laddaNerKnapp">Ladda ner färdig sida</button>
+    <p id="laddaNerInfo">Ersätt din gamla <em>index.html</em> med filen du laddar ner. Då följer ändringarna med när du publicerar.</p>
+    <button class="textknapp" type="button" id="aterstallKnapp">Återställ allt till original</button>
+  </div>
+  <div class="uppgift-kort" id="uppgiftKort" hidden>
+    <p id="uppgiftKortText">Några saker återstår innan sidan kan publiceras.</p>
+    <button class="knapp" type="button" data-oppna-guide>Fyll i dina uppgifter</button>
+  </div>
+  <button class="redigera-knapp" type="button" id="redigeraKnapp" aria-expanded="false" aria-controls="redigeraVerktyg">✎ Redigera sidan</button>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="lank-ruta" id="lankRuta" hidden><label for="lankFalt">Länken leder till</label><input id="lankFalt" list="lankForslag" placeholder="#boka eller https://…"><datalist id="lankForslag"></datalist><button type="button" id="lankKlar">Klar</button></div>
+
+<script>
+(function () {
+  'use strict';
+
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const LAGRING = 'styrkeateljen-v1';
+  const STANDARD = { epost: 'kontakt@styrkeateljen.se', namn: 'Ditt namn', utbildning: 'Din utbildning', orgnr: '000000-0000', accent: '#E3122C' };
+  const minskadRorelse = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const iRam = window.self !== window.top;
+  // Ägarverktygen visas bara när filen öppnas från datorn, i förhandsvisningen eller med #redigera
+  const agarlage = location.protocol === 'file:' || /redigera/i.test(location.hash) || iRam;
+  const redigerar = () => document.documentElement.classList.contains('redigerar');
+
+  function lasLagring() { try { return JSON.parse(localStorage.getItem(LAGRING)) || {}; } catch (e) { return {}; } }
+  function skrivLagring(d) { try { localStorage.setItem(LAGRING, JSON.stringify(d)); return true; } catch (e) { return false; } }
+  let toastTimer;
+  function visaToast(text) {
+    const t = $('#toast');
+    t.textContent = text;
+    t.classList.add('synlig');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('synlig'), 4200);
+  }
+  const heltal = new Intl.NumberFormat('sv-SE', { maximumFractionDigits: 0 });
+  const decimal = new Intl.NumberFormat('sv-SE', { maximumFractionDigits: 1 });
+
+  /* ---------- Framsteg, navigering vid scroll och principlöpare ---------- */
+  function initLyx() {
+    const framsteg = $('#framsteg'), nav = $('.nav');
+    let vantar = false;
+    const uppdatera = () => {
+      vantar = false;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      framsteg.style.transform = 'scaleX(' + (max > 0 ? window.scrollY / max : 0).toFixed(4) + ')';
+      nav.classList.toggle('skrollad', window.scrollY > 40);
+    };
+    window.addEventListener('scroll', () => { if (!vantar) { vantar = true; requestAnimationFrame(uppdatera); } }, { passive: true });
+    uppdatera();
+    // Löparens andra halva speglar den redigerbara första så att loopen blir sömlös
+    const forsta = $('#principerForsta'), andra = $('#principerAndra');
+    const spegla = () => {
+      andra.innerHTML = forsta.innerHTML;
+      $$("[data-verktyg]", andra).forEach(v => v.remove());
+      $$('[data-edit], [contenteditable]', andra).forEach(el => { el.removeAttribute('data-edit'); el.removeAttribute('contenteditable'); el.removeAttribute('spellcheck'); });
+    };
+    spegla();
+    forsta.addEventListener('input', spegla);
+  }
+
+  /* ---------- Meny, dialoger, aktivt avsnitt och till toppen ---------- */
+  function initNavigering() {
+    const knapp = $('#menyKnapp'), lankar = $('#navLankar');
+    const stang = () => { lankar.classList.remove('oppen'); knapp.setAttribute('aria-expanded', 'false'); knapp.setAttribute('aria-label', 'Öppna menyn'); };
+    knapp.addEventListener('click', () => {
+      const oppen = !lankar.classList.contains('oppen');
+      lankar.classList.toggle('oppen', oppen);
+      knapp.setAttribute('aria-expanded', String(oppen));
+      knapp.setAttribute('aria-label', oppen ? 'Stäng menyn' : 'Öppna menyn');
+    });
+    $$('a', lankar).forEach(a => a.addEventListener('click', stang));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') stang(); });
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(p => $('#mobilCta').classList.toggle('dold', p[0].isIntersecting), { threshold: 0.15 }).observe($('#boka'));
+    }
+
+    const oppnaDialog = d => { if (typeof d.showModal === 'function') d.showModal(); else d.setAttribute('open', ''); };
+    const stangDialog = d => { if (typeof d.close === 'function') d.close(); else d.removeAttribute('open'); };
+    $$('[data-oppna-dialog]').forEach(b => b.addEventListener('click', () => oppnaDialog($('#' + b.dataset.oppnaDialog))));
+    $$('[data-stang-dialog]').forEach(b => b.addEventListener('click', () => stangDialog(b.closest('dialog'))));
+    // Klick utanför rutan stänger den – men inte guiden, så att ifyllda uppgifter inte försvinner
+    $$('dialog:not(.guide)').forEach(d => d.addEventListener('click', e => { if (e.target === d) stangDialog(d); }));
+
+    const menyLankar = $$('.nav-lankar a[href^="#"]');
+    const avsnitt = menyLankar.map(a => document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+    if ('IntersectionObserver' in window && avsnitt.length) {
+      const synliga = new Map();
+      const spana = new IntersectionObserver(poster => {
+        poster.forEach(p => synliga.set(p.target.id, p.isIntersecting));
+        const aktivt = avsnitt.find(s => synliga.get(s.id));
+        menyLankar.forEach(a => a.classList.toggle('aktiv', !!aktivt && a.getAttribute('href') === '#' + aktivt.id));
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      avsnitt.forEach(s => spana.observe(s));
+    }
+
+    const toppen = $('#tillToppen');
+    const visaToppen = () => toppen.classList.toggle('synlig', window.scrollY > window.innerHeight * 1.2);
+    window.addEventListener('scroll', visaToppen, { passive: true });
+    visaToppen();
+    toppen.addEventListener('click', () => window.scrollTo({ top: 0, behavior: minskadRorelse ? 'auto' : 'smooth' }));
+  }
+
+  /* ---------- Videor spelas bara när de syns ---------- */
+  function initVideor() {
+    $$('[data-bakgrund] video').forEach(v => {
+      v.muted = true;
+      if (minskadRorelse) return;
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(p => { if (p[0].isIntersecting) v.play().catch(() => {}); else v.pause(); }, { threshold: 0.1 }).observe(v);
+      } else { v.play().catch(() => {}); }
+    });
+  }
+
+  /* ---------- 3D-lutning på kort och bilder ---------- */
+  function initTilt() {
+    if (minskadRorelse || !window.matchMedia('(hover: hover)').matches) return;
+    $$('[data-tilt]').forEach(el => {
+      el.addEventListener('pointermove', e => {
+        if (redigerar()) return;
+        const r = el.getBoundingClientRect();
+        el.style.setProperty('--ry', (((e.clientX - r.left) / r.width - 0.5) * 7).toFixed(2) + 'deg');
+        el.style.setProperty('--rx', (-((e.clientY - r.top) / r.height - 0.5) * 7).toFixed(2) + 'deg');
+      });
+      el.addEventListener('pointerleave', () => { el.style.setProperty('--ry', '0deg'); el.style.setProperty('--rx', '0deg'); });
+    });
+  }
+
+  /* =====================================================================
+     3D (three.js 0.186 – laddas som modul från jsDelivr när den behövs)
+     ===================================================================== */
+  const THREE_URL = 'https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.min.js';
+  let threeLofte = null;
+  const laddaThree = () => { if (!threeLofte) threeLofte = import(THREE_URL); return threeLofte; };
+
+  const scener = [];
+  let loopIgang = false, loopStart = null;
+  function loop(tid) {
+    if (loopStart === null) loopStart = tid;
+    const t = (tid - loopStart) / 1000;
+    let nagon = false;
+    scener.forEach(s => { if (s.synlig) { s.rita(t); nagon = true; } });
+    if (nagon) requestAnimationFrame(loop); else loopIgang = false;
+  }
+  function startaLoop() {
+    if (minskadRorelse || loopIgang || !scener.some(s => s.synlig)) return;
+    loopIgang = true;
+    requestAnimationFrame(loop);
+  }
+  function registreraScen(element, rita) {
+    const s = { synlig: !('IntersectionObserver' in window), rita };
+    scener.push(s);
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(p => { s.synlig = p[0].isIntersecting; startaLoop(); }, { rootMargin: '120px' }).observe(element);
+    }
+    startaLoop();
+  }
+  function nyRenderare(THREE, canvas) {
+    if (!canvas) return null;
+    try {
+      const r = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+      r.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      // Rätt färgrymd och filmisk tonmappning ger lacken djup och glans
+      r.outputColorSpace = THREE.SRGBColorSpace;
+      r.toneMapping = THREE.ACESFilmicToneMapping;
+      r.toneMappingExposure = 1.1;
+      return r;
+    } catch (e) { return null; }
+  }
+  // Ett litet fotostudio-rum som ger reflexer i lacken
+  function skapaMiljo(THREE, renderer) {
+    const pm = new THREE.PMREMGenerator(renderer);
+    const rum = new THREE.Scene();
+    rum.add(new THREE.Mesh(new THREE.BoxGeometry(20, 20, 20), new THREE.MeshBasicMaterial({ color: 0x1a0a07, side: THREE.BackSide })));
+    const panel = (b, h, farg, x, y, z) => {
+      const m = new THREE.Mesh(new THREE.PlaneGeometry(b, h), new THREE.MeshBasicMaterial({ color: farg, side: THREE.DoubleSide }));
+      m.position.set(x, y, z); m.lookAt(0, 0, 0); rum.add(m);
+    };
+    panel(12, 3, 0xffffff, 0, 9, 2);
+    panel(4, 8, 0xffe2c6, -9, 1, 5);
+    panel(3, 7, 0xff4a4a, 9, 0, -3);
+    panel(8, 1.5, 0xffffff, 2, 3, 9);
+    const env = pm.fromScene(rum, 0.04).texture;
+    pm.dispose();
+    return env;
+  }
+  function tokenFarg(THREE, namn, reserv) {
+    const v = getComputedStyle(document.documentElement).getPropertyValue(namn).trim();
+    return new THREE.Color(/^#[0-9a-f]{6}$/i.test(v) ? v : reserv);
+  }
+  function skapaSlump(fro) {
+    return () => {
+      fro = (fro + 0x6D2B79F5) | 0;
+      let t = Math.imul(fro ^ (fro >>> 15), 1 | fro);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  function anpassaStorlek(renderer, kamera, canvas, efter) {
+    const f = () => {
+      const b = canvas.clientWidth, h = canvas.clientHeight;
+      if (!b || !h) return;
+      renderer.setSize(b, h, false);
+      kamera.aspect = b / h;
+      kamera.updateProjectionMatrix();
+      if (efter) efter(b / h);
+    };
+    f();
+    if ('ResizeObserver' in window) new ResizeObserver(f).observe(canvas); else window.addEventListener('resize', f);
+  }
+
+  /* ---------- Scen 1: colaröd kettlebell med kolsyrebubblor ---------- */
+  function scenKettlebell(THREE) {
+    const canvas = $('#scenKettlebell');
+    const renderer = nyRenderare(THREE, canvas);
+    if (!renderer) { document.documentElement.classList.add('ingen-webgl'); canvas.hidden = true; return; }
+    const rod = tokenFarg(THREE, '--rod', STANDARD.accent);
+    const karamell = tokenFarg(THREE, '--karamell', '#C9853F');
+    const scen = new THREE.Scene();
+    scen.environment = skapaMiljo(THREE, renderer);
+    const kamera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
+    kamera.position.set(0, 0.5, 7.4);
+
+    // Ljusstyrkor i fysiska enheter (three.js 0.155 och senare)
+    scen.add(new THREE.AmbientLight(0xffffff, 0.8));
+    const nyckel = new THREE.DirectionalLight(0xfff0e0, 5); nyckel.position.set(3, 5, 5); scen.add(nyckel);
+    const kant = new THREE.PointLight(rod, 9.5, 14, 0); kant.position.set(-3, 1.5, -3); scen.add(kant);
+    const varm = new THREE.PointLight(karamell, 4.4, 12, 0); varm.position.set(3, -2, 2); scen.add(varm);
+
+    const lack = new THREE.MeshPhysicalMaterial({ color: rod, metalness: 0.15, roughness: 0.26, clearcoat: 1, clearcoatRoughness: 0.06 });
+    const gummi = new THREE.MeshStandardMaterial({ color: 0x160806, roughness: 0.8, metalness: 0 });
+    const vikt = new THREE.Group();
+    const klot = new THREE.Mesh(new THREE.SphereGeometry(1, 96, 64), lack);
+    klot.scale.set(1, 0.94, 1);
+    const handtag = new THREE.Mesh(new THREE.TorusGeometry(0.58, 0.13, 32, 120, Math.PI), lack);
+    handtag.position.y = 1.02;
+    const horn1 = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.16, 0.5, 32), lack);
+    horn1.position.set(0.58, 0.8, 0);
+    const horn2 = horn1.clone(); horn2.position.x = -0.58;
+    const fot = new THREE.Mesh(new THREE.CylinderGeometry(0.6, 0.62, 0.05, 64), gummi);
+    fot.position.y = -0.92;
+    const emblem = new THREE.Mesh(new THREE.TorusGeometry(0.28, 0.022, 16, 90), new THREE.MeshStandardMaterial({ color: karamell, metalness: 1, roughness: 0.25 }));
+    emblem.position.set(0, -0.05, 0.965);
+    vikt.add(klot, handtag, horn1, horn2, fot, emblem);
+    vikt.position.y = -0.25;
+    scen.add(vikt);
+
+    const ring = new THREE.Mesh(new THREE.TorusGeometry(1.9, 0.012, 12, 200), new THREE.MeshStandardMaterial({ color: karamell, metalness: 1, roughness: 0.2, emissive: karamell, emissiveIntensity: 0.4 }));
+    ring.rotation.set(1.3, 0.25, 0);
+    scen.add(ring);
+
+    // Kolsyrebubblor som stiger
+    const slump = skapaSlump(20260913);
+    const ANTAL = 150;
+    const bubblor = new THREE.InstancedMesh(
+      new THREE.SphereGeometry(1, 16, 12),
+      new THREE.MeshStandardMaterial({ color: 0xFFF3E6, roughness: 0.1, metalness: 0.2, transparent: true, opacity: 0.32, emissive: karamell, emissiveIntensity: 0.15, depthWrite: false }),
+      ANTAL
+    );
+    const data = Array.from({ length: ANTAL }, () => ({
+      x: (slump() - 0.5) * 5.2, y: (slump() - 0.5) * 5, z: (slump() - 0.5) * 3,
+      r: 0.015 + Math.pow(slump(), 2) * 0.07, fart: 0.25 + slump() * 0.55, fas: slump() * 6.28
+    }));
+    scen.add(bubblor);
+
+    const d = new THREE.Object3D();
+    function placeraBubblor(dt, t) {
+      data.forEach((b, i) => {
+        b.y += b.fart * dt;
+        if (b.y > 2.8) { b.y = -2.8; b.x = (slump() - 0.5) * 5.2; }
+        d.position.set(b.x + Math.sin(t * 1.3 + b.fas) * 0.08, b.y, b.z);
+        d.scale.setScalar(b.r);
+        d.updateMatrix();
+        bubblor.setMatrixAt(i, d.matrix);
+      });
+      bubblor.instanceMatrix.needsUpdate = true;
+    }
+
+    const mus = { x: 0, y: 0 }, mjuk = { x: 0, y: 0 };
+    $('#hjalte').addEventListener('pointermove', e => {
+      mus.x = (e.clientX / window.innerWidth - 0.5) * 2;
+      mus.y = (e.clientY / window.innerHeight - 0.5) * 2;
+    });
+    let forra = 0;
+    function rita(t) {
+      const dt = Math.min(0.05, t - forra); forra = t;
+      mjuk.x += (mus.x - mjuk.x) * 0.05; mjuk.y += (mus.y - mjuk.y) * 0.05;
+      const intro = Math.min(1, t / 1.4), e = 1 - Math.pow(1 - intro, 3);
+      vikt.rotation.y = -0.6 + t * 0.35 + mjuk.x * 0.5;
+      vikt.rotation.x = Math.sin(t * 0.6) * 0.06 + mjuk.y * 0.15;
+      vikt.position.y = -0.25 + Math.sin(t * 1.1) * 0.08;
+      vikt.scale.setScalar(0.85 + e * 0.15);
+      ring.rotation.z = t * 0.2;
+      placeraBubblor(dt, t);
+      kamera.lookAt(0, 0.05, 0);
+      renderer.render(scen, kamera);
+    }
+    anpassaStorlek(renderer, kamera, canvas, () => { if (minskadRorelse) { placeraBubblor(0, 0); rita(3); } });
+    if (!minskadRorelse) registreraScen($('#hjalte'), rita);
+  }
+
+  /* ---------- Scen 2: staplar av viktskivor i kalkylatorn ---------- */
+  function scenPlattor(THREE) {
+    const canvas = $('#scenPlattor');
+    const renderer = nyRenderare(THREE, canvas);
+    if (!renderer) { canvas.hidden = true; $('.legend').hidden = true; return null; }
+    const rod = tokenFarg(THREE, '--rod', STANDARD.accent);
+    const karamell = tokenFarg(THREE, '--karamell', '#C9853F');
+    const scen = new THREE.Scene();
+    scen.environment = skapaMiljo(THREE, renderer);
+    const kamera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
+    kamera.position.set(0, 5.4, 11.4);
+    scen.add(new THREE.AmbientLight(0xffffff, 0.95));
+    const sol = new THREE.DirectionalLight(0xfff0e0, 4.7); sol.position.set(4, 8, 6); scen.add(sol);
+    const glod = new THREE.PointLight(rod, 6.3, 16, 0); glod.position.set(-4, 3, 2); scen.add(glod);
+
+    const grupp = new THREE.Group(); scen.add(grupp);
+    const golv = new THREE.Mesh(new THREE.CylinderGeometry(3.4, 3.5, 0.18, 96), new THREE.MeshStandardMaterial({ color: 0x2a130d, roughness: 0.55, metalness: 0.3 }));
+    golv.position.y = -0.09; grupp.add(golv);
+    const kantRing = new THREE.Mesh(new THREE.TorusGeometry(3.42, 0.03, 12, 180), new THREE.MeshStandardMaterial({ color: karamell, metalness: 1, roughness: 0.2 }));
+    kantRing.rotation.x = Math.PI / 2; grupp.add(kantRing);
+
+    const navMat = new THREE.MeshStandardMaterial({ color: 0x140806, roughness: 0.4, metalness: 0.6 });
+    function nyStapel(max, radie, tjocklek, farg, x) {
+      const mat = new THREE.MeshPhysicalMaterial({ color: farg, metalness: 0.2, roughness: 0.3, clearcoat: 0.8, clearcoatRoughness: 0.1 });
+      const skivor = [];
+      for (let i = 0; i < max; i++) {
+        const s = new THREE.Group();
+        s.add(new THREE.Mesh(new THREE.CylinderGeometry(radie, radie, tjocklek, 64), mat));
+        s.add(new THREE.Mesh(new THREE.CylinderGeometry(radie * 0.3, radie * 0.3, tjocklek * 1.1, 32), navMat));
+        s.position.set(x, 8, 0);
+        s.visible = false;
+        s.userData = { mal: tjocklek / 2 + i * (tjocklek + 0.02), aktiv: false };
+        grupp.add(s);
+        skivor.push(s);
+      }
+      return skivor;
+    }
+    const kcal = nyStapel(20, 0.95, 0.16, rod, -1.25);
+    const protein = nyStapel(16, 0.62, 0.14, karamell, 1.35);
+
+    function placera(direkt) {
+      [kcal, protein].forEach(stapel => stapel.forEach(s => {
+        const malY = s.userData.aktiv ? s.userData.mal : 8;
+        if (direkt) s.position.y = malY; else s.position.y += (malY - s.position.y) * 0.14;
+        s.visible = s.userData.aktiv || s.position.y < 7.5;
+      }));
+    }
+    const ritaDirekt = () => { placera(true); kamera.lookAt(0, 1.7, 0); renderer.render(scen, kamera); };
+    function rita(t) {
+      placera(false);
+      grupp.rotation.y = Math.sin(t * 0.3) * 0.35;
+      kamera.lookAt(0, 1.7, 0);
+      renderer.render(scen, kamera);
+    }
+    anpassaStorlek(renderer, kamera, canvas, () => { if (minskadRorelse) ritaDirekt(); });
+    if (!minskadRorelse) registreraScen(canvas, rita);
+    return {
+      visa(antalKcal, antalProtein) {
+        kcal.forEach((s, i) => { s.userData.aktiv = i < antalKcal; });
+        protein.forEach((s, i) => { s.userData.aktiv = i < antalProtein; });
+        if (minskadRorelse) ritaDirekt();
+      }
+    };
+  }
+
+  /* ---------- Kalkylator: energi, protein och vatten ---------- */
+  function initKalkylator() {
+    let plattor = null;
+    const falt = ['kAlder', 'kLangd', 'kVikt', 'kAktivitet', 'kMal'].map(id => $('#' + id));
+    function rakna() {
+      const kon = $('input[name="kon"]:checked').value;
+      const alder = parseFloat($('#kAlder').value), langd = parseFloat($('#kLangd').value), vikt = parseFloat($('#kVikt').value);
+      const aktivitet = parseFloat($('#kAktivitet').value), mal = parseFloat($('#kMal').value);
+      const varning = $('#kVarning');
+      if (!(alder >= 16 && alder <= 90) || !(langd >= 130 && langd <= 220) || !(vikt >= 35 && vikt <= 250)) {
+        varning.textContent = 'Fyll i ålder 16–90 år, längd 130–220 cm och vikt 35–250 kg.';
+        return;
+      }
+      varning.textContent = '';
+      // Mifflin–St Jeor: grundomsättning × aktivitet, justerat efter målet
+      const grund = 10 * vikt + 6.25 * langd - 5 * alder + (kon === 'man' ? 5 : -161);
+      const kalorier = Math.round(grund * aktivitet * (1 + mal) / 10) * 10;
+      const proteinMin = Math.round(vikt * 1.6), proteinMax = Math.round(vikt * 2.2);
+      $('#rKalorier').innerHTML = heltal.format(kalorier) + ' <small>kcal</small>';
+      $('#rProtein').innerHTML = proteinMin + '–' + proteinMax + ' <small>g</small>';
+      $('#rVatten').innerHTML = decimal.format(vikt * 0.035) + ' <small>liter</small>';
+      if (plattor) plattor.visa(Math.min(20, Math.round(kalorier / 250)), Math.min(16, Math.round(((proteinMin + proteinMax) / 2) / 20)));
+    }
+    falt.forEach(f => f.addEventListener('input', rakna));
+    $$('input[name="kon"]').forEach(r => r.addEventListener('change', rakna));
+    rakna();
+    return { sattPlattor(p) { plattor = p; rakna(); } };
+  }
+
+  /* ---------- Förklaringsfilmen i en dialogruta ---------- */
+  function initForklaring() {
+    const dialog = $('#videoDialog');
+    if (!dialog) return;
+    document.addEventListener('click', e => {
+      if (!e.target.closest('[data-spela-video]')) return;
+      if (redigerar()) { visaToast('Filmen spelas när du har klickat på "Klar". Byt film i panelen under Videor.'); return; }
+      if (typeof dialog.showModal === 'function') dialog.showModal(); else dialog.setAttribute('open', '');
+      const video = $('video', dialog);
+      if (video && !video.hidden) video.play().catch(() => {});
+    });
+    dialog.addEventListener('close', () => {
+      $$('video', dialog).forEach(v => v.pause());
+      // En YouTube-film stoppas genom att laddas om
+      $$('iframe', dialog).forEach(f => { f.src = f.src; });
+    });
+  }
+
+  /* ---------- Nivåtest: tre frågor ger ett förslag bland priskorten ---------- */
+  const skyddaHtml = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  function initNivaTest() {
+    const form = $('#nivaTest'), ut = $('#nivaResultat');
+    if (!form || !ut) return;
+    ut.hidden = true;
+    ut.innerHTML = '';
+    form.addEventListener('submit', e => e.preventDefault());
+    form.addEventListener('change', () => {
+      if (redigerar()) return;
+      const svar = $$('.niva-fraga', form).map(f => $('input:checked', f));
+      const kort = $$('#priser .kort');
+      if (!svar.length || svar.some(s => !s) || !kort.length) return;
+      // Snittet av svaren (1–3) väljer kort – första, mittersta eller sista nivån
+      const snitt = svar.reduce((summa, s) => summa + (parseFloat(s.value) || 1), 0) / svar.length;
+      const index = Math.max(0, Math.min(kort.length - 1, Math.round(snitt) - 1));
+      const valt = kort[index];
+      const del = sel => { const el = $(sel, valt); return el ? skyddaHtml(textUtanVerktyg(el)) : ''; };
+      ut.innerHTML = `<p class="etikett">Förslag till dig</p>
+        <h3 class="niva-namn">${del('h3')}</h3>
+        <p class="niva-pris">${del('.pris strong')} ${del('.pris span')}</p>
+        <p class="niva-beskrivning">${del('.beskrivning')}</p>
+        <div class="niva-knappar"><button class="knapp" type="button" data-visa-kort="${index}">Visa ${del('h3')}</button><a class="lanklik" href="#boka">Boka ett kostnadsfritt samtal först</a></div>`;
+      ut.hidden = false;
+    });
+    ut.addEventListener('click', e => {
+      const knapp = e.target.closest('[data-visa-kort]');
+      if (!knapp) return;
+      const valt = $$('#priser .kort')[Number(knapp.dataset.visaKort)];
+      if (!valt) return;
+      $$('#priser .kort.markerad').forEach(k => k.classList.remove('markerad'));
+      valt.classList.add('markerad');
+      valt.scrollIntoView({ behavior: minskadRorelse ? 'auto' : 'smooth', block: 'center' });
+      setTimeout(() => valt.classList.remove('markerad'), 4000);
+    });
+  }
+
+  /* ---------- Betalning: knapparna leder till Stripe när betallänkar finns ---------- */
+  const arBetallank = href => /^https:\/\/\S+$/i.test(href || '');
+  function uppdateraBetalning() {
+    let nagon = false;
+    $$('#priser .kort').forEach(kort => {
+      const lank = $('[data-betallank]', kort), not = $('[data-betalnot]', kort);
+      const betal = !!lank && arBetallank(lank.getAttribute('href'));
+      if (betal) nagon = true;
+      if (not) not.hidden = !betal;
+    });
+    $$('[data-betalinfo]').forEach(el => { el.hidden = !nagon; });
+    return nagon;
+  }
+
+  // Stripe skickar tillbaka kunden med ?betalt=1 – då visas en välkomstruta
+  function initValkommen() {
+    if (!/[?&]betalt=1(&|$)/.test(location.search)) return;
+    const d = $('#valkommenDialog');
+    if (!d) return;
+    if (typeof d.showModal === 'function') d.showModal(); else d.setAttribute('open', '');
+  }
+
+  /* =====================================================================
+     TRÄNINGSPROGRAM – flikar och utskrift
+     ===================================================================== */
+  function initTraningsprogram() {
+    const flikar = $('#programFlikar'), lista = $('.programlista');
+    if (!flikar || !lista) return () => {};
+    function bygg() {
+      const program = [...lista.children].filter(c => c.matches('[data-program]'));
+      let vald = program.findIndex(p => p.classList.contains('vald'));
+      if (vald < 0) vald = 0;
+      flikar.innerHTML = '';
+      program.forEach((p, i) => {
+        p.classList.toggle('vald', i === vald);
+        const knapp = document.createElement('button');
+        knapp.type = 'button';
+        knapp.className = 'flik';
+        knapp.setAttribute('role', 'tab');
+        knapp.setAttribute('aria-selected', String(i === vald));
+        const rubrik = $('h3', p);
+        knapp.textContent = rubrik ? [...rubrik.childNodes].filter(n => !(n.nodeType === 1 && n.matches('[data-verktyg]'))).map(n => n.textContent).join('').trim() : 'Program';
+        knapp.addEventListener('click', () => { program.forEach((q, j) => q.classList.toggle('vald', j === i)); bygg(); });
+        flikar.appendChild(knapp);
+      });
+    }
+    bygg();
+    lista.addEventListener('input', e => { if (e.target.closest && e.target.closest('[data-program] h3')) bygg(); });
+    document.addEventListener('click', e => {
+      if (!e.target.closest('[data-skriv-ut]') || redigerar()) return;
+      document.body.classList.add('skriver-ut');
+      window.print();
+      setTimeout(() => document.body.classList.remove('skriver-ut'), 400);
+    });
+    window.addEventListener('afterprint', () => document.body.classList.remove('skriver-ut'));
+    return bygg;
+  }
+
+  /* =====================================================================
+     REDIGERING – full kontroll för ägaren
+     ===================================================================== */
+  const hamtaRegioner = (rot = document) => $$('[data-region]', rot);
+  const STANDARD_FARGER = { '--rod': '#E3122C', '--karamell': '#C9853F', '--cola': '#140806' };
+  let bilder = {}, farger = {}, fingeravtryck = '', byggFlikarFn = () => {};
+  const installningar = () => $('[data-installningar]');
+  const txt = nyckel => { const el = $(`[data-edit="${nyckel}"]`); return el ? textUtanVerktyg(el) : ''; };
+  function textUtanVerktyg(el) {
+    const k = el.cloneNode(true);
+    $$('[data-verktyg]', k).forEach(v => v.remove());
+    return k.textContent.trim();
+  }
+  function hash(text) {
+    let h = 5381;
+    for (let i = 0; i < text.length; i++) h = ((h << 5) + h + text.charCodeAt(i)) | 0;
+    return (h >>> 0).toString(36);
+  }
+
+  // Tar bort allt som bara hör till redigeringen eller körningen innan sidan sparas
+  function stada(rot, behallBilder) {
+    $$('[data-verktyg]', rot).forEach(x => x.remove());
+    $$('[contenteditable]', rot).forEach(x => { x.removeAttribute('contenteditable'); x.removeAttribute('spellcheck'); });
+    if (rot.hasAttribute && rot.hasAttribute('contenteditable')) { rot.removeAttribute('contenteditable'); rot.removeAttribute('spellcheck'); }
+    $$('[data-genererad]', rot).forEach(x => { x.innerHTML = ''; });
+    $$('.aktiv, .vald, .markerad', rot).forEach(x => x.classList.remove('aktiv', 'vald', 'markerad'));
+    $$('details[data-stangd]', rot).forEach(d => { d.removeAttribute('open'); d.removeAttribute('data-stangd'); });
+    $$('[data-tilt]', rot).forEach(x => x.removeAttribute('style'));
+    $$('canvas', rot).forEach(c => { c.removeAttribute('width'); c.removeAttribute('height'); c.removeAttribute('style'); c.hidden = false; });
+    $$('.legend', rot).forEach(x => { x.hidden = false; });
+    $$('.falt-fel', rot).forEach(x => { x.textContent = ''; });
+    $$('[aria-invalid]', rot).forEach(x => x.removeAttribute('aria-invalid'));
+    const form = $('#bokaForm', rot); if (form) form.hidden = false;
+    const tack = $('#tackRuta', rot); if (tack) tack.hidden = true;
+    if (!behallBilder) {
+      $$('img[src^="data:"]', rot).forEach(i => {
+        if (i.dataset.orig) i.setAttribute('src', i.dataset.orig);
+        else { i.removeAttribute('src'); i.hidden = true; }
+      });
+    }
+  }
+  const renHtml = region => { const k = region.cloneNode(true); stada(k, false); return k.innerHTML; };
+
+  // Körs först av allt: läser in det ägaren har ändrat tidigare
+  function aterstallSparat() {
+    $$('[data-bild-slot] img').forEach(img => { if (!img.hasAttribute('data-orig')) img.dataset.orig = img.getAttribute('src') || ''; });
+    fingeravtryck = hash(hamtaRegioner().map(renHtml).join('§'));
+    const data = lasLagring();
+    // Sparat innehåll används bara om filen inte har bytts ut sedan dess
+    if (data.innehall && data.fingeravtryck === fingeravtryck) {
+      hamtaRegioner().forEach(r => { const html = data.innehall[r.dataset.region]; if (typeof html === 'string') r.innerHTML = html; });
+    }
+    farger = data.farger || {};
+    Object.entries(farger).forEach(([namn, v]) => document.documentElement.style.setProperty(namn, v));
+    if (data.titel) document.title = data.titel;
+    bilder = data.bilder || {};
+    Object.entries(bilder).forEach(([slot, src]) => sattBild(slot, src));
+  }
+
+  function sattBild(slot, src) {
+    const ruta = $(`[data-bild-slot="${slot}"]`);
+    if (!ruta) return;
+    const img = $('img', ruta);
+    const nytt = src || img.dataset.orig;
+    if (nytt) { img.src = nytt; img.hidden = false; } else { img.removeAttribute('src'); img.hidden = true; }
+  }
+
+  function spara() {
+    uppdateraBetalning();
+    const innehall = {};
+    hamtaRegioner().forEach(r => { innehall[r.dataset.region] = renHtml(r); });
+    const ok = skrivLagring({ fingeravtryck, innehall, bilder, farger, titel: document.title });
+    uppdateraChecklista();
+    return ok;
+  }
+  let sparTimer;
+  function autoSpara() {
+    clearTimeout(sparTimer);
+    sparTimer = setTimeout(() => { if (!spara()) visaToast('Webbläsaren blockerar lagring. Klicka på "Ladda ner färdig sida" för att behålla ändringarna.'); }, 500);
+  }
+
+  const checklista = [
+    ['Skriv ditt namn', () => txt('coach-namn') !== STANDARD.namn],
+    ['Skriv din utbildning', () => txt('coach-utbildning') !== STANDARD.utbildning],
+    ['Ladda upp ditt porträtt', () => !!bilder.portratt],
+    ['Skriv din e-postadress', () => $('#epostLank').textContent.trim() !== STANDARD.epost],
+    ['Skriv ditt org.nr', () => !txt('sidfot-orgnr').includes(STANDARD.orgnr)],
+    ['Bekräfta dina priser', () => installningar().dataset.priserok === 'ja'],
+    ['Riktiga omdömen – eller dölj dem', () => $('#resultat').hasAttribute('data-dolt') || !txt('omdomen-not')],
+    ['Granska köpvillkoren', () => installningar().dataset.villkorok === 'ja'],
+    ['Koppla säker betalning (Stripe)', () => $$('#priser [data-betallank]').some(a => arBetallank(a.getAttribute('href')))]
+  ];
+  function uppdateraChecklista() {
+    if (!agarlage) return;
+    const klara = checklista.map(([, test]) => { try { return test(); } catch (e) { return false; } });
+    $('#checklista').innerHTML = checklista.map(([namn], i) => `<li class="${klara[i] ? 'klar' : ''}"><span aria-hidden="true">${klara[i] ? '✓' : '○'}</span>${namn}</li>`).join('');
+    const kvar = klara.filter(k => !k).length;
+    $('#uppgiftKort').hidden = kvar === 0 || redigerar();
+    $('#uppgiftKortText').textContent = kvar === 1 ? '1 sak återstår innan sidan kan publiceras.' : `${kvar} saker återstår innan sidan kan publiceras.`;
+  }
+
+  function sattRedigerbart(aktiv) {
+    hamtaRegioner().forEach(r => [r, ...$$('[data-edit]', r)].filter(el => el.matches('[data-edit]')).forEach(el => {
+      if (aktiv) { el.setAttribute('contenteditable', 'true'); el.setAttribute('spellcheck', 'true'); }
+      else { el.removeAttribute('contenteditable'); el.removeAttribute('spellcheck'); }
+    }));
+  }
+
+  const LISTKNAPPAR = '<button type="button" data-atgard="upp" title="Flytta upp" aria-label="Flytta upp">↑</button>' +
+    '<button type="button" data-atgard="ner" title="Flytta ner" aria-label="Flytta ner">↓</button>' +
+    '<button type="button" data-atgard="kopiera" title="Lägg till en kopia" aria-label="Lägg till en kopia">+</button>' +
+    '<button type="button" data-atgard="ta-bort" title="Ta bort" aria-label="Ta bort">✕</button>';
+  function visaListverktyg(aktiv) {
+    $$('[data-verktyg]').forEach(v => v.remove());
+    if (!aktiv) return;
+    $$('[data-region] [data-lista]').forEach(lista => {
+      [...lista.children].forEach(item => {
+        const vard = item.tagName === 'TR' ? item.lastElementChild : item.tagName === 'DETAILS' ? $('summary', item) : item;
+        if (!vard) return;
+        const bar = document.createElement('span');
+        bar.className = 'lista-verktyg';
+        bar.setAttribute('data-verktyg', '');
+        bar.setAttribute('contenteditable', 'false');
+        bar.innerHTML = LISTKNAPPAR;
+        vard.appendChild(bar);
+      });
+    });
+  }
+  function efterStrukturandring() {
+    visaListverktyg(true);
+    sattRedigerbart(true);
+    byggFlikarFn();
+    const lopare = $('#principerForsta');
+    if (lopare) lopare.dispatchEvent(new Event('input', { bubbles: true }));
+    autoSpara();
+  }
+
+  // Flytta, kopiera och ta bort rader, kort, övningar och annat i listor
+  function initListor() {
+    document.addEventListener('click', e => {
+      const knapp = e.target.closest('[data-atgard]');
+      if (!knapp || !redigerar()) return;
+      e.preventDefault();
+      e.stopPropagation();
+      const lista = knapp.closest('[data-lista]');
+      let item = knapp.closest('[data-verktyg]').parentElement;
+      while (item && item.parentElement !== lista) item = item.parentElement;
+      if (!item) return;
+      const atgard = knapp.dataset.atgard;
+      if (atgard === 'upp' && item.previousElementSibling) lista.insertBefore(item, item.previousElementSibling);
+      else if (atgard === 'ner' && item.nextElementSibling) item.nextElementSibling.after(item);
+      else if (atgard === 'kopiera') {
+        const kopia = item.cloneNode(true);
+        $$('[data-verktyg]', kopia).forEach(v => v.remove());
+        kopia.removeAttribute('id');
+        $$('[id]', kopia).forEach(x => x.removeAttribute('id'));
+        item.after(kopia);
+        if (kopia.matches('[data-program]')) { item.classList.remove('vald'); kopia.classList.add('vald'); }
+        visaToast('En kopia är tillagd – skriv över texten.');
+      } else if (atgard === 'ta-bort') {
+        if (lista.children.length <= 1) { visaToast('Det måste finnas minst en kvar. Dölj hela avsnittet under "Avsnitt på sidan" i stället.'); return; }
+        if (!knapp.classList.contains('bekrafta')) {
+          knapp.classList.add('bekrafta');
+          visaToast('Klicka på ✕ en gång till för att ta bort.');
+          setTimeout(() => knapp.classList.remove('bekrafta'), 2500);
+          return;
+        }
+        item.remove();
+        visaToast('Borttaget.');
+      } else return;
+      efterStrukturandring();
+    }, true);
+  }
+
+  // Panelens lista där hela avsnitt visas, döljs och flyttas
+  function byggAvsnittslista() {
+    const lista = $('#avsnittslista');
+    lista.innerHTML = '';
+    $$('main > [data-avsnitt]').forEach((avsnitt, i) => {
+      const li = document.createElement('li');
+      li.innerHTML = `<label for="avsnittVal${i}"><input type="checkbox" id="avsnittVal${i}"><span></span></label>` +
+        '<button type="button" data-flytta="-1" aria-label="Flytta upp">↑</button><button type="button" data-flytta="1" aria-label="Flytta ner">↓</button>';
+      $('span', li).textContent = avsnitt.dataset.avsnitt;
+      const ruta = $('input', li);
+      ruta.checked = !avsnitt.hasAttribute('data-dolt');
+      ruta.addEventListener('change', () => { avsnitt.toggleAttribute('data-dolt', !ruta.checked); autoSpara(); });
+      $$('[data-flytta]', li).forEach(b => b.addEventListener('click', () => {
+        const fore = avsnitt.previousElementSibling, efter = avsnitt.nextElementSibling;
+        if (b.dataset.flytta === '-1' && fore && fore.matches('[data-avsnitt]')) avsnitt.parentElement.insertBefore(avsnitt, fore);
+        else if (b.dataset.flytta === '1' && efter && efter.matches('[data-avsnitt]')) efter.after(avsnitt);
+        byggAvsnittslista();
+        autoSpara();
+      }));
+      lista.appendChild(li);
+    });
+  }
+
+  // Ruta för att ändra vart en knapp eller länk leder
+  function initLankar() {
+    const ruta = $('#lankRuta'), falt = $('#lankFalt'), forslag = $('#lankForslag');
+    let aktiv = null;
+    const stang = () => { ruta.hidden = true; aktiv = null; };
+    function visa(lank) {
+      aktiv = lank;
+      forslag.innerHTML = $$('main > [data-avsnitt][id]').map(s => `<option value="#${s.id}">${s.dataset.avsnitt}</option>`).join('');
+      falt.value = lank.getAttribute('href') || '';
+      ruta.hidden = false;
+      const r = lank.getBoundingClientRect();
+      ruta.style.top = Math.max(12, Math.min(window.innerHeight - ruta.offsetHeight - 12, r.bottom + 10)) + 'px';
+      ruta.style.left = Math.max(16, Math.min(window.innerWidth - ruta.offsetWidth - 16, r.left)) + 'px';
+    }
+    function klar() {
+      if (aktiv) { aktiv.setAttribute('href', falt.value.trim() || '#'); autoSpara(); visaToast('Länken är ändrad.'); }
+      stang();
+    }
+    document.addEventListener('click', e => {
+      if (!redigerar() || e.target.closest('#lankRuta')) return;
+      const lank = e.target.closest('[data-region] a[href]');
+      if (lank && lank.id !== 'epostLank' && !e.target.closest('[data-verktyg]')) visa(lank); else stang();
+    });
+    $('#lankKlar').addEventListener('click', klar);
+    falt.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); klar(); }
+      if (e.key === 'Escape') stang();
+    });
+  }
+
+  function initFarger() {
+    const falt = { '--rod': $('#fargAccent'), '--karamell': $('#fargDetalj'), '--cola': $('#fargBakgrund') };
+    Object.entries(falt).forEach(([namn, input]) => {
+      input.value = farger[namn] || STANDARD_FARGER[namn];
+      input.addEventListener('input', () => { farger[namn] = input.value; document.documentElement.style.setProperty(namn, input.value); autoSpara(); });
+    });
+    $('#aterstallFarger').addEventListener('click', () => {
+      farger = {};
+      Object.entries(falt).forEach(([namn, input]) => { document.documentElement.style.removeProperty(namn); input.value = STANDARD_FARGER[namn]; });
+      autoSpara();
+      visaToast('Färgerna är återställda. 3D-grafiken får nya färger när sidan laddas om.');
+    });
+  }
+
+  function init3dVal() {
+    [['#val3dHjalte', 'hjalte3d'], ['#val3dKalk', 'kalk3d']].forEach(([sel, nyckel]) => {
+      const ruta = $(sel);
+      ruta.checked = installningar().dataset[nyckel] !== 'av';
+      ruta.addEventListener('change', () => {
+        installningar().dataset[nyckel] = ruta.checked ? 'pa' : 'av';
+        spara();
+        visaToast('Sidan laddas om för att visa ändringen …');
+        setTimeout(() => location.reload(), 900);
+      });
+    });
+  }
+
+  function youtubeId(url) {
+    const m = String(url).match(/(?:youtu\.be\/|[?&]v=|embed\/|shorts\/)([\w-]{11})/);
+    return m ? m[1] : null;
+  }
+  function sattVideo(slot, varde) {
+    const ruta = $(`[data-video-slot="${slot}"]`);
+    if (!ruta) return;
+    const video = $('video', ruta);
+    $$('iframe', ruta).forEach(f => f.remove());
+    const id = youtubeId(varde), bakgrund = ruta.hasAttribute('data-bakgrund');
+    if (id) {
+      video.pause();
+      video.hidden = true;
+      const f = document.createElement('iframe');
+      if (bakgrund) f.className = 'video-iframe';
+      f.title = bakgrund ? 'Video' : 'Film';
+      f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      f.src = bakgrund ? `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}&controls=0&playsinline=1&rel=0` : `https://www.youtube-nocookie.com/embed/${id}?rel=0&playsinline=1`;
+      ruta.insertBefore(f, video);
+    } else {
+      video.hidden = false;
+      video.removeAttribute('poster');
+      video.src = /^(https?:|media\/)/.test(varde) ? varde : 'media/' + varde.replace(/^\.?\//, '');
+      if (bakgrund && !minskadRorelse) video.play().catch(() => {});
+    }
+  }
+
+  function lasBild(fil, klar) {
+    const lasare = new FileReader();
+    lasare.onload = () => {
+      const bild = new Image();
+      bild.onload = () => {
+        // Skala ner så att bilden ryms i webbläsarens lagring
+        const s = Math.min(1, 1400 / Math.max(bild.width, bild.height));
+        const c = document.createElement('canvas');
+        c.width = Math.round(bild.width * s);
+        c.height = Math.round(bild.height * s);
+        c.getContext('2d').drawImage(bild, 0, 0, c.width, c.height);
+        klar(c.toDataURL('image/jpeg', 0.82));
+      };
+      bild.onerror = () => visaToast('Bilden kunde inte läsas. Välj en JPG- eller PNG-fil.');
+      bild.src = lasare.result;
+    };
+    lasare.readAsDataURL(fil);
+  }
+
+  function vaxlaRedigering(aktiv) {
+    document.documentElement.classList.toggle('redigerar', aktiv);
+    // Öppna alla frågor så att svaren går att redigera – stäng dem igen efteråt
+    $$('[data-region] details').forEach(d => {
+      if (aktiv) { if (!d.open) { d.dataset.stangd = '1'; d.open = true; } }
+      else if (d.dataset.stangd) { d.open = false; delete d.dataset.stangd; }
+    });
+    sattRedigerbart(aktiv);
+    visaListverktyg(aktiv);
+    $('#redigeraVerktyg').hidden = !aktiv;
+    if (!aktiv) $('#lankRuta').hidden = true;
+    const knapp = $('#redigeraKnapp');
+    knapp.textContent = aktiv ? '✓ Klar' : '✎ Redigera sidan';
+    knapp.setAttribute('aria-expanded', String(aktiv));
+    if (aktiv) { byggAvsnittslista(); visaToast('Klicka på en text för att ändra den. För musen över ett kort eller en rad för fler val.'); }
+    else { spara(); visaToast('Klart – dina ändringar är sparade.'); }
+    uppdateraChecklista();
+  }
+
+  function initRedigering(byggFlikar) {
+    if (byggFlikar) byggFlikarFn = byggFlikar;
+    if (!agarlage) return;
+    $('#redigeraPanel').hidden = false;
+    $('#redigeraKnapp').addEventListener('click', () => vaxlaRedigering(!redigerar()));
+    document.addEventListener('input', e => {
+      if (redigerar() && e.target.closest && e.target.closest('[data-region]') && e.target.closest('[data-edit]')) autoSpara();
+    });
+    document.addEventListener('paste', e => {
+      if (!redigerar() || !e.target.closest || !e.target.closest('[data-edit]')) return;
+      e.preventDefault();
+      document.execCommand('insertText', false, (e.clipboardData || window.clipboardData).getData('text/plain'));
+    });
+    // Länkar och frågerubriker ska inte följas eller fällas ut medan man skriver
+    document.addEventListener('click', e => {
+      if (!redigerar() || !e.target.closest('[data-region]')) return;
+      if (e.target.closest('a') || e.target.closest('summary') || e.target.closest('[data-skriv-ut]')) e.preventDefault();
+    }, true);
+    document.addEventListener('keydown', e => {
+      if (redigerar() && e.target.tagName === 'SUMMARY' && (e.key === ' ' || e.key === 'Enter')) {
+        e.preventDefault();
+        if (e.key === ' ') document.execCommand('insertText', false, ' ');
+      }
+    });
+
+    // Byt bilder
+    const filval = document.createElement('input');
+    filval.type = 'file'; filval.accept = 'image/*'; filval.hidden = true; filval.id = 'tillfalligtFilval';
+    document.body.appendChild(filval);
+    let aktivSlot = null;
+    document.addEventListener('click', e => {
+      const b = e.target.closest('[data-byt-bild]');
+      if (!b) return;
+      aktivSlot = b.dataset.bytBild;
+      filval.click();
+    });
+    filval.addEventListener('change', () => {
+      const fil = filval.files && filval.files[0];
+      if (!fil || !aktivSlot) return;
+      const slot = aktivSlot;
+      lasBild(fil, src => {
+        bilder[slot] = src;
+        sattBild(slot, src);
+        visaToast(spara() ? 'Bilden är bytt.' : 'Bilden är för stor för webbläsarens lagring. Ladda ner sidan direkt för att behålla den.');
+      });
+      filval.value = '';
+    });
+
+    // Videor
+    $$('[data-anvand-video]').forEach(b => {
+      const falt = $('#' + b.dataset.falt);
+      const ruta = $(`[data-video-slot="${b.dataset.anvandVideo}"]`);
+      if (ruta) {
+        const iframe = $('iframe', ruta);
+        falt.value = iframe ? iframe.src : ($('video', ruta).getAttribute('src') || '').replace(/^media\//, '');
+      }
+      b.addEventListener('click', () => {
+        const varde = falt.value.trim();
+        if (!varde) { visaToast('Skriv ett filnamn från mappen media eller klistra in en YouTube-länk.'); return; }
+        sattVideo(b.dataset.anvandVideo, varde);
+        spara();
+        visaToast(youtubeId(varde) ? 'YouTube-videon är inlagd.' : 'Videon hämtas från mappen media – kontrollera att filen ligger där.');
+      });
+    });
+
+    initListor();
+    initLankar();
+    initFarger();
+    init3dVal();
+
+    // Återställ – kräver två klick så att ingenting försvinner av misstag
+    const aterstall = $('#aterstallKnapp');
+    let bekraftaTimer;
+    aterstall.addEventListener('click', () => {
+      if (!aterstall.classList.contains('bekrafta')) {
+        aterstall.classList.add('bekrafta');
+        aterstall.textContent = 'Klicka igen för att radera alla ändringar';
+        bekraftaTimer = setTimeout(() => { aterstall.classList.remove('bekrafta'); aterstall.textContent = 'Återställ allt till original'; }, 4000);
+        return;
+      }
+      clearTimeout(bekraftaTimer);
+      try { localStorage.removeItem(LAGRING); } catch (e) {}
+      visaToast('Sidan återställs …');
+      setTimeout(() => location.reload(), 700);
+    });
+
+    if (iRam) $('#laddaNerInfo').textContent = 'Nedladdningen fungerar när du öppnar index.html från mappen styrkeateljen på din dator.';
+    $('#laddaNerKnapp').addEventListener('click', laddaNer);
+    uppdateraChecklista();
+  }
+
+  function laddaNer() {
+    spara();
+    if (iRam) { visaToast('Öppna index.html från din dator för att ladda ner – förhandsvisningen tillåter inte nedladdning.'); return; }
+    const klon = document.documentElement.cloneNode(true);
+    hamtaRegioner(klon).forEach(r => stada(r, true));
+    klon.classList.remove('redigerar', 'ingen-webgl', 'utan-3d');
+    $$('#tillfalligtFilval', klon).forEach(x => x.remove());
+    ['#redigeraPanel', '#redigeraVerktyg', '#uppgiftKort', '#lankRuta'].forEach(sel => { const el = $(sel, klon); if (el) el.setAttribute('hidden', ''); });
+    const knapp = $('#redigeraKnapp', klon); knapp.textContent = '✎ Redigera sidan'; knapp.setAttribute('aria-expanded', 'false');
+    const toast = $('#toast', klon); toast.textContent = ''; toast.classList.remove('synlig');
+    $('#navLankar', klon).classList.remove('oppen');
+    $('.nav', klon).classList.remove('skrollad');
+    $('#framsteg', klon).removeAttribute('style');
+    $('#mobilCta', klon).classList.remove('dold');
+    $('#tillToppen', klon).classList.remove('synlig');
+    $$('dialog[open]', klon).forEach(d => d.removeAttribute('open'));
+    $$('#checklista, #avsnittslista, #lankForslag', klon).forEach(el => { el.innerHTML = ''; });
+    const mini = $('#gPortrattBild', klon); mini.removeAttribute('src'); mini.setAttribute('hidden', '');
+    $$('#guideForm .falt-fel', klon).forEach(el => { el.textContent = ''; });
+    const aterstall = $('#aterstallKnapp', klon); aterstall.classList.remove('bekrafta'); aterstall.textContent = 'Återställ allt till original';
+    [['kAlder', '30'], ['kLangd', '170'], ['kVikt', '70']].forEach(([id, v]) => $('#' + id, klon).setAttribute('value', v));
+
+    const html = '<!DOCTYPE html>\n' + klon.outerHTML;
+    const url = URL.createObjectURL(new Blob([html], { type: 'text/html;charset=utf-8' }));
+    const a = document.createElement('a');
+    a.href = url; a.download = 'index.html';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+    visaToast('index.html laddas ner – lägg den i mappen styrkeateljen och ersätt den gamla.');
+  }
+
+  /* ---------- Guide: fyll i dina uppgifter ---------- */
+  function initGuide() {
+    if (!agarlage) return;
+    const dialog = $('#uppgiftsDialog'), form = $('#guideForm');
+    const f = id => document.getElementById(id);
+    const sattText = (nyckel, v) => $$(`[data-edit="${nyckel}"]`).forEach(el => { el.textContent = v; });
+    const prisfalt = () => $$('#priser .kort .pris strong');
+    let nyttPortratt = null, andradeOmdomen = false;
+
+    // Förifyll med det som står på sidan – aldrig med platshållare eller exempel
+    function fyllI() {
+      f('gNamn').value = txt('coach-namn') === STANDARD.namn ? '' : txt('coach-namn');
+      f('gUtbildning').value = txt('coach-utbildning') === STANDARD.utbildning ? '' : txt('coach-utbildning');
+      const epost = $('#epostLank').textContent.trim();
+      f('gEpost').value = epost === STANDARD.epost ? '' : epost;
+      const orgnr = ($('[data-falt="orgnr"]') || {}).textContent || '';
+      f('gOrgnr').value = orgnr.trim() === STANDARD.orgnr ? '' : orgnr.trim();
+      f('gForetag').value = txt('varumarke');
+      const priser = prisfalt();
+      ['gPrisOnline', 'gPrisPremium', 'gPrisPt'].forEach((id, i) => { f(id).value = priser[i] ? textUtanVerktyg(priser[i]) : ''; f(id).disabled = !priser[i]; });
+      f('gPriserOk').checked = installningar().dataset.priserok === 'ja';
+      const betalKort = $$('#priser .kort');
+      [1, 2, 3].forEach(i => {
+        const kort = betalKort[i - 1], lank = kort ? $('[data-betallank]', kort) : null, falt = f('gBetal' + i);
+        const href = lank ? lank.getAttribute('href') : '';
+        falt.value = arBetallank(href) ? href : '';
+        falt.disabled = !lank;
+        const rubrik = kort ? $('h3', kort) : null;
+        if (falt.labels && falt.labels[0]) falt.labels[0].textContent = 'Betallänk – ' + (rubrik ? textUtanVerktyg(rubrik) : 'nivå ' + i);
+      });
+      f('gAvbokning').value = (($('[data-falt="avbokning"]') || {}).textContent || '').trim();
+      const exempel = !!txt('omdomen-not');
+      const omdomen = $$('.omdome');
+      f('gVisaOmdomen').checked = !$('#resultat').hasAttribute('data-dolt');
+      [1, 2, 3].forEach(i => {
+        const item = omdomen[i - 1];
+        f('gOmdome' + i).value = !exempel && item ? textUtanVerktyg($('blockquote', item)) : '';
+        f('gOmdomeNamn' + i).value = !exempel && item ? textUtanVerktyg($('figcaption', item)) : '';
+        f('gOmdome' + i).placeholder = exempel && item ? 'Exempel på sidan: ' + textUtanVerktyg($('blockquote', item)) : '';
+      });
+      andradeOmdomen = false;
+      f('gVillkorGranskade').checked = installningar().dataset.villkorok === 'ja';
+      nyttPortratt = null;
+      f('gPortratt').value = '';
+      const mini = f('gPortrattBild');
+      if (bilder.portratt) { mini.src = bilder.portratt; mini.hidden = false; } else { mini.removeAttribute('src'); mini.hidden = true; }
+      $$('.falt-fel', form).forEach(el => { el.textContent = ''; });
+      $$('[aria-invalid]', form).forEach(el => el.removeAttribute('aria-invalid'));
+    }
+    const oppna = () => { fyllI(); if (typeof dialog.showModal === 'function') dialog.showModal(); else dialog.setAttribute('open', ''); };
+    const stang = () => { if (typeof dialog.close === 'function') dialog.close(); else dialog.removeAttribute('open'); };
+    $$('[data-oppna-guide]').forEach(b => b.addEventListener('click', oppna));
+    [1, 2, 3].forEach(i => f('gBetal' + i).addEventListener('input', () => fel('gBetal' + i, '')));
+    [1, 2, 3].forEach(i => ['gOmdome' + i, 'gOmdomeNamn' + i].forEach(id => f(id).addEventListener('input', () => { andradeOmdomen = true; })));
+
+    f('gPortratt').addEventListener('change', e => {
+      const fil = e.target.files && e.target.files[0];
+      if (!fil) return;
+      lasBild(fil, src => { nyttPortratt = src; const mini = f('gPortrattBild'); mini.src = src; mini.hidden = false; });
+    });
+
+    const formateraPris = v => /^\d[\d\s]*$/.test(v) ? heltal.format(Number(v.replace(/\s/g, ''))) + ' kr' : v;
+    const fel = (id, meddelande) => {
+      const falt = f(id);
+      f(falt.getAttribute('aria-describedby')).textContent = meddelande;
+      if (meddelande) falt.setAttribute('aria-invalid', 'true'); else falt.removeAttribute('aria-invalid');
+    };
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const epost = f('gEpost').value.trim(), orgnr = f('gOrgnr').value.trim();
+      fel('gEpost', !epost || /^\S+@\S+\.\S+$/.test(epost) ? '' : 'Skriv en giltig e-postadress, till exempel namn@exempel.se.');
+      fel('gOrgnr', !orgnr || /^\d{6}-?\d{4}$/.test(orgnr) ? '' : 'Organisationsnummer har tio siffror, till exempel 556677-8899.');
+      [1, 2, 3].forEach(i => { const v = f('gBetal' + i).value.trim(); fel('gBetal' + i, !v || arBetallank(v) ? '' : 'Klistra in hela betallänken från Stripe. Den börjar med https://'); });
+      const forstaFel = $('[aria-invalid="true"]', form);
+      if (forstaFel) { forstaFel.focus(); return; }
+
+      const namn = f('gNamn').value.trim();
+      if (namn) {
+        sattText('coach-namn', namn);
+        const delar = namn.split(/\s+/);
+        sattText('monogram', (delar[0][0] + (delar.length > 1 ? delar[delar.length - 1][0] : '')).toUpperCase());
+      }
+      const utbildning = f('gUtbildning').value.trim();
+      if (utbildning) sattText('coach-utbildning', utbildning);
+      if (epost) sattText('epost', epost);
+      if (orgnr) {
+        const snyggt = orgnr.includes('-') ? orgnr : orgnr.slice(0, 6) + '-' + orgnr.slice(6);
+        $$('[data-falt="orgnr"]').forEach(el => { el.textContent = snyggt; });
+      }
+      const foretag = f('gForetag').value.trim();
+      if (foretag && foretag !== txt('varumarke')) {
+        ['varumarke', 'sidfot-namn', 'sidfot-ordmarke'].forEach(k => sattText(k, foretag));
+        $$('[data-falt="foretag"]').forEach(el => { el.textContent = foretag; });
+        document.title = foretag;
+      }
+      const priser = prisfalt();
+      ['gPrisOnline', 'gPrisPremium', 'gPrisPt'].forEach((id, i) => {
+        const v = f(id).value.trim();
+        if (v && priser[i]) priser[i].textContent = formateraPris(v);
+      });
+      installningar().dataset.priserok = f('gPriserOk').checked ? 'ja' : 'nej';
+      // Betallänkar – ett tomt fält gör att knappen leder till bokningsformuläret igen
+      $$('#priser .kort').slice(0, 3).forEach((kort, i) => {
+        const lank = $('[data-betallank]', kort), v = f('gBetal' + (i + 1)).value.trim();
+        if (!lank) return;
+        if (v) lank.setAttribute('href', v);
+        else if (arBetallank(lank.getAttribute('href'))) lank.setAttribute('href', '#boka');
+      });
+      const timmar = f('gAvbokning').value.trim();
+      if (timmar) $$('[data-falt="avbokning"]').forEach(el => { el.textContent = timmar; });
+      if (nyttPortratt) { bilder.portratt = nyttPortratt; sattBild('portratt', nyttPortratt); }
+
+      // Ifyllda omdömen ersätter exemplen – tomma tas bort
+      const ifyllda = [1, 2, 3].map(i => [f('gOmdome' + i).value.trim(), f('gOmdomeNamn' + i).value.trim()]).filter(([citat]) => citat);
+      if (andradeOmdomen && ifyllda.length) {
+        const behallare = $('.omdomen'), mall = $('.omdome', behallare);
+        const nya = ifyllda.map(([citat, vem]) => {
+          const kopia = mall.cloneNode(true);
+          $$('[data-verktyg]', kopia).forEach(v => v.remove());
+          $('blockquote', kopia).textContent = citat;
+          $('figcaption', kopia).textContent = vem;
+          return kopia;
+        });
+        behallare.replaceChildren(...nya);
+        sattText('omdomen-not', '');
+      }
+      $('#resultat').toggleAttribute('data-dolt', !f('gVisaOmdomen').checked);
+      installningar().dataset.villkorok = f('gVillkorGranskade').checked ? 'ja' : 'nej';
+
+      if (redigerar()) { visaListverktyg(true); sattRedigerbart(true); byggAvsnittslista(); }
+      const ok = spara();
+      stang();
+      visaToast(ok ? 'Uppgifterna är sparade och uppdaterade på hela sidan.' : 'Webbläsaren blockerar lagring. Klicka på "Ladda ner färdig sida" direkt för att behålla ändringarna.');
+    });
+  }
+
+  /* ---------- Bokningsformulär ---------- */
+  function initFormular() {
+    const epostText = () => $('#epostLank').textContent.trim();
+    $('#epostLank').addEventListener('click', e => {
+      if (redigerar()) return;
+      e.preventDefault();
+      window.location.href = 'mailto:' + epostText();
+    });
+    const namn = $('#fNamn'), epost = $('#fEpost');
+    const visaFel = (falt, meddelande) => {
+      $('#' + falt.getAttribute('aria-describedby')).textContent = meddelande;
+      if (meddelande) falt.setAttribute('aria-invalid', 'true'); else falt.removeAttribute('aria-invalid');
+    };
+    const kontrollera = () => {
+      visaFel(namn, namn.value.trim() ? '' : 'Fyll i ditt namn.');
+      visaFel(epost, /^\S+@\S+\.\S+$/.test(epost.value.trim()) ? '' : 'Fyll i en giltig e-postadress, till exempel namn@exempel.se.');
+      return !$('#bokaForm [aria-invalid="true"]');
+    };
+    [namn, epost].forEach(f => f.addEventListener('input', () => { if (f.hasAttribute('aria-invalid')) kontrollera(); }));
+    $('#bokaForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      if (!kontrollera()) { $('#bokaForm [aria-invalid="true"]').focus(); return; }
+      if ($('#fHonung').value) return; // skräppost
+      const till = epostText();
+      if (till === STANDARD.epost || !/^\S+@\S+\.\S+$/.test(till)) {
+        visaToast(agarlage ? 'Formuläret är inte kopplat än. Skriv in din e-postadress under "Fyll i dina uppgifter".' : 'Formuläret är tillfälligt ur funktion. Kontakta mig gärna via e-post i stället.');
+        return;
+      }
+      const uppgifter = {
+        Namn: namn.value.trim(),
+        'E-post': epost.value.trim(),
+        Telefon: $('#fTelefon').value.trim() || '–',
+        Mål: $('#fMal').value,
+        Erfarenhet: $('#fNiva').value,
+        Meddelande: $('#fMeddelande').value.trim() || '–'
+      };
+      const knapp = $('#skickaKnapp');
+      knapp.disabled = true; knapp.textContent = 'Skickar …';
+      try {
+        const svar = await fetch('https://formsubmit.co/ajax/' + till, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(Object.assign({ _subject: 'Ny förfrågan om konsultation – ' + uppgifter.Namn, _template: 'table', _captcha: 'false', _replyto: uppgifter['E-post'] }, uppgifter))
+        });
+        if (!svar.ok) throw new Error('HTTP ' + svar.status);
+        $('#bokaForm').hidden = true;
+        $('#tackRuta').hidden = false;
+      } catch (fel) {
+        // Reserv: öppna besökarens e-postprogram med allt ifyllt
+        const kropp = Object.entries(uppgifter).map(([k, v]) => k + ': ' + v).join('\n');
+        window.location.href = `mailto:${till}?subject=${encodeURIComponent('Förfrågan om konsultation – ' + uppgifter.Namn)}&body=${encodeURIComponent(kropp)}`;
+        visaToast('Kunde inte skicka direkt – ditt e-postprogram öppnas med förfrågan ifylld.');
+      } finally {
+        knapp.disabled = false; knapp.textContent = 'Skicka förfrågan';
+      }
+    });
+  }
+
+  /* ---------- Start ---------- */
+  aterstallSparat();
+  initLyx();
+  initNavigering();
+  initVideor();
+  initTilt();
+  const byggFlikar = initTraningsprogram();
+  initRedigering(byggFlikar);
+  initGuide();
+  initFormular();
+  initForklaring();
+  initNivaTest();
+  uppdateraBetalning();
+  initValkommen();
+  // 3D-motorn hämtas i bakgrunden – sidan fungerar fullt ut även om den inte går att ladda
+  const val = installningar();
+  const kalkylator = initKalkylator();
+  const visaKettlebell = val.dataset.hjalte3d !== 'av', visaPlattor = val.dataset.kalk3d !== 'av';
+  if (!visaKettlebell) { document.documentElement.classList.add('utan-3d'); $('#scenKettlebell').hidden = true; }
+  if (!visaPlattor) { $('#scenPlattor').hidden = true; $('.legend').hidden = true; }
+  if (visaKettlebell || visaPlattor) {
+    laddaThree().then(THREE => {
+      if (visaKettlebell) scenKettlebell(THREE);
+      if (visaPlattor) kalkylator.sattPlattor(scenPlattor(THREE));
+    }).catch(() => {
+      if (visaKettlebell) { document.documentElement.classList.add('ingen-webgl'); $('#scenKettlebell').hidden = true; }
+      if (visaPlattor) { $('#scenPlattor').hidden = true; $('.legend').hidden = true; }
+    });
+  }
+})();
+</script>
+
+</html>

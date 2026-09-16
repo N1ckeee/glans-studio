@@ -99,9 +99,7 @@
   /* Exempel */
   .projekt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
   .projekt { position: relative; display: block; overflow: hidden; border: 1px solid var(--linje); border-radius: 24px; background: var(--kol-2); text-decoration: none; }
-  .projekt:first-child { grid-column: 1 / -1; }
   .projekt-bild { position: relative; overflow: hidden; aspect-ratio: 16 / 10; }
-  .projekt:first-child .projekt-bild { aspect-ratio: 21 / 9; }
   .projekt-bild img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 1.4s cubic-bezier(.2, .7, .2, 1); }
   .projekt:hover .projekt-bild img { transform: scale(1.04); }
   .projekt-bild .projekt-mobil { position: absolute; height: auto; object-fit: contain; right: 22px; bottom: -40px; width: 24%; border: 6px solid #000; border-radius: 26px; box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .8); transition: transform .8s cubic-bezier(.2, .7, .2, 1); }
@@ -206,7 +204,6 @@
     .kort-rad, .paket-rad { grid-template-columns: 1fr; }
     .paket.utvald { transform: none; }
     .steg { grid-template-columns: 1fr 1fr; gap: 40px 22px; }
-    .projekt:first-child .projekt-bild { aspect-ratio: 16 / 10; }
   }
   @media (max-width: 560px) {
     .nav-hoger .knapp { display: none; }
@@ -365,7 +362,7 @@
     <div class="ram">
       <div class="huvud visas">
         <div><p class="etikett" data-edit data-da="Eksempler">Exempel</p><h2 data-edit data-da="Sådan kan <em>din side</em> se ud">Så kan <em>din sida</em> se ut</h2></div>
-        <p data-edit data-da="Klik ind og prøv eksempelsiderne på computer og mobil. Salon Silke og Café Kanel er opdigtede virksomheder, lavet for at vise stilen.">Klicka in och prova exempelsidorna i dator och mobil. Salong Silke och Café Kanel är påhittade företag, gjorda för att visa stilen.</p>
+        <p data-edit data-da="Klik ind og prøv siderne på computer og mobil. Salon Silke og Café Kanel er opdigtede eksempler. Kvant Akademi og Styrkeateljén er egne projekter, der stadig er under arbejde.">Klicka in och prova sidorna i dator och mobil. Salong Silke och Café Kanel är påhittade exempel. Kvant Akademi och Styrkeateljén är egna projekt som fortfarande är under arbete.</p>
       </div>
       <div class="projekt-grid">
         <a class="projekt visas" href="exempel/salong-silke/index.html">
@@ -373,13 +370,17 @@
           <div class="projekt-text"><div><h3>Salong Silke</h3><p data-edit data-da="Frisør &amp; skønhed · video, prisliste og booking">Frisör &amp; skönhet · film, prislista och bokning</p></div><span class="markor" data-edit data-da="Eksempel">Exempel</span></div>
         </a>
         <a class="projekt visas" href="exempel/cafe-kanel/index.html">
-          <div class="projekt-bild"><img src="media/projekt-cafe-kanel-dator.jpg" alt="Exempelsajten Café Kanel i dator" loading="lazy"></div>
+          <div class="projekt-bild"><img src="media/projekt-cafe-kanel-dator.jpg" alt="Exempelsajten Café Kanel i dator" loading="lazy"><img class="projekt-mobil" src="media/projekt-cafe-kanel-mobil.jpg" alt="Café Kanel i mobil" loading="lazy"></div>
           <div class="projekt-text"><div><h3>Café Kanel</h3><p data-edit data-da="Café &amp; bistro · menu, video og bordbooking">Café &amp; bistro · meny, film och bordsbokning</p></div><span class="markor" data-edit data-da="Eksempel">Exempel</span></div>
         </a>
-        <div class="projekt visas">
-          <div class="projekt-bild"><img src="media/projekt-styrkeateljen.jpg" alt="Styrkeateljén – hemsida för onlinecoachning" loading="lazy"></div>
-          <div class="projekt-text"><div><h3>Styrkeateljén</h3><p data-edit data-da="Onlinecoaching · 3D, video og betaling">Onlinecoachning · 3D, film och betalning</p></div><span class="markor" data-edit data-da="Eget projekt">Eget projekt</span></div>
-        </div>
+        <a class="projekt visas" href="sidor/kvant-akademi/index.html">
+          <div class="projekt-bild"><img src="media/projekt-kvant-dator.jpg" alt="Kvant Akademi i dator" loading="lazy"><img class="projekt-mobil" src="media/projekt-kvant-mobil.jpg" alt="Kvant Akademi i mobil" loading="lazy"></div>
+          <div class="projekt-text"><div><h3>Kvant Akademi</h3><p data-edit data-da="Aktieskole · 3D, 4K-film og beregnere">Aktieskola · 3D, 4K-film och räknare</p></div><span class="markor" data-edit data-da="Eget projekt · under arbejde">Eget projekt · under arbete</span></div>
+        </a>
+        <a class="projekt visas" href="sidor/styrkeateljen/index.html">
+          <div class="projekt-bild"><img src="media/projekt-styrkeateljen-dator.jpg" alt="Styrkeateljén i dator" loading="lazy"><img class="projekt-mobil" src="media/projekt-styrkeateljen-mobil.jpg" alt="Styrkeateljén i mobil" loading="lazy"></div>
+          <div class="projekt-text"><div><h3>Styrkeateljén</h3><p data-edit data-da="Onlinecoaching · 3D, video og betaling">Onlinecoachning · 3D, film och betalning</p></div><span class="markor" data-edit data-da="Eget projekt · under arbejde">Eget projekt · under arbete</span></div>
+        </a>
       </div>
     </div>
   </section>
