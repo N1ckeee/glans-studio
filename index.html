@@ -100,6 +100,8 @@
   .projekt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
   .projekt { position: relative; display: block; overflow: hidden; border: 1px solid var(--linje); border-radius: 24px; background: var(--kol-2); text-decoration: none; }
   .projekt-bild { position: relative; overflow: hidden; aspect-ratio: 16 / 10; }
+  .projekt:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .projekt:last-child:nth-child(odd) .projekt-bild { aspect-ratio: 21 / 9; }
   .projekt-bild img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform 1.4s cubic-bezier(.2, .7, .2, 1); }
   .projekt:hover .projekt-bild img { transform: scale(1.04); }
   .projekt-bild .projekt-mobil { position: absolute; height: auto; object-fit: contain; right: 22px; bottom: -40px; width: 24%; border: 6px solid #000; border-radius: 26px; box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .8); transition: transform .8s cubic-bezier(.2, .7, .2, 1); }
@@ -376,6 +378,10 @@
         <a class="projekt visas" href="sidor/kvant-akademi/index.html">
           <div class="projekt-bild"><img src="media/projekt-kvant-dator.jpg" alt="Kvant Akademi i dator" loading="lazy"><img class="projekt-mobil" src="media/projekt-kvant-mobil.jpg" alt="Kvant Akademi i mobil" loading="lazy"></div>
           <div class="projekt-text"><div><h3>Kvant Akademi</h3><p data-edit data-da="Aktieskole · 3D, 4K-film og beregnere">Aktieskola · 3D, 4K-film och räknare</p></div><span class="markor" data-edit data-da="Eget projekt · under arbejde">Eget projekt · under arbete</span></div>
+        </a>
+        <a class="projekt visas" href="sidor/skan-x-daek/index.html">
+          <div class="projekt-bild"><img src="media/projekt-skanx-dator.jpg" alt="Skan-X-Dæk i dator" loading="lazy"><img class="projekt-mobil" src="media/projekt-skanx-mobil.jpg" alt="Skan-X-Dæk i mobil" loading="lazy"></div>
+          <div class="projekt-text"><div><h3>Skan-X-Dæk</h3><p data-edit data-da="Dækværksted i København · 3D, kort og dansk">Däckverkstad i København · 3D, karta och danska</p></div><span class="markor" data-edit data-da="Eget projekt · forslag">Eget projekt · förslag</span></div>
         </a>
         <a class="projekt visas" href="sidor/styrkeateljen/index.html">
           <div class="projekt-bild"><img src="media/projekt-styrkeateljen-dator.jpg" alt="Styrkeateljén i dator" loading="lazy"><img class="projekt-mobil" src="media/projekt-styrkeateljen-mobil.jpg" alt="Styrkeateljén i mobil" loading="lazy"></div>

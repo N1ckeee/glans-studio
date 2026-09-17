@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SKAN-X-DÆK – dæk, fælge og dækskift i København S</title>
+<meta name="description" content="Designforslag: SKAN-X-DÆK på Artillerivej 157 i København S har dæk til personbiler og varebiler, specialdæk, bred-dæk, vinterdæk på fælge og dækskift. Montering og balancering er med i prisen.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#08090B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2308090B'/%3E%3Ccircle cx='16' cy='16' r='10' fill='none' stroke='%23E8EDF2' stroke-width='3.4'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%23E4322B'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+  :root {
+    --natt: #08090B;
+    --asfalt: #0E1114;
+    --panel: #141922;
+    --panel-2: #1A212B;
+    --linje: rgba(196, 208, 222, .12);
+    --linje-stark: rgba(196, 208, 222, .3);
+    --krom: #E8EDF2;
+    --dampad: #94A2B0;
+    --rod: #E4322B;
+    --rod-ljus: #FF5A4E;
+    --amber: #F2B24C;
+    --display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif;
+    --text: "Inter", "Segoe UI", system-ui, sans-serif;
+    --mono: "JetBrains Mono", Consolas, ui-monospace, monospace;
+    --radie: 18px;
+    --max: 1240px;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--natt); color: var(--krom); font: 400 1rem/1.7 var(--text); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+  body::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background:
+      radial-gradient(ellipse 60% 45% at 78% -8%, rgba(228, 50, 43, .16), transparent 62%),
+      radial-gradient(ellipse 48% 38% at 4% 22%, rgba(232, 237, 242, .05), transparent 60%),
+      repeating-linear-gradient(115deg, rgba(232, 237, 242, .022) 0 2px, transparent 2px 9px); }
+  [hidden] { display: none !important; }
+  img, svg, canvas, iframe { display: block; max-width: 100%; }
+  a { color: inherit; }
+  button, input, select, textarea { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--rod-ljus); outline-offset: 3px; border-radius: 6px; }
+  ::selection { background: var(--rod); color: #fff; }
+  .ram { width: min(var(--max), 100% - 40px); margin-inline: auto; }
+  .hoppa { position: absolute; left: 16px; top: -60px; z-index: 100; padding: 10px 16px; border-radius: 8px; background: var(--rod); color: #fff; text-decoration: none; }
+  .hoppa:focus { top: 16px; }
+
+  /* ===== Märkning: designförslag ===== */
+  .remsa { position: relative; z-index: 60; padding: 9px 20px; background: linear-gradient(90deg, var(--rod), #8E1C17); color: #fff; font: 500 .78rem/1.5 var(--text); text-align: center; }
+  .remsa a { color: #fff; }
+
+  /* ===== Meny ===== */
+  .nav { position: sticky; top: 0; z-index: 50; border-bottom: 1px solid transparent; transition: background-color .4s, border-color .4s, backdrop-filter .4s; }
+  .nav.skrollad { background: rgba(8, 9, 11, .8); border-color: var(--linje); backdrop-filter: blur(14px) saturate(1.3); -webkit-backdrop-filter: blur(14px) saturate(1.3); }
+  .nav-inre { display: flex; align-items: center; justify-content: space-between; gap: 22px; height: 72px; }
+  .logo { display: inline-flex; align-items: baseline; gap: 2px; font: 700 1.5rem/1 var(--display); letter-spacing: .04em; text-decoration: none; text-transform: uppercase; }
+  .logo i { font-style: normal; color: var(--rod); }
+  .nav-lankar { display: flex; gap: 28px; margin: 0; padding: 0; list-style: none; }
+  .nav-lankar a { font: 500 .82rem/1 var(--text); letter-spacing: .04em; color: var(--dampad); text-decoration: none; text-transform: uppercase; transition: color .3s; }
+  .nav-lankar a:hover { color: var(--krom); }
+
+  /* ===== Knappar ===== */
+  .knapp { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 24px; border: 0; border-radius: 999px; background: linear-gradient(135deg, var(--rod-ljus), var(--rod) 55%, #A8231D); color: #fff; font: 600 .9rem/1 var(--text); letter-spacing: .02em; text-decoration: none; white-space: nowrap; cursor: pointer; box-shadow: 0 14px 34px -14px rgba(228, 50, 43, .8); transition: transform .3s, box-shadow .3s; }
+  .knapp:hover { transform: translateY(-2px); box-shadow: 0 20px 44px -14px rgba(228, 50, 43, .9); }
+  .knapp.krom { background: linear-gradient(135deg, #F7FAFC, #C3CCD6 55%, #8F99A5); color: #10141A; box-shadow: 0 14px 34px -16px rgba(232, 237, 242, .6); }
+  .knapp.spok { background: transparent; color: var(--krom); box-shadow: inset 0 0 0 1px var(--linje-stark); }
+  .knapp.spok:hover { box-shadow: inset 0 0 0 1px var(--krom); }
+  .knapp.liten { padding: 10px 18px; font-size: .84rem; }
+
+  /* ===== Rubriker ===== */
+  h1, h2, h3 { margin: 0; font-family: var(--display); font-weight: 700; line-height: .98; letter-spacing: .01em; text-transform: uppercase; }
+  h1 { font-size: clamp(3rem, 7vw, 6.4rem); }
+  h2 { font-size: clamp(2.3rem, 5vw, 4rem); }
+  h3 { font-size: 1.45rem; }
+  .krom-text { background: linear-gradient(180deg, #FFFFFF 10%, #C7D0DA 45%, #7C8794 60%, #EDF2F7 92%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .etikett { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0 0 16px; font: 500 .74rem/1 var(--mono); letter-spacing: .2em; text-transform: uppercase; color: var(--rod-ljus); }
+  .etikett::before { content: ""; width: 26px; height: 2px; background: var(--rod); }
+
+  /* ===== Hjältedel ===== */
+  .hjalte { position: relative; display: flex; align-items: center; min-height: 88svh; padding-block: 70px 60px; overflow: hidden; }
+  .hjalte-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 40px; align-items: center; }
+  .ingress { max-width: 520px; margin: 24px 0 34px; font-size: 1.1rem; color: var(--dampad); }
+  .knapprad { display: flex; flex-wrap: wrap; gap: 12px; }
+  .fakta { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 30px; margin-top: 46px; padding-top: 24px; border-top: 1px solid var(--linje); }
+  .fakta strong { display: block; font: 700 1.05rem/1.2 var(--display); letter-spacing: .03em; text-transform: uppercase; }
+  .fakta span { font-size: .84rem; color: var(--dampad); }
+  .scen { position: relative; aspect-ratio: 1 / 1; margin-right: -3vw; }
+  .scen canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .scen-reserv { position: absolute; inset: 16%; color: var(--dampad); }
+  .scen-tips { position: absolute; right: 8%; bottom: 8%; font: 500 .68rem/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--dampad); }
+
+  /* ===== Avsnitt och kort ===== */
+  .sektion { position: relative; padding-block: clamp(80px, 10vw, 130px); }
+  .sektion.mork { background: linear-gradient(180deg, transparent, rgba(14, 17, 20, .85) 12%, rgba(14, 17, 20, .85) 88%, transparent); }
+  .huvud { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 36px; align-items: end; margin-bottom: 48px; }
+  .huvud > p { justify-self: end; max-width: 440px; margin: 0; color: var(--dampad); }
+  .kort { position: relative; overflow: hidden; padding: 28px 26px; border: 1px solid var(--linje); border-radius: var(--radie); background: linear-gradient(180deg, var(--panel-2), var(--panel)); transition: border-color .35s, transform .35s; }
+  .kort:hover { border-color: var(--linje-stark); transform: translateY(-3px); }
+  .ydelser { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 16px; }
+  .ydelse-ikon { display: grid; place-items: center; width: 48px; height: 48px; margin-bottom: 26px; border: 1px solid var(--linje-stark); border-radius: 12px; background: rgba(228, 50, 43, .1); color: var(--rod-ljus); }
+  .ydelse-ikon svg { width: 24px; height: 24px; }
+  .kort h3 { margin-bottom: 10px; letter-spacing: .02em; }
+  .kort p { margin: 0; font-size: .95rem; color: var(--dampad); }
+
+  /* ===== Storlekar och fälgmärken ===== */
+  .storlek-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 40px; align-items: center; }
+  .storlekar { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+  .storlekar li { padding: 9px 14px; border: 1px solid var(--linje); border-radius: 10px; background: rgba(232, 237, 242, .03); font: 500 .84rem/1 var(--mono); }
+  .marken { display: flex; flex-wrap: wrap; gap: 10px; margin: 26px 0 0; padding: 0; list-style: none; }
+  .marken li { padding: 10px 16px; border: 1px solid var(--linje-stark); border-radius: 999px; font: 700 .8rem/1 var(--display); letter-spacing: .12em; text-transform: uppercase; }
+  .falg-scen { position: relative; aspect-ratio: 1 / 1; }
+  .falg-scen canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+  /* ===== Steg ===== */
+  .steg { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; counter-reset: steg; }
+  .steg li { position: relative; padding: 30px 26px; border: 1px solid var(--linje); border-radius: var(--radie); background: linear-gradient(180deg, var(--panel-2), var(--panel)); }
+  .steg li::before { counter-increment: steg; content: "0" counter(steg); display: block; margin-bottom: 18px; font: 700 2.4rem/1 var(--display); color: rgba(228, 50, 43, .55); }
+  .steg h3 { margin-bottom: 8px; }
+  .steg p { margin: 0; font-size: .95rem; color: var(--dampad); }
+
+  /* ===== Find vej ===== */
+  .vej-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: 20px; align-items: stretch; }
+  .karta { position: relative; overflow: hidden; min-height: 420px; border: 1px solid var(--linje); border-radius: var(--radie); background: var(--panel); }
+  .karta iframe { width: 100%; height: 100%; min-height: 420px; border: 0; filter: invert(.92) hue-rotate(180deg) grayscale(.35) brightness(.95) contrast(.95); }
+  .karta-plats { position: absolute; left: 18px; bottom: 18px; padding: 12px 16px; border: 1px solid var(--linje-stark); border-radius: 12px; background: rgba(8, 9, 11, .82); font: 500 .82rem/1.5 var(--mono); }
+  .vej-info { display: grid; gap: 14px; align-content: start; }
+  .info-kort { padding: 22px 24px; border: 1px solid var(--linje); border-radius: var(--radie); background: linear-gradient(180deg, var(--panel-2), var(--panel)); }
+  .info-kort h3 { margin-bottom: 12px; font-size: 1.15rem; }
+  .info-kort p { margin: 0 0 6px; color: var(--dampad); font-size: .95rem; }
+  .info-kort a { color: var(--krom); }
+  .oppet { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; font-size: .95rem; }
+  .oppet li { display: flex; justify-content: space-between; gap: 14px; padding: 7px 0; border-bottom: 1px solid var(--linje); color: var(--dampad); }
+  .oppet li:last-child { border-bottom: 0; }
+  .oppet b { font-weight: 500; color: var(--krom); font-family: var(--mono); }
+
+  /* ===== Sidfot och ägarverktyg ===== */
+  .sidfot { padding-block: 54px 40px; border-top: 1px solid var(--linje); }
+  .sidfot-rad { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px 30px; font-size: .84rem; color: var(--dampad); }
+  .sidfot-not { margin: 22px 0 0; font-size: .8rem; color: rgba(148, 162, 176, .8); }
+  .redigera { position: fixed; left: 16px; bottom: 16px; z-index: 80; display: grid; justify-items: start; gap: 10px; }
+  .redigera-panel { display: grid; gap: 8px; width: min(330px, calc(100vw - 32px)); max-height: calc(100vh - 96px); overflow-y: auto; padding: 18px; border: 1px solid var(--linje-stark); border-radius: 16px; background: rgba(10, 12, 15, .95); box-shadow: 0 30px 80px -30px #000; font-size: .84rem; }
+  .redigera-panel span { color: var(--dampad); }
+  .aterstall { padding: 8px 0; border: 0; background: none; color: var(--dampad); font-size: .8rem; text-align: left; text-decoration: underline; cursor: pointer; }
+  html.redigerar [data-edit] { outline: 1px dashed rgba(228, 50, 43, .5); outline-offset: 3px; border-radius: 4px; cursor: text; }
+  html.redigerar [data-edit]:hover, html.redigerar [data-edit]:focus { outline: 1px solid var(--rod-ljus); }
+  .toast { position: fixed; left: 50%; bottom: 24px; z-index: 95; max-width: calc(100vw - 32px); padding: 13px 20px; border-radius: 999px; background: var(--krom); color: #10141A; font-size: .9rem; box-shadow: 0 20px 50px -20px #000; opacity: 0; pointer-events: none; transform: translate(-50%, calc(100% + 40px)); transition: transform .5s cubic-bezier(.2, .8, .2, 1), opacity .5s; }
+  .toast.synlig { opacity: 1; transform: translate(-50%, 0); }
+  .visas { opacity: 0; transform: translateY(24px); transition: opacity .9s cubic-bezier(.2, .7, .2, 1), transform .9s cubic-bezier(.2, .7, .2, 1); }
+  .visas.synlig { opacity: 1; transform: none; }
+
+  @media (max-width: 1000px) {
+    .nav-lankar { display: none; }
+    .hjalte { min-height: auto; padding-top: 30px; }
+    .hjalte-grid, .huvud, .storlek-grid, .vej-grid { grid-template-columns: minmax(0, 1fr); }
+    .scen { order: -1; width: 100%; max-width: 520px; margin: 0 auto -20px; }
+    .huvud > p { justify-self: start; }
+    .steg { grid-template-columns: 1fr; }
+    .falg-scen { max-width: 420px; margin-inline: auto; }
+  }
+  @media (max-width: 600px) {
+    .ram { width: calc(100% - 32px); }
+    .etikett { font-size: .68rem; letter-spacing: .14em; }
+    .fakta { grid-template-columns: 1fr; gap: 14px; }
+    .karta, .karta iframe { min-height: 320px; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .visas { opacity: 1; transform: none; transition: none; } }
+</style>
+</head>
+<body>
+
+<a class="hoppa" href="#indhold">Spring til indholdet</a>
+
+<div class="remsa">Designforslag af Glans Studio · Dette er ikke Skan-X-Dæks officielle hjemmeside – den findes på <a href="http://skan-x.dk/" target="_blank" rel="noopener">skan-x.dk</a></div>
+
+<header class="nav" id="nav">
+  <div class="ram nav-inre">
+    <a class="logo" href="#top">Skan-<i>X</i>-Dæk</a>
+    <ul class="nav-lankar">
+      <li><a href="#ydelser" data-edit>Ydelser</a></li>
+      <li><a href="#daek" data-edit>Dæk &amp; fælge</a></li>
+      <li><a href="#saadan" data-edit>Sådan foregår det</a></li>
+      <li><a href="#find-vej" data-edit>Find vej</a></li>
+    </ul>
+    <a class="knapp liten" href="tel:+4532542234" data-edit>Ring 32 54 22 34</a>
+  </div>
+</header>
+
+<main id="indhold">
+  <section class="hjalte" id="top">
+    <div class="ram hjalte-grid">
+      <div class="visas">
+        <p class="etikett" data-edit>Dæk · fælge · dækskift i København S</p>
+        <h1 data-edit>Dæk der <span class="krom-text">holder</span> hele vejen</h1>
+        <p class="ingress" data-edit>SKAN-X-DÆK har alt i dæk til personbiler og varebiler – og specialdæk til sækkevogne og lignende. Vi er specialister i bred-dæk og vinterdæk på fælge. Montering og balancering er med i dækprisen.</p>
+        <div class="knapprad">
+          <a class="knapp" href="tel:+4532542234" data-edit>Ring og få et tilbud</a>
+          <a class="knapp spok" href="#find-vej" data-edit>Find vej til værkstedet</a>
+        </div>
+        <div class="fakta">
+          <div><strong data-edit>Inkl. montering</strong><span data-edit>Og balancering i dækprisen</span></div>
+          <div><strong data-edit>Man–fre 8–16</strong><span data-edit>Dækskift senest 15.30</span></div>
+          <div><strong data-edit>Artillerivej 157</strong><span data-edit>2300 København S</span></div>
+        </div>
+      </div>
+      <div class="scen" aria-hidden="true">
+        <div class="scen-reserv" id="scenReserv">
+          <svg viewBox="0 0 200 200" fill="none"><circle cx="100" cy="100" r="88" stroke="currentColor" stroke-width="16"/><circle cx="100" cy="100" r="52" stroke="currentColor" stroke-width="6"/><circle cx="100" cy="100" r="14" fill="currentColor"/><g stroke="currentColor" stroke-width="7"><path d="M100 52V32"/><path d="M100 168v-20"/><path d="M52 100H32"/><path d="M168 100h-20"/><path d="M66 66 52 52"/><path d="M148 148l-14-14"/><path d="M134 66l14-14"/><path d="M52 148l14-14"/></g></svg>
+        </div>
+        <canvas id="scenHjul"></canvas>
+        <span class="scen-tips">Træk for at dreje hjulet</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="sektion mork" id="ydelser">
+    <div class="ram">
+      <div class="huvud visas">
+        <div><p class="etikett" data-edit>Ydelser</p><h2 data-edit>Alt i <span class="krom-text">dæk</span></h2></div>
+        <p data-edit>Vi finder dæk til hverdagsbilen, varebilen og det, der er svært at skaffe. Ring med bilens dækstørrelse, så giver vi et tilbud.</p>
+      </div>
+      <div class="ydelser">
+        <article class="kort visas">
+          <div class="ydelse-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.2"/><path d="M12 3v5M12 16v5M3 12h5M16 12h5"/></svg></div>
+          <h3 data-edit>Dæk til personbil</h3>
+          <p data-edit>Sommer- og vinterdæk i de almindelige størrelser fra 14 til 18 tommer.</p>
+        </article>
+        <article class="kort visas">
+          <div class="ydelse-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16V8h11v8M14 11h4l3 3v2h-2"/><circle cx="7.5" cy="17" r="2"/><circle cx="17.5" cy="17" r="2"/></svg></div>
+          <h3 data-edit>Dæk til varebil</h3>
+          <p data-edit>Forstærkede dæk til varevogne, så bilen holder til vægten hele året.</p>
+        </article>
+        <article class="kort visas">
+          <div class="ydelse-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19V6a2 2 0 0 1 2-2h7v15"/><circle cx="8" cy="19" r="2"/><path d="M14 9h4l2 4v6h-2"/></svg></div>
+          <h3 data-edit>Specialdæk</h3>
+          <p data-edit>Dæk til sækkevogne, trailere og andet, der ikke er standard.</p>
+        </article>
+        <article class="kort visas">
+          <div class="ydelse-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 8h16M4 16h16"/><circle cx="12" cy="12" r="9"/></svg></div>
+          <h3 data-edit>Bred-dæk</h3>
+          <p data-edit>Vi er specialister i bred-dæk, også i de lave profiler.</p>
+        </article>
+        <article class="kort visas">
+          <div class="ydelse-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M5 6l2.5 3M19 6l-2.5 3M3 13h4M17 13h4M7 20l2-3M17 20l-2-3"/><circle cx="12" cy="13" r="3"/></svg></div>
+          <h3 data-edit>Vinterdæk på fælge</h3>
+          <p data-edit>Færdige sæt på fælge gør skiftet hurtigt, når vejret vender.</p>
+        </article>
+        <article class="kort visas">
+          <div class="ydelse-ikon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.5"/><path d="M12 4.5v3M12 16.5v3M4.5 12h3M16.5 12h3"/></svg></div>
+          <h3 data-edit>Fælge</h3>
+          <p data-edit>Stort udvalg i alufælge. Alufælg koster 55,- kr./stk. ekstra ved montering.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sektion" id="daek">
+    <div class="ram">
+      <div class="huvud visas">
+        <div><p class="etikett" data-edit>Dæk &amp; fælge</p><h2 data-edit>Størrelser vi <span class="krom-text">ofte har</span></h2></div>
+        <p data-edit>Står din størrelse ikke på listen, så ring alligevel – vi skaffer de fleste dæk hjem.</p>
+      </div>
+      <div class="storlek-grid">
+        <div class="visas">
+          <ul class="storlekar">
+            <li>155/65 R14</li><li>165/70 R14</li><li>175/65 R14</li><li>185/60 R14</li>
+            <li>185/60 R15</li><li>185/65 R14</li><li>185/65 R15</li><li>195/50 R15</li>
+            <li>195/55 R15</li><li>195/55 R16</li><li>195/60 R15</li><li>195/65 R15</li>
+            <li>205/55 R16</li><li>205/65 R16</li><li>215/55 R16</li><li>225/40 R18</li>
+            <li>225/45 R17</li>
+          </ul>
+          <p style="margin:22px 0 0;color:var(--dampad)" data-edit>Alle dækpriser er inkl. moms, montering og balancering. Alufælg +55,- kr./stk.</p>
+          <p class="etikett" style="margin-top:30px" data-edit>Fælge fra blandt andre</p>
+          <ul class="marken">
+            <li>AEZ</li><li>Borbet</li><li>Dezent</li><li>Enzo</li><li>Dotz</li><li>Rial</li>
+          </ul>
+        </div>
+        <div class="falg-scen visas" aria-hidden="true"><canvas id="scenFalg"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sektion mork" id="saadan">
+    <div class="ram">
+      <div class="huvud visas">
+        <div><p class="etikett" data-edit>Sådan foregår det</p><h2 data-edit>Fra opkald til <span class="krom-text">færdigt skift</span></h2></div>
+        <p data-edit>Tre enkle skridt. Har du dækstørrelsen klar, går det hurtigere.</p>
+      </div>
+      <ol class="steg">
+        <li class="visas"><h3 data-edit>Ring eller skriv</h3><p data-edit>Oplys bilens dækstørrelse, for eksempel 195/65 R15. Skriver du på mail, så skriv gerne dit telefonnummer, så ringer vi tilbage.</p></li>
+        <li class="visas"><h3 data-edit>Vi finder dæk og tid</h3><p data-edit>Du får et tilbud på dæk eller fælge, og vi aftaler hvornår du kommer forbi på Artillerivej.</p></li>
+        <li class="visas"><h3 data-edit>Dækskift senest 15.30</h3><p data-edit>Vi monterer og balancerer, mens du venter. Husk at dækskift skal være senest kl. 15.30 på hverdage.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sektion" id="find-vej">
+    <div class="ram">
+      <div class="huvud visas">
+        <div><p class="etikett" data-edit>Find vej</p><h2 data-edit>Artillerivej 157 i <span class="krom-text">København S</span></h2></div>
+        <p data-edit>Vi er flyttet til Artillerivej 157 på Islands Brygge-siden af Amager. Der er plads til at parkere lige uden for porten.</p>
+      </div>
+      <div class="vej-grid">
+        <div class="karta visas">
+          <iframe id="karta" title="Kort over Artillerivej 157, 2300 København S" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=12.5613%2C55.6508%2C12.5762%2C55.6578&amp;layer=mapnik&amp;marker=55.654277%2C12.568747"></iframe>
+          <div class="karta-plats">SKAN-X-DÆK<br>Artillerivej 157, 2300 København S</div>
+        </div>
+        <div class="vej-info">
+          <div class="info-kort visas">
+            <h3 data-edit>Kør hertil</h3>
+            <p data-edit>Artillerivej 157, 2300 København S.</p>
+            <p><a href="https://www.google.com/maps/dir/?api=1&amp;destination=Artillerivej+157%2C+2300+K%C3%B8benhavn+S" target="_blank" rel="noopener" data-edit>Åbn rutevejledning</a></p>
+            <p><a href="https://www.openstreetmap.org/?mlat=55.654277&amp;mlon=12.568747#map=17/55.654277/12.568747" target="_blank" rel="noopener" data-edit>Se stedet på OpenStreetMap</a></p>
+          </div>
+          <div class="info-kort visas">
+            <h3 data-edit>Åbningstider</h3>
+            <ul class="oppet">
+              <li><span data-edit>Mandag–fredag</span><b data-edit>8–16</b></li>
+              <li><span data-edit>Dækskift senest</span><b data-edit>15.30</b></li>
+              <li><span data-edit>Lørdag og søndag</span><b data-edit>Lukket</b></li>
+            </ul>
+          </div>
+          <div class="info-kort visas">
+            <h3 data-edit>Kontakt</h3>
+            <p><a href="tel:+4532542234" data-edit>Tlf. 32 54 22 34</a></p>
+            <p><a href="mailto:karsten@skan-x-daek.dk" data-edit>karsten@skan-x-daek.dk</a></p>
+            <p data-edit>Skriv gerne dit telefonnummer i mailen, så vender vi tilbage hurtigst muligt.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="sidfot">
+  <div class="ram">
+    <div class="sidfot-rad">
+      <span><a class="logo" href="#top" style="font-size:1.1rem">Skan-<i>X</i>-Dæk</a></span>
+      <span data-edit>Artillerivej 157 · 2300 København S · Tlf. 32 54 22 34</span>
+      <span data-edit>Man–fre 8–16 · Dækskift senest 15.30</span>
+    </div>
+    <p class="sidfot-not">Designforslag lavet af Glans Studio som eget projekt. Siden er ikke Skan-X-Dæks officielle hjemmeside, og oplysningerne er hentet fra <a href="http://skan-x.dk/" target="_blank" rel="noopener">skan-x.dk</a> den 17. september 2026. 3D: three.js. Kort: OpenStreetMap.</p>
+  </div>
+</footer>
+
+<div class="redigera" id="redigera" hidden>
+  <div class="redigera-panel" id="redigeraPanel" hidden>
+    <strong>Redigera sidan</strong>
+    <span>Klicka på en text och skriv. Ändringarna sparas i webbläsaren tills du laddar ner sidan.</span>
+    <button class="knapp liten" type="button" id="laddaNer">Ladda ner färdig sida</button>
+    <button class="aterstall" type="button" id="aterstall">Återställ allt till original</button>
+  </div>
+  <button class="knapp spok liten" type="button" id="redigeraKnapp" aria-expanded="false" aria-controls="redigeraPanel">✎ Redigera sidan</button>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const LAGRING = 'skan-x-daek-v1';
+  const THREE_URL = 'https://cdn.jsdelivr.net/npm/three@0.186.0/build/three.module.min.js';
+  const minskadRorelse = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const iRam = window.self !== window.top;
+  // Ägarverktygen visas när filen öppnas från datorn, i förhandsvisning eller med #redigera
+  const agarlage = location.protocol === 'file:' || /redigera/i.test(location.hash) || iRam;
+  const redigerar = () => document.documentElement.classList.contains('redigerar');
+  let fingeravtryck = '';
+
+  let toastTimer;
+  function visaToast(text) {
+    const t = $('#toast');
+    t.textContent = text;
+    t.classList.add('synlig');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('synlig'), 4400);
+  }
+  function hash(text) {
+    let h = 5381;
+    for (let i = 0; i < text.length; i++) h = ((h << 5) + h + text.charCodeAt(i)) | 0;
+    return (h >>> 0).toString(36);
+  }
+
+  /* ---------- Sparade ändringar ---------- */
+  const redigerbara = () => $$('[data-edit]');
+  function aterstallSparat() {
+    fingeravtryck = hash(redigerbara().map(el => el.innerHTML).join('§'));
+    try {
+      const d = JSON.parse(localStorage.getItem(LAGRING)) || {};
+      if (d.fingeravtryck === fingeravtryck && Array.isArray(d.texter)) {
+        redigerbara().forEach((el, i) => { if (typeof d.texter[i] === 'string') el.innerHTML = d.texter[i]; });
+      }
+    } catch (e) {}
+  }
+  function spara() {
+    try {
+      localStorage.setItem(LAGRING, JSON.stringify({ fingeravtryck, texter: redigerbara().map(el => el.innerHTML) }));
+      return true;
+    } catch (e) { return false; }
+  }
+
+  /* ---------- Meny och inglidning ---------- */
+  function initNavigering() {
+    const nav = $('#nav');
+    const uppdatera = () => nav.classList.toggle('skrollad', window.scrollY > 24);
+    window.addEventListener('scroll', uppdatera, { passive: true });
+    uppdatera();
+    const visas = $$('.visas');
+    if ('IntersectionObserver' in window && !minskadRorelse) {
+      const o = new IntersectionObserver(p => p.forEach(x => { if (x.isIntersecting) { x.target.classList.add('synlig'); o.unobserve(x.target); } }), { threshold: 0.1 });
+      visas.forEach(el => o.observe(el));
+    } else visas.forEach(el => el.classList.add('synlig'));
+  }
+
+  /* ---------- Redigering för ägaren ---------- */
+  let sparTimer;
+  const autoSpara = () => { clearTimeout(sparTimer); sparTimer = setTimeout(() => { if (!spara()) visaToast('Webbläsaren blockerar lagring – ladda ner sidan för att behålla ändringarna.'); }, 500); };
+
+  function vaxlaRedigering(aktiv) {
+    document.documentElement.classList.toggle('redigerar', aktiv);
+    redigerbara().forEach(el => { if (aktiv) el.setAttribute('contenteditable', 'true'); else el.removeAttribute('contenteditable'); });
+    $('#redigeraPanel').hidden = !aktiv;
+    const knapp = $('#redigeraKnapp');
+    knapp.textContent = aktiv ? '✓ Klar' : '✎ Redigera sidan';
+    knapp.setAttribute('aria-expanded', String(aktiv));
+    if (aktiv) visaToast('Klicka på en text och skriv. Allt sparas automatiskt.');
+    else { spara(); visaToast('Klart – dina ändringar är sparade.'); }
+  }
+
+  function laddaNer() {
+    spara();
+    if (iRam) { visaToast('Öppna index.html från mappen skan-x-daek på datorn för att ladda ner.'); return; }
+    const klon = document.documentElement.cloneNode(true);
+    klon.classList.remove('redigerar');
+    $$('[contenteditable]', klon).forEach(el => el.removeAttribute('contenteditable'));
+    $$('.visas', klon).forEach(el => el.classList.remove('synlig'));
+    $('#nav', klon).classList.remove('skrollad');
+    $('#redigera', klon).setAttribute('hidden', '');
+    $('#redigeraPanel', klon).setAttribute('hidden', '');
+    const knapp = $('#redigeraKnapp', klon); knapp.textContent = '✎ Redigera sidan'; knapp.setAttribute('aria-expanded', 'false');
+    const toast = $('#toast', klon); toast.className = 'toast'; toast.textContent = '';
+    ['#scenHjul', '#scenFalg'].forEach(s => { const c = $(s, klon); if (c) ['width', 'height', 'style', 'hidden'].forEach(a => c.removeAttribute(a)); });
+    $('#scenReserv', klon).removeAttribute('hidden');
+    const html = '<!DOCTYPE html>\n' + klon.outerHTML;
+    const url = URL.createObjectURL(new Blob([html], { type: 'text/html;charset=utf-8' }));
+    const a = document.createElement('a');
+    a.href = url; a.download = 'index.html';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+    visaToast('index.html laddas ner – lägg den i mappen skan-x-daek och ersätt den gamla.');
+  }
+
+  function initRedigering() {
+    if (!agarlage) return;
+    $('#redigera').hidden = false;
+    $('#redigeraKnapp').addEventListener('click', () => vaxlaRedigering(!redigerar()));
+    document.addEventListener('input', e => {
+      if (redigerar() && e.target.closest && e.target.closest('[data-edit]')) autoSpara();
+    });
+    document.addEventListener('click', e => {
+      if (redigerar() && e.target.closest('[data-edit]') && e.target.closest('a, button')) e.preventDefault();
+    }, true);
+    document.addEventListener('paste', e => {
+      if (!redigerar() || !e.target.closest || !e.target.closest('[data-edit]')) return;
+      e.preventDefault();
+      document.execCommand('insertText', false, (e.clipboardData || window.clipboardData).getData('text/plain'));
+    });
+    $('#laddaNer').addEventListener('click', laddaNer);
+    const aterstall = $('#aterstall');
+    let bekrafta = false, timer;
+    aterstall.addEventListener('click', () => {
+      if (!bekrafta) { bekrafta = true; aterstall.textContent = 'Klicka igen för att radera alla ändringar'; timer = setTimeout(() => { bekrafta = false; aterstall.textContent = 'Återställ allt till original'; }, 4000); return; }
+      clearTimeout(timer);
+      try { localStorage.removeItem(LAGRING); } catch (e) {}
+      visaToast('Sidan återställs …');
+      setTimeout(() => location.reload(), 700);
+    });
+  }
+
+  /* ---------- 3D: hjul och fälg (three.js från jsDelivr) ---------- */
+  let threeLofte = null;
+  const laddaThree = () => (threeLofte = threeLofte || import(THREE_URL));
+
+  // Ett litet fotostudio ger krommet reflexer
+  function studio(THREE, renderer, scen) {
+    const pm = new THREE.PMREMGenerator(renderer), rum = new THREE.Scene();
+    rum.add(new THREE.Mesh(new THREE.BoxGeometry(24, 24, 24), new THREE.MeshBasicMaterial({ color: 0x23272d, side: THREE.BackSide })));
+    [[16, 4, 0xffffff, 0, 10, 4], [4, 12, 0xdfe7ee, -10, 1, 5], [4, 10, 0xe4322b, 10, -1, -3], [10, 2, 0xffffff, 2, -7, 9]].forEach(([b, h, f, x, y, z]) => {
+      const m = new THREE.Mesh(new THREE.PlaneGeometry(b, h), new THREE.MeshBasicMaterial({ color: f, side: THREE.DoubleSide }));
+      m.position.set(x, y, z); m.lookAt(0, 0, 0); rum.add(m);
+    });
+    scen.environment = pm.fromScene(rum, 0.04).texture;
+    pm.dispose();
+  }
+
+  // Bygger ett hjul: gummidäck med mönster i ytan, blank kromfälg med ekrar, bromsskiva och rött ok
+  function byggHjul(THREE, meddack) {
+    const hjul = new THREE.Group();
+    const krom = new THREE.MeshPhysicalMaterial({ color: 0xf4f7fa, metalness: 1, roughness: 0.11, clearcoat: 1, clearcoatRoughness: 0.05 });
+    const morkKrom = new THREE.MeshPhysicalMaterial({ color: 0x9aa4ae, metalness: 1, roughness: 0.3 });
+    const gummi = new THREE.MeshPhysicalMaterial({ color: 0x121519, metalness: 0.05, roughness: 0.85, clearcoat: 0.2, clearcoatRoughness: 0.55 });
+    const monster = new THREE.MeshPhysicalMaterial({ color: 0x080a0c, metalness: 0.04, roughness: 0.95 });
+    const rod = new THREE.MeshPhysicalMaterial({ color: 0xe4322b, metalness: 0.4, roughness: 0.3, clearcoat: 0.9 });
+    const R = 1.58, T = 0.5;
+
+    if (meddack) {
+      hjul.add(new THREE.Mesh(new THREE.TorusGeometry(R, T, 26, 120), gummi));
+      // Mönsterspår som ligger i däckets yta, inte utanpå
+      const spar = new THREE.InstancedMesh(new THREE.BoxGeometry(0.06, 0.2, 0.46), monster, 56);
+      const m4 = new THREE.Matrix4(), pos = new THREE.Vector3(), q = new THREE.Quaternion(), e = new THREE.Euler(), sk = new THREE.Vector3(1, 1, 1);
+      for (let i = 0; i < 56; i++) {
+        const v = (i / 56) * Math.PI * 2;
+        pos.set(Math.cos(v) * (R + T - 0.07), Math.sin(v) * (R + T - 0.07), (i % 2 ? 0.21 : -0.21));
+        // Snedställda spår ger ett mönster i stället för kuggar
+        e.set(i % 2 ? 0.34 : -0.34, 0, v);
+        spar.setMatrixAt(i, m4.compose(pos, q.setFromEuler(e), sk));
+      }
+      hjul.add(spar);
+      // Två tunna spår runt hela däcket
+      [0.13, -0.13].forEach(z => {
+        const ring = new THREE.Mesh(new THREE.TorusGeometry(R + T - 0.06, 0.035, 10, 120), monster);
+        ring.position.z = z;
+        hjul.add(ring);
+      });
+      // Blank kant mot fälgen
+      const kant = new THREE.Mesh(new THREE.TorusGeometry(1.2, 0.07, 14, 90), morkKrom);
+      kant.position.z = 0.3;
+      hjul.add(kant);
+    }
+
+    // Fälgens läpp och skål
+    const lapp = new THREE.Mesh(new THREE.TorusGeometry(1.16, 0.1, 16, 90), krom);
+    lapp.position.z = 0.32;
+    hjul.add(lapp);
+    const skal = new THREE.Mesh(new THREE.CylinderGeometry(1.16, 1.06, 0.62, 64, 1, true), krom);
+    skal.rotation.x = Math.PI / 2;
+    skal.position.z = 0.02;
+    hjul.add(skal);
+    const botten = new THREE.Mesh(new THREE.CircleGeometry(1.12, 64), morkKrom);
+    botten.position.z = -0.12;
+    hjul.add(botten);
+
+    // Fem breda ekrar från navet ut mot läppen
+    for (let i = 0; i < 5; i++) {
+      const v = (i / 5) * Math.PI * 2;
+      const eker = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.92, 0.18), krom);
+      eker.position.set(Math.cos(v) * 0.68, Math.sin(v) * 0.68, 0.3);
+      eker.rotation.z = v - Math.PI / 2;
+      hjul.add(eker);
+      const fot = new THREE.Mesh(new THREE.BoxGeometry(0.46, 0.3, 0.16), krom);
+      fot.position.set(Math.cos(v) * 1.02, Math.sin(v) * 1.02, 0.3);
+      fot.rotation.z = v - Math.PI / 2;
+      hjul.add(fot);
+      const bult = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 0.1, 16), morkKrom);
+      bult.rotation.x = Math.PI / 2;
+      bult.position.set(Math.cos(v + 0.63) * 0.34, Math.sin(v + 0.63) * 0.34, 0.42);
+      hjul.add(bult);
+    }
+    // Navkapsel
+    const nav = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.28, 0.14, 36), rod);
+    nav.rotation.x = Math.PI / 2;
+    nav.position.z = 0.42;
+    hjul.add(nav);
+    const navring = new THREE.Mesh(new THREE.TorusGeometry(0.3, 0.035, 12, 36), krom);
+    navring.position.z = 0.44;
+    hjul.add(navring);
+
+    if (meddack) {
+      const brom = new THREE.Mesh(new THREE.CylinderGeometry(0.92, 0.92, 0.06, 48), morkKrom);
+      brom.rotation.x = Math.PI / 2;
+      brom.position.z = -0.2;
+      hjul.add(brom);
+      const ok = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.62, 0.24), rod);
+      ok.position.set(-0.8, 0.22, -0.2);
+      hjul.add(ok);
+    }
+    return hjul;
+  }
+
+  function korLoop(element, rita) {
+    if (minskadRorelse) { rita(1.4); return; }
+    let synlig = true, igang = false, start = null;
+    const loop = tid => {
+      if (!synlig) { igang = false; return; }
+      if (start === null) start = tid;
+      rita((tid - start) / 1000);
+      requestAnimationFrame(loop);
+    };
+    const kor = () => { if (!igang && synlig) { igang = true; requestAnimationFrame(loop); } };
+    if ('IntersectionObserver' in window) new IntersectionObserver(p => { synlig = p[0].isIntersecting; kor(); }, { rootMargin: '120px' }).observe(element);
+    kor();
+  }
+
+  async function initScen(id, meddack) {
+    const canvas = $('#' + id);
+    if (!canvas) return;
+    let THREE, renderer;
+    try { THREE = await laddaThree(); renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true }); }
+    catch (e) { canvas.hidden = true; return; }
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = meddack ? 1.15 : 1.25;
+    const scen = new THREE.Scene();
+    studio(THREE, renderer, scen);
+    const kamera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
+    kamera.position.set(0, 0, meddack ? 7.4 : 5.6);
+    scen.add(new THREE.AmbientLight(0xffffff, 0.5));
+    const ljus = new THREE.DirectionalLight(0xfff4e8, 3);
+    ljus.position.set(4, 5, 7);
+    scen.add(ljus);
+    const rodLjus = new THREE.PointLight(0xe4322b, 18, 16);
+    rodLjus.position.set(-4, -2, 3);
+    scen.add(rodLjus);
+
+    const hjul = byggHjul(THREE, meddack);
+    hjul.rotation.x = meddack ? -0.3 : -0.34;
+    hjul.rotation.y = meddack ? -0.52 : 0.45;
+    scen.add(hjul);
+
+    // Dra för att snurra hjulet, med eftersläpning
+    let fart = meddack ? 0.35 : 0.5, drar = false, forraX = 0;
+    if (meddack) {
+      const ruta = canvas.parentElement;
+      ruta.style.touchAction = 'pan-y';
+      ruta.style.cursor = 'grab';
+      ruta.addEventListener('pointerdown', e => { drar = true; forraX = e.clientX; try { ruta.setPointerCapture(e.pointerId); } catch (fel) {} });
+      ruta.addEventListener('pointermove', e => { if (!drar) return; fart += (e.clientX - forraX) * 0.02; forraX = e.clientX; });
+      const slapp = () => { drar = false; };
+      ruta.addEventListener('pointerup', slapp);
+      ruta.addEventListener('pointercancel', slapp);
+    }
+
+    const storlek = () => {
+      const b = canvas.clientWidth, h = canvas.clientHeight;
+      if (!b || !h) return;
+      renderer.setSize(b, h, false);
+      kamera.aspect = b / h;
+      kamera.updateProjectionMatrix();
+    };
+    storlek();
+    if ('ResizeObserver' in window) new ResizeObserver(storlek).observe(canvas); else window.addEventListener('resize', storlek);
+
+    let forra = 0;
+    function rita(t) {
+      const steg = Math.min(0.05, t - forra || 0.016);
+      forra = t;
+      if (!drar) fart += ((meddack ? 0.35 : 0.5) - fart) * 0.02;
+      hjul.rotation.z -= fart * steg;
+      if (!meddack) hjul.rotation.y = 0.4 + Math.sin(t * 0.4) * 0.25;
+      renderer.render(scen, kamera);
+    }
+    rita(0.3);
+    if (id === 'scenHjul') $('#scenReserv').hidden = true;
+    korLoop(canvas, rita);
+  }
+
+  /* ---------- Start ---------- */
+  aterstallSparat();
+  initNavigering();
+  initRedigering();
+  initScen('scenHjul', true);
+  initScen('scenFalg', false);
+})();
+</script>
+</body>
+</html>
