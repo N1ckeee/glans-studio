@@ -168,6 +168,42 @@
     .karta, .karta iframe { min-height: 320px; }
   }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .visas { opacity: 1; transform: none; transition: none; } }
+
+  /* ===== Svart, vitt och rött ===== */
+  :root { --vit: #FFFFFF; }
+  h1, h2, h3 { color: var(--vit); }
+  .sektion.ljus { background: var(--vit); color: #0B0C0E; }
+  .sektion.ljus h2, .sektion.ljus h3 { color: #0B0C0E; }
+  .sektion.ljus .huvud > p, .sektion.ljus p { color: #4A525C; }
+  .sektion.ljus .etikett { color: var(--rod); }
+  .sektion.ljus .etikett::before { background: var(--rod); }
+  .sektion.ljus .steg li { border-color: rgba(11, 12, 14, .12); background: #F4F6F8; }
+  .sektion.ljus .steg li::before { color: var(--rod); }
+  .sektion.ljus .krom-text { background: linear-gradient(180deg, #2B3037, #0B0C0E); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  /* ===== Välj däckstorlek ===== */
+  .valj { display: grid; gap: 14px; margin: 0 0 26px; padding: 24px 26px; border: 1px solid var(--linje-stark); border-radius: var(--radie); background: linear-gradient(135deg, rgba(228, 50, 43, .12), transparent 60%), var(--panel); }
+  .valj-rad { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .valj label { font: 500 .74rem/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--dampad); }
+  .valj select { min-width: 190px; padding: 13px 16px; border: 1px solid var(--linje-stark); border-radius: 10px; background: #0B0C0E; color: var(--vit); font-family: var(--mono); }
+  .valj select:focus { border-color: var(--rod-ljus); outline: none; }
+  .valj-svar { margin: 0; font-size: .95rem; color: var(--dampad); }
+  .valj-svar b { color: var(--vit); font-family: var(--mono); font-weight: 500; }
+
+  /* ===== Boka tid ===== */
+  .bok-falt { display: grid; gap: 12px; margin-top: 4px; }
+  .bok-falt label { display: grid; gap: 6px; font-size: .84rem; color: var(--dampad); }
+  .bok-falt input, .bok-falt select { padding: 12px 14px; border: 1px solid var(--linje-stark); border-radius: 10px; background: #0B0C0E; color: var(--vit); }
+  .bok-falt input:focus, .bok-falt select:focus { border-color: var(--rod-ljus); outline: none; }
+  .bok-not { margin: 10px 0 0; font-size: .8rem; color: var(--dampad); }
+
+  @media (max-width: 600px) {
+    .valj { padding: 20px 18px; }
+    .valj select { width: 100%; }
+  }
+
+  /* Dämpat sken på menyknappen, så den inte lyser mot vita avsnitt */
+  .nav .knapp { box-shadow: 0 8px 18px -12px rgba(228, 50, 43, .55); }
 </style>
 </head>
 <body>
@@ -265,6 +301,17 @@
       </div>
       <div class="storlek-grid">
         <div class="visas">
+          <div class="valj">
+            <div class="valj-rad">
+              <label for="valjStorlek" data-edit>Vælg din dækstørrelse</label>
+              <select id="valjStorlek" aria-describedby="valjSvar">
+                <option value="">Vælg størrelse …</option>
+              </select>
+              <a class="knapp liten" id="valjRing" href="tel:+4532542234" data-edit>Ring om pris</a>
+              <a class="knapp liten spok" id="valjMail" href="mailto:karsten@skan-x-daek.dk" data-edit>Skriv efter pris</a>
+            </div>
+            <p class="valj-svar" id="valjSvar" data-edit>Vi giver pris på telefon eller mail – vælg størrelsen først, så er den skrevet ind i mailen.</p>
+          </div>
           <ul class="storlekar">
             <li>155/65 R14</li><li>165/70 R14</li><li>175/65 R14</li><li>185/60 R14</li>
             <li>185/60 R15</li><li>185/65 R14</li><li>185/65 R15</li><li>195/50 R15</li>
@@ -283,7 +330,7 @@
     </div>
   </section>
 
-  <section class="sektion mork" id="saadan">
+  <section class="sektion ljus" id="saadan">
     <div class="ram">
       <div class="huvud visas">
         <div><p class="etikett" data-edit>Sådan foregår det</p><h2 data-edit>Fra opkald til <span class="krom-text">færdigt skift</span></h2></div>
@@ -323,6 +370,17 @@
               <li><span data-edit>Dækskift senest</span><b data-edit>15.30</b></li>
               <li><span data-edit>Lørdag og søndag</span><b data-edit>Lukket</b></li>
             </ul>
+          </div>
+          <div class="info-kort visas">
+            <h3 data-edit>Book tid til dækskift</h3>
+            <div class="bok-falt">
+              <label><span data-edit>Dit navn</span><input id="bokNavn" autocomplete="name" placeholder="Navn"></label>
+              <label><span data-edit>Telefon</span><input id="bokTlf" autocomplete="tel" inputmode="tel" placeholder="Telefonnummer"></label>
+              <label><span data-edit>Dækstørrelse</span><select id="bokStorlek"><option value="">Vælg størrelse …</option></select></label>
+              <label><span data-edit>Ønsket dag</span><input id="bokDag" type="date"></label>
+              <button class="knapp" type="button" id="bokKnapp" data-edit>Send som mail</button>
+            </div>
+            <p class="bok-not" data-edit>Knappen åbner dit mailprogram med teksten færdig. Vi bekræfter tiden, når vi har set den.</p>
           </div>
           <div class="info-kort visas">
             <h3 data-edit>Kontakt</h3>
@@ -484,6 +542,61 @@
     });
   }
 
+  /* ---------- Vælg dækstørrelse og book tid (åbner mail, ingen server) ---------- */
+  const MAIL = 'karsten@skan-x-daek.dk';
+  const NL = String.fromCharCode(10);
+
+  const storlekar = () => $$('.storlekar li').map(li => li.textContent.trim()).filter(Boolean);
+
+  function fyllValjare() {
+    const lista = storlekar();
+    ['#valjStorlek', '#bokStorlek'].forEach(sel => {
+      const falt = $(sel);
+      if (!falt) return;
+      lista.forEach(s => {
+        const val = document.createElement('option');
+        val.value = s;
+        val.textContent = s;
+        falt.appendChild(val);
+      });
+    });
+  }
+
+  const mailto = (amne, rader) => 'mailto:' + MAIL + '?subject=' + encodeURIComponent(amne) + '&body=' + encodeURIComponent(rader.join(NL));
+
+  function initValj() {
+    const falt = $('#valjStorlek'), mail = $('#valjMail'), svar = $('#valjSvar');
+    if (!falt) return;
+    const grund = svar.textContent;
+    falt.addEventListener('change', () => {
+      const s = falt.value;
+      if (!s) {
+        mail.setAttribute('href', 'mailto:' + MAIL);
+        svar.textContent = grund;
+        return;
+      }
+      mail.setAttribute('href', mailto('Pris på dæk ' + s,
+        ['Hej Skan-X-Dæk', '', 'Jeg vil gerne have pris på dæk i størrelsen ' + s + '.', '', 'Bil:', 'Telefon:', '', 'Venlig hilsen', '']));
+      svar.innerHTML = 'Valgt størrelse: <b>' + s + '</b>. Ring, eller skriv – størrelsen står allerede i mailen.';
+    });
+  }
+
+  function initBokning() {
+    const knapp = $('#bokKnapp');
+    if (!knapp) return;
+    knapp.addEventListener('click', () => {
+      if (redigerar()) return;
+      const namn = $('#bokNavn').value.trim(), tlf = $('#bokTlf').value.trim();
+      const storlek = $('#bokStorlek').value, dag = $('#bokDag').value;
+      if (!namn || !tlf) { visaToast('Skriv navn og telefonnummer, så er mailen klar.'); return; }
+      window.location.href = mailto('Booking af dækskift – ' + namn,
+        ['Hej Skan-X-Dæk', '', 'Jeg vil gerne booke tid til dækskift.', '',
+         'Navn: ' + namn, 'Telefon: ' + tlf, 'Dækstørrelse: ' + (storlek || 'ved ikke'),
+         'Ønsket dag: ' + (dag || 'så hurtigt som muligt'), '', 'Venlig hilsen', namn, '']);
+      visaToast('Dit mailprogram åbner med teksten færdig.');
+    });
+  }
+
   /* ---------- 3D: hjul och fälg (three.js från jsDelivr) ---------- */
   let threeLofte = null;
   const laddaThree = () => (threeLofte = threeLofte || import(THREE_URL));
@@ -500,85 +613,112 @@
     pm.dispose();
   }
 
-  // Bygger ett hjul: gummidäck med mönster i ytan, blank kromfälg med ekrar, bromsskiva och rött ok
+  // Bygger ett hjul: däck med sidovägg och djupt mönster, kromfälg med fasade ekrar,
+  // borrad bromsskiva, rött ok och ventil
   function byggHjul(THREE, meddack) {
     const hjul = new THREE.Group();
-    const krom = new THREE.MeshPhysicalMaterial({ color: 0xf4f7fa, metalness: 1, roughness: 0.11, clearcoat: 1, clearcoatRoughness: 0.05 });
-    const morkKrom = new THREE.MeshPhysicalMaterial({ color: 0x9aa4ae, metalness: 1, roughness: 0.3 });
-    const gummi = new THREE.MeshPhysicalMaterial({ color: 0x121519, metalness: 0.05, roughness: 0.85, clearcoat: 0.2, clearcoatRoughness: 0.55 });
-    const monster = new THREE.MeshPhysicalMaterial({ color: 0x080a0c, metalness: 0.04, roughness: 0.95 });
-    const rod = new THREE.MeshPhysicalMaterial({ color: 0xe4322b, metalness: 0.4, roughness: 0.3, clearcoat: 0.9 });
-    const R = 1.58, T = 0.5;
+    const krom = new THREE.MeshPhysicalMaterial({ color: 0xf6f8fb, metalness: 1, roughness: 0.09, clearcoat: 1, clearcoatRoughness: 0.04 });
+    const borstad = new THREE.MeshPhysicalMaterial({ color: 0xc8d0d8, metalness: 1, roughness: 0.32 });
+    const morkKrom = new THREE.MeshPhysicalMaterial({ color: 0x79828c, metalness: 1, roughness: 0.36 });
+    const gummi = new THREE.MeshPhysicalMaterial({ color: 0x14171b, metalness: 0.02, roughness: 0.82, clearcoat: 0.3, clearcoatRoughness: 0.5 });
+    const gummiMork = new THREE.MeshPhysicalMaterial({ color: 0x07080a, metalness: 0.02, roughness: 0.96 });
+    const sidovagg = new THREE.MeshPhysicalMaterial({ color: 0x1b1f24, metalness: 0.02, roughness: 0.7, clearcoat: 0.4 });
+    const rod = new THREE.MeshPhysicalMaterial({ color: 0xe4322b, metalness: 0.35, roughness: 0.26, clearcoat: 1 });
+    const R = 1.56, T = 0.52;
 
     if (meddack) {
-      hjul.add(new THREE.Mesh(new THREE.TorusGeometry(R, T, 26, 120), gummi));
-      // Mönsterspår som ligger i däckets yta, inte utanpå
-      const spar = new THREE.InstancedMesh(new THREE.BoxGeometry(0.06, 0.2, 0.46), monster, 56);
-      const m4 = new THREE.Matrix4(), pos = new THREE.Vector3(), q = new THREE.Quaternion(), e = new THREE.Euler(), sk = new THREE.Vector3(1, 1, 1);
-      for (let i = 0; i < 56; i++) {
-        const v = (i / 56) * Math.PI * 2;
-        pos.set(Math.cos(v) * (R + T - 0.07), Math.sin(v) * (R + T - 0.07), (i % 2 ? 0.21 : -0.21));
-        // Snedställda spår ger ett mönster i stället för kuggar
-        e.set(i % 2 ? 0.34 : -0.34, 0, v);
-        spar.setMatrixAt(i, m4.compose(pos, q.setFromEuler(e), sk));
-      }
-      hjul.add(spar);
-      // Två tunna spår runt hela däcket
-      [0.13, -0.13].forEach(z => {
-        const ring = new THREE.Mesh(new THREE.TorusGeometry(R + T - 0.06, 0.035, 10, 120), monster);
-        ring.position.z = z;
-        hjul.add(ring);
+      hjul.add(new THREE.Mesh(new THREE.TorusGeometry(R, T, 40, 150), gummi));
+      // Sidoväggar med en svag ring, som på ett riktigt däck
+      [0.34, -0.34].forEach(z => {
+        const vagg = new THREE.Mesh(new THREE.TorusGeometry(R - 0.02, 0.4, 24, 120), sidovagg);
+        vagg.scale.z = 0.42;
+        vagg.position.z = z;
+        hjul.add(vagg);
+        const ribba = new THREE.Mesh(new THREE.TorusGeometry(R + 0.12, 0.035, 12, 130), gummiMork);
+        ribba.position.z = z * 0.72;
+        hjul.add(ribba);
       });
-      // Blank kant mot fälgen
-      const kant = new THREE.Mesh(new THREE.TorusGeometry(1.2, 0.07, 14, 90), morkKrom);
-      kant.position.z = 0.3;
-      hjul.add(kant);
+      // Mönster: två spårrader och snedställda klackar
+      [0.2, -0.2].forEach(z => {
+        const spar = new THREE.Mesh(new THREE.TorusGeometry(R + T - 0.045, 0.045, 12, 140), gummiMork);
+        spar.position.z = z;
+        hjul.add(spar);
+      });
+      const mitt = new THREE.Mesh(new THREE.TorusGeometry(R + T - 0.05, 0.05, 12, 140), gummiMork);
+      hjul.add(mitt);
+      const klack = new THREE.InstancedMesh(new THREE.BoxGeometry(0.07, 0.17, 0.3), gummiMork, 76);
+      const m4 = new THREE.Matrix4(), pos = new THREE.Vector3(), q = new THREE.Quaternion(), e = new THREE.Euler(), sk = new THREE.Vector3(1, 1, 1);
+      for (let i = 0; i < 76; i++) {
+        const v = (i / 38) * Math.PI, rad = i % 2 ? 0.31 : -0.31;
+        pos.set(Math.cos(v) * (R + T - 0.06), Math.sin(v) * (R + T - 0.06), rad);
+        e.set(i % 2 ? 0.42 : -0.42, 0, v);
+        klack.setMatrixAt(i, m4.compose(pos, q.setFromEuler(e), sk));
+      }
+      hjul.add(klack);
+      // Ventil
+      const ventil = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.055, 0.26, 14), morkKrom);
+      ventil.position.set(Math.cos(1.9) * 1.06, Math.sin(1.9) * 1.06, 0.42);
+      ventil.rotation.set(Math.PI / 2, 0, 0);
+      hjul.add(ventil);
     }
 
-    // Fälgens läpp och skål
-    const lapp = new THREE.Mesh(new THREE.TorusGeometry(1.16, 0.1, 16, 90), krom);
-    lapp.position.z = 0.32;
+    // Fälg: läpp, skål, botten och en borstad ring i mitten
+    const lapp = new THREE.Mesh(new THREE.TorusGeometry(1.14, 0.11, 20, 110), krom);
+    lapp.position.z = 0.36;
     hjul.add(lapp);
-    const skal = new THREE.Mesh(new THREE.CylinderGeometry(1.16, 1.06, 0.62, 64, 1, true), krom);
+    const skal = new THREE.Mesh(new THREE.CylinderGeometry(1.14, 1.02, 0.66, 72, 1, true), krom);
     skal.rotation.x = Math.PI / 2;
-    skal.position.z = 0.02;
+    skal.position.z = 0.03;
     hjul.add(skal);
-    const botten = new THREE.Mesh(new THREE.CircleGeometry(1.12, 64), morkKrom);
-    botten.position.z = -0.12;
+    const botten = new THREE.Mesh(new THREE.CircleGeometry(1.1, 72), new THREE.MeshPhysicalMaterial({ color: 0x1b2027, metalness: 0.7, roughness: 0.55 }));
+    botten.position.z = -0.14;
     hjul.add(botten);
 
-    // Fem breda ekrar från navet ut mot läppen
+    // Fem ekrar med fasade kanter
     for (let i = 0; i < 5; i++) {
       const v = (i / 5) * Math.PI * 2;
-      const eker = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.92, 0.18), krom);
-      eker.position.set(Math.cos(v) * 0.68, Math.sin(v) * 0.68, 0.3);
+      const eker = new THREE.Group();
+      const kropp = new THREE.Mesh(new THREE.BoxGeometry(0.3, 1.0, 0.2), krom);
+      const fas = new THREE.Mesh(new THREE.BoxGeometry(0.19, 1.02, 0.1), borstad);
+      fas.position.z = 0.1;
+      const bred = new THREE.Mesh(new THREE.BoxGeometry(0.52, 0.28, 0.18), krom);
+      bred.position.y = 0.45;
+      eker.add(kropp, fas, bred);
+      eker.position.set(Math.cos(v) * 0.6, Math.sin(v) * 0.6, 0.33);
       eker.rotation.z = v - Math.PI / 2;
       hjul.add(eker);
-      const fot = new THREE.Mesh(new THREE.BoxGeometry(0.46, 0.3, 0.16), krom);
-      fot.position.set(Math.cos(v) * 1.02, Math.sin(v) * 1.02, 0.3);
-      fot.rotation.z = v - Math.PI / 2;
-      hjul.add(fot);
-      const bult = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 0.1, 16), morkKrom);
+      const bult = new THREE.Mesh(new THREE.CylinderGeometry(0.062, 0.062, 0.09, 18), morkKrom);
       bult.rotation.x = Math.PI / 2;
-      bult.position.set(Math.cos(v + 0.63) * 0.34, Math.sin(v + 0.63) * 0.34, 0.42);
+      bult.position.set(Math.cos(v + 0.63) * 0.33, Math.sin(v + 0.63) * 0.33, 0.45);
       hjul.add(bult);
     }
-    // Navkapsel
-    const nav = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.28, 0.14, 36), rod);
-    nav.rotation.x = Math.PI / 2;
-    nav.position.z = 0.42;
-    hjul.add(nav);
-    const navring = new THREE.Mesh(new THREE.TorusGeometry(0.3, 0.035, 12, 36), krom);
-    navring.position.z = 0.44;
+    const navring = new THREE.Mesh(new THREE.TorusGeometry(0.42, 0.05, 16, 44), borstad);
+    navring.position.z = 0.42;
     hjul.add(navring);
+    const nav = new THREE.Mesh(new THREE.CylinderGeometry(0.26, 0.26, 0.12, 40), rod);
+    nav.rotation.x = Math.PI / 2;
+    nav.position.z = 0.46;
+    hjul.add(nav);
+    const navkant = new THREE.Mesh(new THREE.TorusGeometry(0.27, 0.03, 12, 40), krom);
+    navkant.position.z = 0.49;
+    hjul.add(navkant);
 
     if (meddack) {
-      const brom = new THREE.Mesh(new THREE.CylinderGeometry(0.92, 0.92, 0.06, 48), morkKrom);
-      brom.rotation.x = Math.PI / 2;
-      brom.position.z = -0.2;
-      hjul.add(brom);
-      const ok = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.62, 0.24), rod);
-      ok.position.set(-0.8, 0.22, -0.2);
+      // Bromsskiva med borrade hål och rött ok
+      const skiva = new THREE.Mesh(new THREE.CylinderGeometry(0.9, 0.9, 0.05, 60), borstad);
+      skiva.rotation.x = Math.PI / 2;
+      skiva.position.z = -0.24;
+      hjul.add(skiva);
+      const hal = new THREE.InstancedMesh(new THREE.CylinderGeometry(0.052, 0.052, 0.08, 12), gummiMork, 30);
+      const m = new THREE.Matrix4(), pp = new THREE.Vector3(), qq = new THREE.Quaternion().setFromEuler(new THREE.Euler(Math.PI / 2, 0, 0)), ss = new THREE.Vector3(1, 1, 1);
+      for (let i = 0; i < 30; i++) {
+        const v = (i / 10) * Math.PI * 2 * 0.3334, r = i % 3 === 0 ? 0.74 : (i % 3 === 1 ? 0.62 : 0.5);
+        pp.set(Math.cos(v + i * 0.21) * r, Math.sin(v + i * 0.21) * r, -0.24);
+        hal.setMatrixAt(i, m.compose(pp, qq, ss));
+      }
+      hjul.add(hal);
+      const ok = new THREE.Mesh(new THREE.BoxGeometry(0.26, 0.6, 0.3), rod);
+      ok.position.set(-0.78, 0.26, -0.24);
       hjul.add(ok);
     }
     return hjul;
@@ -607,18 +747,41 @@
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = meddack ? 1.15 : 1.25;
+    renderer.toneMappingExposure = meddack ? 1.08 : 1.06;
     const scen = new THREE.Scene();
     studio(THREE, renderer, scen);
     const kamera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
     kamera.position.set(0, 0, meddack ? 7.4 : 5.6);
     scen.add(new THREE.AmbientLight(0xffffff, 0.5));
-    const ljus = new THREE.DirectionalLight(0xfff4e8, 3);
+    const ljus = new THREE.DirectionalLight(0xfff4e8, meddack ? 3 : 2.5);
     ljus.position.set(4, 5, 7);
     scen.add(ljus);
-    const rodLjus = new THREE.PointLight(0xe4322b, 18, 16);
+    const rodLjus = new THREE.PointLight(0xe4322b, meddack ? 22 : 10, 18);
     rodLjus.position.set(-4, -2, 3);
     scen.add(rodLjus);
+    const kantljus = new THREE.DirectionalLight(0xdff0ff, 1.5);
+    kantljus.position.set(-6, 2, -5);
+    scen.add(kantljus);
+
+    if (meddack) {
+      // Mjuk kontaktskugga på golvet, så hjulet inte svävar
+      const c = document.createElement('canvas');
+      c.width = c.height = 256;
+      const g = c.getContext('2d');
+      const grad = g.createRadialGradient(128, 128, 6, 128, 128, 126);
+      grad.addColorStop(0, 'rgba(0,0,0,.75)');
+      grad.addColorStop(0.45, 'rgba(0,0,0,.35)');
+      grad.addColorStop(1, 'rgba(0,0,0,0)');
+      g.fillStyle = grad;
+      g.fillRect(0, 0, 256, 256);
+      const skugga = new THREE.Mesh(new THREE.PlaneGeometry(7.5, 4.2),
+        new THREE.MeshBasicMaterial({ map: new THREE.CanvasTexture(c), transparent: true, depthWrite: false }));
+      skugga.rotation.x = -Math.PI / 2;
+      skugga.position.set(0, -2.16, 0.1);
+      scen.add(skugga);
+      kamera.position.set(0, 1.05, 7.5);
+      kamera.lookAt(0, -0.12, 0);
+    }
 
     const hjul = byggHjul(THREE, meddack);
     hjul.rotation.x = meddack ? -0.3 : -0.34;
@@ -665,6 +828,9 @@
   /* ---------- Start ---------- */
   aterstallSparat();
   initNavigering();
+  fyllValjare();
+  initValj();
+  initBokning();
   initRedigering();
   initScen('scenHjul', true);
   initScen('scenFalg', false);
